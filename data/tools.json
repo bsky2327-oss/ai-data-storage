@@ -1,0 +1,385 @@
+{
+  "updatedAt": "2026-05-11T04:08:09Z",
+  "items": [
+    {
+      "name": "redmlovesyou333/arcgentica",
+      "desc": "🤖 Solve ARC-AGI challenges efficiently using LLM-powered agentic AI for high accuracy and robust task performance.",
+      "url": "https://github.com/redmlovesyou333/arcgentica",
+      "tags": [
+        "ai-models",
+        "arcgentica",
+        "artificial-intelligence",
+        "computer-vision"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "hrabanazviking/Verdandi",
+      "desc": "VERÐANDI — The Norn of Becoming. AI nervous system for real-time cross-instance awareness via Unix domain sockets. Self-healing, self-correcting, cons",
+      "url": "https://github.com/hrabanazviking/Verdandi",
+      "tags": [
+        "agi",
+        "ai",
+        "ai-agent",
+        "ai-agents"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "HoppyCat/soul-stack",
+      "desc": "The SoulMode working archive. Prism competitions, soul file research, experimental frameworks, and the source material behind the soulmode-agent templ",
+      "url": "https://github.com/HoppyCat/soul-stack",
+      "tags": [
+        "agentic-ai",
+        "artificial-intelligence",
+        "persistent-memory",
+        "soul-files"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "antonpictures/ANTON-SIFTA",
+      "desc": "Born alive on Silicon. #SIFTA is an embodied operating system layer for AI. ",
+      "url": "https://github.com/antonpictures/ANTON-SIFTA",
+      "tags": [
+        "agents",
+        "artificial-intelligence",
+        "autonomous-agents",
+        "cryptography"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "RichardWoz/WOZ",
+      "desc": "",
+      "url": "https://github.com/RichardWoz/WOZ",
+      "tags": [
+        "artificial-intelligence",
+        "creative-ai",
+        "open-source",
+        "philosophy"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "thedotmack/claude-mem",
+      "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "tags": [
+        "ai",
+        "ai-agents",
+        "ai-memory",
+        "anthropic"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "Ratnesh-181998/Resume-and-Social-Profiles",
+      "desc": "Experienced 4+ Yrs across the full AI/ML lifecycle, from DE , DS and model development to API driven deployment, cloud infrastructure, and monitoring.",
+      "url": "https://github.com/Ratnesh-181998/Resume-and-Social-Profiles",
+      "tags": [
+        "agentic-ai",
+        "aiops",
+        "artificial-intelligence",
+        "aws"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "SeriousOldMan/Simulator-Controller",
+      "desc": "A virtual AI-based pit crew  for Sim Racing. Use the latest GPT technology to create a real life like experience when out on the track.",
+      "url": "https://github.com/SeriousOldMan/Simulator-Controller",
+      "tags": [
+        "agent",
+        "artificial-intelligence",
+        "assistant",
+        "autohotkey"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "cdtalley/DocuMind",
+      "desc": "Local-first RAG platform for technical document libraries. Features FastAPI, ChromaDB, and active retrieval (FLARE) powered by Ollama.",
+      "url": "https://github.com/cdtalley/DocuMind",
+      "tags": [
+        "active-retrieval",
+        "artificial-intelligence",
+        "chromadb",
+        "document-intelligence-rag"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "EalZz/IT-AI-NEWS",
+      "desc": "A curated collection of the latest news, trends, and updates in Information Technology and Artificial Intelligence.",
+      "url": "https://github.com/EalZz/IT-AI-NEWS",
+      "tags": [
+        "aggregator",
+        "ai",
+        "artificial-intelligence",
+        "it"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "TextLDM: Language Modeling with Continuous Latent Diffusion",
+      "desc": "Diffusion Transformers (DiT) trained with flow matching in a VAE latent space have unified visual generation across images and videos. A natural next step toward a single architecture for both generat",
+      "url": "https://huggingface.co/papers/2605.07748",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "HyperEyes: Dual-Grained Efficiency-Aware Reinforcement Learning for Parallel Multimodal Search Agents",
+      "desc": "Existing multimodal search agents process target entities sequentially, issuing one tool call per entity and accumulating redundant interaction rounds whenever a query decomposes into independent sub-",
+      "url": "https://huggingface.co/papers/2605.07177",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "Anisotropic Modality Align",
+      "desc": "Training multimodal large language models has long been limited by the scarcity of high-quality paired multimodal data. Recent studies show that the shared representation space of pretrained multimoda",
+      "url": "https://huggingface.co/papers/2605.07825",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
+      "desc": "Existing Flow Matching (FM) text-to-image models suffer from two critical bottlenecks under multi-task alignment: the reward sparsity induced by scalar-valued rewards, and the gradient interference ar",
+      "url": "https://huggingface.co/papers/2605.08063",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "What Matters for Diffusion-Friendly Latent Manifold? Prior-Aligned Autoencoders for Latent Diffusion",
+      "desc": "Tokenizers are a crucial component of latent diffusion models, as they define the latent space in which diffusion models operate. However, existing tokenizers are primarily designed to improve reconst",
+      "url": "https://huggingface.co/papers/2605.07915",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "Scaling Continual Learning to 300+ Tasks with Bi-Level Routing Mixture-of-Experts",
+      "desc": "Continual learning, especially class-incremental learning (CIL), on the basis of a pre-trained model (PTM) has garnered substantial research interest in recent years. However, how to effectively learn",
+      "url": "https://huggingface.co/papers/2602.03473",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
+    },
+    {
+      "name": "CPCANet: Deep Unfolding Common Principal Component Analysis for Domain Generalization",
+      "desc": "Domain Generalization (DG) aims to learn representations that remain robust under out-of-distribution (OOD) shifts and generalize effectively to unseen target domains. While recent invariant learning ",
+      "url": "https://huggingface.co/papers/2605.05136",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "Steering Visual Generation in Unified Multimodal Models with Understanding Supervision",
+      "desc": "Unified multimodal models are envisioned to bridge the gap between understanding and generation. Yet, to achieve competitive performance, state-of-the-art models adopt largely decoupled understanding ",
+      "url": "https://huggingface.co/papers/2605.05781",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "LiVeAction: a Lightweight, Versatile, and Asymmetric Neural Codec Design for Real-time Operation",
+      "desc": "Modern sensors generate rich, high-fidelity data, yet applications operating on wearable or remote sensing devices remain constrained by bandwidth and power budgets. Standardized codecs such as JPEG a",
+      "url": "https://huggingface.co/papers/2605.06628",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "UniSD: Towards a Unified Self-Distillation Framework for Large Language Models",
+      "desc": "Self-distillation (SD) offers a promising path for adapting large language models (LLMs) without relying on stronger external teachers. However, SD in autoregressive LLMs remains challenging because s",
+      "url": "https://huggingface.co/papers/2605.06597",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "MDN: Parallelizing Stepwise Momentum for Delta Linear Attention",
+      "desc": "Linear Attention (LA) offers a promising paradigm for scaling large language models (LLMs) to long sequences by avoiding the quadratic complexity of self-attention. Recent LA models such as Mamba2 and",
+      "url": "https://huggingface.co/papers/2605.05838",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "HumanNet: Scaling Human-centric Video Learning to One Million Hours",
+      "desc": "Progress in embodied intelligence increasingly depends on scalable data infrastructure. While vision and language have scaled with internet corpora, learning physical interaction remains constrained b",
+      "url": "https://huggingface.co/papers/2605.06747",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "UniPrefill: Universal Long-Context Prefill Acceleration via Block-wise Dynamic Sparsification",
+      "desc": "As large language models (LLMs) continue to advance rapidly, they are becoming increasingly capable while simultaneously demanding ever-longer context lengths. To improve the inference efficiency of l",
+      "url": "https://huggingface.co/papers/2605.06221",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms",
+      "desc": "Large Language Model (LLM)-based agents have fundamentally reshaped artificial intelligence by integrating external tools and planning capabilities. While memory mechanisms have emerged as the archite",
+      "url": "https://huggingface.co/papers/2605.06716",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "Beyond Retrieval: A Multitask Benchmark and Model for Code Search",
+      "desc": "Code search has usually been evaluated as first-stage retrieval, even though production systems rely on broader pipelines with reranking and developer-style queries. Existing benchmarks also suffer fr",
+      "url": "https://huggingface.co/papers/2605.04615",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-05"
+    },
+    {
+      "name": "z-lab/gemma-4-31B-it-DFlash",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 74",
+      "url": "https://huggingface.co/z-lab/gemma-4-31B-it-DFlash",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "qwen3",
+        "dflash"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-30"
+    },
+    {
+      "name": "XiaomiMiMo/MiMo-V2.5-Pro",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 506",
+      "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
+      "tags": [
+        "safetensors",
+        "mimo_v2",
+        "text-generation",
+        "agent"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-27"
+    },
+    {
+      "name": "HuggingFaceTB/nanowhale-100m",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 46",
+      "url": "https://huggingface.co/HuggingFaceTB/nanowhale-100m",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "deepseek_v4",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-24"
+    },
+    {
+      "name": "google/gemma-4-31B-it-assistant",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 198",
+      "url": "https://huggingface.co/google/gemma-4-31B-it-assistant",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "gemma4_assistant",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
+      "name": "google/gemma-4-26B-A4B-it-assistant",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 105",
+      "url": "https://huggingface.co/google/gemma-4-26B-A4B-it-assistant",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "gemma4_assistant",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
+      "name": "google/gemma-4-E4B-it-assistant",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 57",
+      "url": "https://huggingface.co/google/gemma-4-E4B-it-assistant",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "gemma4_assistant",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
+      "name": "z-lab/Qwen3.6-27B-DFlash",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 279",
+      "url": "https://huggingface.co/z-lab/Qwen3.6-27B-DFlash",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "qwen3",
+        "feature-extraction"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
+      "name": "poolside/Laguna-XS.2",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 240",
+      "url": "https://huggingface.co/poolside/Laguna-XS.2",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "laguna",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
+      "name": "deepseek-ai/DeepSeek-V4-Pro",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 3823",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "deepseek_v4",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-22"
+    },
+    {
+      "name": "deepseek-ai/DeepSeek-V4-Flash",
+      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 1026",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "deepseek_v4",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-22"
+    }
+  ]
+}

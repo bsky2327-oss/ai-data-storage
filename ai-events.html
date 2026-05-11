@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 한국 AI 행사 일정</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #4f8ef7;
+      --accent2: #7c5cfc;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --radius: 14px;
+
+      /* 행사 유형별 액센트 색상 */
+      --clr-expo: #7c5cfc;
+      --clr-conf: #4f8ef7;
+      --clr-semi: #22c55e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER (Glassmorphism) ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 17, 34, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 28px 24px;
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #4f8ef7 0%, #7c5cfc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text2);
+      margin-top: 4px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .last-updated {
+      font-size: 0.78rem;
+      color: var(--text2);
+      text-align: right;
+    }
+
+    .last-updated span {
+      display: block;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* ── REFRESH BUTTON ── */
+    .refresh-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+      white-space: nowrap;
+      box-shadow: 0 2px 16px rgba(79, 142, 247, 0.25);
+    }
+
+    .refresh-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 4px 24px rgba(79, 142, 247, 0.4);
+    }
+
+    .refresh-btn:active { transform: scale(0.97); }
+    .refresh-btn.loading { opacity: 0.6; cursor: not-allowed; }
+
+    .refresh-icon { display: inline-block; }
+    .refresh-btn.loading .refresh-icon { animation: spin 0.8s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 960px;
+      margin: 32px auto 0;
+      padding: 0 20px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .filter-label {
+      font-size: 0.8rem;
+      color: var(--text2);
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .summary-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.8rem;
+    }
+
+    .summary-chip .num {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    /* ── EVENT CARDS ── */
+    #eventsGrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .event-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 24px 24px 28px; /* 왼쪽 패딩 추가 (액센트 바 공간) */
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s;
+      animation: fadeIn 0.4s ease both;
+    }
+
+    /* ── 개선 1: 좌측 컬러 액센트 바 ── */
+    .event-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    .event-card[data-type="expo"]::before       { background: var(--clr-expo); }
+    .event-card[data-type="conference"]::before  { background: var(--clr-conf); }
+    .event-card[data-type="seminar"]::before     { background: var(--clr-semi); }
+
+    /* ── 개선 3: 호버 시 그라디언트 글로우 ── */
+    .event-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 0 1px var(--accent),
+        0 8px 32px rgba(79, 142, 247, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .event-card[data-type="expo"]:hover {
+      box-shadow:
+        0 0 0 1px var(--clr-expo),
+        0 8px 32px rgba(124, 92, 252, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .event-card[data-type="seminar"]:hover {
+      box-shadow:
+        0 0 0 1px var(--clr-semi),
+        0 8px 32px rgba(34, 197, 94, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── CARD INNER ── */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .card-title-group { flex: 1; min-width: 0; }
+
+    .card-type {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text2);
+      margin-bottom: 5px;
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--text2);
+      margin-top: 4px;
+    }
+
+    /* ── BADGES ── */
+    .badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge.upcoming { background: rgba(34,197,94,0.15);  color: var(--green);   border: 1px solid rgba(34,197,94,0.3); }
+    .badge.soon     { background: rgba(79,142,247,0.15); color: var(--accent);  border: 1px solid rgba(79,142,247,0.3); }
+    .badge.pending  { background: rgba(245,158,11,0.15); color: var(--yellow);  border: 1px solid rgba(245,158,11,0.3); }
+    .badge.type-expo { background: rgba(124,92,252,0.15); color: var(--accent2); border: 1px solid rgba(124,92,252,0.3); }
+    .badge.type-conf { background: rgba(79,142,247,0.12); color: var(--accent);  border: 1px solid rgba(79,142,247,0.25); }
+    .badge.type-semi { background: rgba(34,197,94,0.12);  color: var(--green);   border: 1px solid rgba(34,197,94,0.25); }
+
+    /* ── INFO GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .info-item {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 11px 14px;
+    }
+
+    .info-key {
+      font-size: 0.7rem;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    .info-val {
+      font-size: 0.86rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .price-free { color: var(--green); }
+    .price-paid { color: var(--yellow); }
+    .price-tbd  { color: var(--text2); font-style: italic; }
+
+    /* ── DESCRIPTION ── */
+    .card-desc {
+      font-size: 0.84rem;
+      color: var(--text2);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      border-left: 2px solid var(--border);
+      padding-left: 14px;
+    }
+
+    /* ── PENDING NOTICE ── */
+    .pending-notice {
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.22);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.81rem;
+      color: var(--yellow);
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    /* ── CARD FOOTER ── */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .site-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 0.81rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+
+    .site-link:hover {
+      background: rgba(79,142,247,0.1);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .d-day {
+      font-size: 0.8rem;
+      color: var(--text2);
+    }
+
+    .d-day strong { color: var(--accent); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text2);
+    }
+
+    .empty-state p { margin-top: 12px; }
+
+    /* ── LOADING OVERLAY (Glassmorphism) ── */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 17, 23, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .loading-overlay.show { display: flex; }
+
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .loading-text { color: var(--text2); font-size: 0.88rem; }
+
+    /* ── PAGE FOOTER ── */
+    .page-footer {
+      max-width: 960px;
+      margin: 48px auto 0;
+      padding: 20px 20px 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.76rem;
+      color: var(--text2);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.2rem; }
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      .last-updated { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p class="loading-text">행사 정보를 불러오는 중...</p>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <h1>🇰🇷 한국 AI 행사 일정 2026</h1>
+      <p class="subtitle">세미나 · 컨퍼런스 · 박람회 | 단순 강의 제외</p>
+    </div>
+    <div class="header-right">
+      <div class="last-updated">
+        마지막 확인
+        <span id="lastUpdated">—</span>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" onclick="refreshEvents()">
+        <span class="refresh-icon">↻</span>
+        새로고침
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="filter-bar">
+    <span class="filter-label">필터:</span>
+    <button class="filter-btn active" data-filter="all">전체</button>
+    <button class="filter-btn" data-filter="expo">박람회</button>
+    <button class="filter-btn" data-filter="conference">컨퍼런스</button>
+    <button class="filter-btn" data-filter="seminar">세미나</button>
+    <button class="filter-btn" data-filter="pending">정보 예정</button>
+  </div>
+
+  <div class="summary-bar" id="summaryBar"></div>
+  <div id="eventsGrid"></div>
+</main>
+
+<footer class="page-footer">
+  <span>기준일: <strong id="baseDate">—</strong></span>
+  <span>출처: 각 행사 공식 사이트 / AI매터스 / COEX / Eventbrite</span>
+</footer>
+
+<script>
+  const EVENTS = [
+    {
+      id: 1,
+      type: "expo",
+      typeLabel: "박람회",
+      name: "스마트테크 코리아 2026 (STK 2026)",
+      subtitle: "AI & 빅데이터쇼 · 스마트테크쇼 동시 개최",
+      startDate: "2026-06-10",
+      endDate:   "2026-06-12",
+      time: "10:00 – 18:00",
+      venue: "서울 코엑스 (COEX) 전관",
+      price: "무료 (사전 온라인, 6/6까지) / 현장 20,000원",
+      priceClass: "price-paid",
+      desc: "40개국 500개사 2,000부스 규모의 국내 최대 스마트기술 복합 전시회. AI·빅데이터·클라우드·제조 자동화 등 분야별 최신 솔루션을 한자리에서 확인할 수 있으며, 부대 컨퍼런스와 네트워킹 세션도 동시 진행됩니다.",
+      site: "https://smarttechkorea.com/",
+      siteLabel: "공식 사이트",
+      pendingInfo: null
+    },
+    {
+      id: 2,
+      type: "seminar",
+      typeLabel: "심포지엄",
+      name: "AAAI 2026 Summer Symposium Series",
+      subtitle: "Association for the Advancement of Artificial Intelligence",
+      startDate: "2026-06-22",
+      endDate:   "2026-06-24",
+      time: "미정",
+      venue: "동국대학교, 서울",
+      price: "등록비 별도 (세부 금액 미발표)",
+      priceClass: "price-tbd",
+      desc: "세계 최대 AI 학술 단체 AAAI가 주관하는 주제별 소규모 연구 심포지엄. 각 심포지엄 등록 시 전자 논문집, 커피 브레이크, 개막 리셉션 참여 포함. 연구자·산업계 전문가가 함께 참여하는 토론 중심 세션.",
+      site: "https://aaai.org/conference/summer-symposia/suss26/",
+      siteLabel: "AAAI 공식 사이트",
+      pendingInfo: "참가비 및 세부 일정은 2026년 5–6월 중 발표 예정. aaai.getregistered.net 에서 업데이트 확인 가능."
+    },
+    {
+      id: 3,
+      type: "conference",
+      typeLabel: "컨퍼런스",
+      name: "ICML 2026 (국제 머신러닝 컨퍼런스)",
+      subtitle: "International Conference on Machine Learning",
+      startDate: "2026-07-06",
+      endDate:   "2026-07-11",
+      time: "7/6 엑스포·튜토리얼 / 7/7–9 메인 / 7/10–11 워크숍",
+      venue: "서울 코엑스 (COEX) 컨벤션센터",
+      price: "유료 (icml.cc/Conferences/2026/Pricing 확인)",
+      priceClass: "price-tbd",
+      desc: "세계 최고 권위의 머신러닝 학술 대회. 학술 논문 발표, 산업 엑스포, 핸즈온 튜토리얼, 집중 워크숍으로 구성. 가상 패스(스트리밍 포함)와 현장 패스 중 선택 가능. 한국 개최는 역사적으로 드문 기회.",
+      site: "https://icml.cc/",
+      siteLabel: "ICML 공식 사이트",
+      pendingInfo: "정확한 등록 금액은 icml.cc/Conferences/2026/Pricing 에서 확인. 사전 등록 할인 마감일 주의."
+    },
+    {
+      id: 4,
+      type: "expo",
+      typeLabel: "박람회 + 컨퍼런스",
+      name: "AI Summit Seoul & Expo 2026",
+      subtitle: "제9회 아시아 최대 AI 종합 행사",
+      startDate: "2026-08-19",
+      endDate:   "2026-08-21",
+      time: "09:00 – 18:00 (컨퍼런스 8/19–20, 엑스포 8/19–21)",
+      venue: "서울 코엑스 그랜드 볼룸 + Hall B 전시관",
+      price: "컨퍼런스 구매 시 엑스포 무료 / 엑스포 단독 별도",
+      priceClass: "price-tbd",
+      desc: "2018년부터 매년 열리는 아시아 최대 규모 AI 비즈니스 행사. 9회차 주요 테마는 AI Agent · Agentic AI · Physical AI · 산업별 AI 융합. 글로벌 기업·학계·스타트업이 한자리에서 만나는 네트워킹 허브.",
+      site: "https://www.aisummit.co.kr/",
+      siteLabel: "AI Summit Seoul",
+      pendingInfo: "컨퍼런스 세부 프로그램 및 가격은 2026년 6–7월 공개 예정. Eventbrite에서 사전 알림 신청 가능."
+    },
+    {
+      id: 5,
+      type: "expo",
+      typeLabel: "박람회",
+      name: "인공지능 페스타 (AI Festa 2026)",
+      subtitle: "과기정통부 공식 '인공지능주간(AI Week)' 대표 행사",
+      startDate: null,
+      endDate:   null,
+      time: "미정",
+      venue: "미정 (역대 서울 개최)",
+      price: "미정",
+      priceClass: "price-tbd",
+      desc: "매년 350여 기업, 30,000명 이상이 참여하는 국내 최대 AI 비즈니스 플랫폼. 정부 주관으로 AI 스타트업·대기업·연구기관·투자자가 모두 모이는 연례 행사.",
+      site: "https://www.aifesta.kr/",
+      siteLabel: "AI Festa 공식 사이트",
+      pendingInfo: "2026년 일정·장소·참가 정보 미발표. 전년도 패턴(9–10월)을 참고하면 2026년 하반기 개최 예상. 공식 사이트 주기적 확인 권장."
+    }
+  ];
+
+  function today() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
+  function formatDate(iso) {
+    if (!iso) return "미정";
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric", weekday: "short" });
+  }
+
+  function dDay(startIso) {
+    if (!startIso) return null;
+    const now = new Date(); now.setHours(0,0,0,0);
+    const start = new Date(startIso + "T00:00:00");
+    const diff = Math.round((start - now) / 86400000);
+    if (diff < 0) return null;
+    if (diff === 0) return "오늘 개막";
+    return `D-${diff}`;
+  }
+
+  function statusBadge(startIso, endIso) {
+    if (!startIso) return { cls: "pending", label: "일정 미정" };
+    const now = new Date(); now.setHours(0,0,0,0);
+    const start = new Date(startIso + "T00:00:00");
+    const end   = new Date((endIso || startIso) + "T23:59:59");
+    if (now > end) return null;
+    const diff = Math.round((start - now) / 86400000);
+    return diff <= 30
+      ? { cls: "soon",     label: "곧 개최" }
+      : { cls: "upcoming", label: "예정" };
+  }
+
+  function typeBadgeClass(type) {
+    return type === "expo" ? "type-expo" : type === "conference" ? "type-conf" : "type-semi";
+  }
+
+  let currentFilter = "all";
+
+  function renderSummary(events) {
+    document.getElementById("summaryBar").innerHTML = `
+      <div class="summary-chip"><span class="num">${events.length}</span> 개 행사</div>
+      <div class="summary-chip"><span class="num">${events.filter(e => e.startDate).length}</span> 개 일정 확정</div>
+      <div class="summary-chip"><span class="num">${events.filter(e => !e.startDate).length}</span> 개 정보 대기</div>
+    `;
+  }
+
+  function buildCard(ev, idx) {
+    const status = statusBadge(ev.startDate, ev.endDate);
+    if (status === null) return "";
+
+    const dd = dDay(ev.startDate);
+    const dateRange = ev.startDate
+      ? (ev.startDate === ev.endDate
+          ? formatDate(ev.startDate)
+          : `${formatDate(ev.startDate)} ~ ${formatDate(ev.endDate)}`)
+      : "미정";
+
+    return `
+      <div class="event-card" style="animation-delay:${idx * 60}ms" data-type="${ev.type}">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-type">${ev.typeLabel}</div>
+            <div class="card-title">${ev.name}</div>
+            <div class="card-subtitle">${ev.subtitle}</div>
+          </div>
+          <div class="badges">
+            ${status ? `<span class="badge ${status.cls}">● ${status.label}</span>` : ""}
+            <span class="badge ${typeBadgeClass(ev.type)}">${ev.typeLabel}</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-key">📅 날짜</div>
+            <div class="info-val">${dateRange}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">⏰ 시간</div>
+            <div class="info-val">${ev.time}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">📍 장소</div>
+            <div class="info-val">${ev.venue}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">💰 참가비</div>
+            <div class="info-val ${ev.priceClass}">${ev.price}</div>
+          </div>
+        </div>
+
+        <p class="card-desc">${ev.desc}</p>
+
+        ${ev.pendingInfo ? `<div class="pending-notice">⚠️ ${ev.pendingInfo}</div>` : ""}
+
+        <div class="card-footer">
+          <a href="${ev.site}" target="_blank" rel="noopener" class="site-link">🔗 ${ev.siteLabel}</a>
+          ${dd ? `<span class="d-day">개막까지 <strong>${dd}</strong></span>` : ""}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderEvents() {
+    const todayStr = today();
+    const filtered = EVENTS.filter(ev => {
+      const notPast = !ev.endDate || ev.endDate >= todayStr;
+      const typeMatch = currentFilter === "all"
+        || currentFilter === ev.type
+        || (currentFilter === "pending" && !ev.startDate);
+      return notPast && typeMatch;
+    });
+
+    renderSummary(filtered);
+
+    const grid = document.getElementById("eventsGrid");
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p>해당 조건의 행사가 없습니다.</p></div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map((ev, i) => buildCard(ev, i)).join("");
+  }
+
+  function updateTimestamp() {
+    const now = new Date();
+    document.getElementById("lastUpdated").textContent =
+      now.toLocaleString("ko-KR", { month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    document.getElementById("baseDate").textContent =
+      now.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  }
+
+  function refreshEvents() {
+    const btn = document.getElementById("refreshBtn");
+    const overlay = document.getElementById("loadingOverlay");
+    if (btn.classList.contains("loading")) return;
+
+    btn.classList.add("loading");
+    overlay.classList.add("show");
+
+    setTimeout(() => {
+      renderEvents();
+      updateTimestamp();
+      btn.classList.remove("loading");
+      overlay.classList.remove("show");
+
+      document.querySelectorAll(".event-card").forEach((c, i) => {
+        c.style.animation = "none";
+        setTimeout(() => { c.style.animation = `fadeIn 0.4s ease ${i * 60}ms both`; }, 10);
+      });
+    }, 900);
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.dataset.filter;
+      renderEvents();
+    });
+  });
+
+  renderEvents();
+  updateTimestamp();
+</script>
+</body>
+</html>

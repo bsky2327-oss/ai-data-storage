@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나만의 AI 정보 창고</title>
+  <style>
+    :root {
+      --bg:       #0f1117;
+      --surface:  #1a1d27;
+      --surface2: #22263a;
+      --border:   #2e3350;
+      --text:     #e2e8f0;
+      --text2:    #94a3b8;
+      --radius:   14px;
+
+      /* 탭별 강조색 */
+      --c-events:  #4f8ef7;
+      --c-news:    #f59e0b;
+      --c-papers:  #7c5cfc;
+      --c-jobs:    #22c55e;
+      --c-tools:   #f97316;
+
+      /* 행사 유형 */
+      --clr-expo: #7c5cfc;
+      --clr-conf: #4f8ef7;
+      --clr-semi: #22c55e;
+
+      --tab-accent: var(--c-events);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,34,0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    }
+    .header-top {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      padding: 20px 24px 0;
+    }
+    h1 {
+      font-size: 1.4rem; font-weight: 700;
+      background: linear-gradient(90deg,#4f8ef7 0%,#7c5cfc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .subtitle { font-size: 0.76rem; color: var(--text2); margin-top: 3px; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .last-updated { font-size: 0.75rem; color: var(--text2); text-align: right; }
+    .last-updated span { display: block; color: var(--tab-accent); font-weight: 600; transition: color 0.3s; }
+
+    /* ── REFRESH BUTTON ── */
+    .refresh-btn {
+      display: flex; align-items: center; gap: 7px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--tab-accent), color-mix(in srgb, var(--tab-accent) 70%, #000));
+      border: none; border-radius: 10px;
+      color: #fff; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .refresh-btn:hover { opacity: 0.85; }
+    .refresh-btn.loading .refresh-icon { animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      max-width: 960px; margin: 0 auto;
+      display: flex; gap: 2px;
+      padding: 12px 24px 0;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 9px 18px;
+      background: transparent;
+      border: none; border-radius: 10px 10px 0 0;
+      color: var(--text2); font-size: 0.82rem; font-weight: 500;
+      cursor: pointer; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .tab-btn:hover { color: var(--text); background: var(--surface); }
+    .tab-btn.active {
+      color: var(--tab-accent);
+      border-bottom-color: var(--tab-accent);
+      background: var(--surface);
+    }
+    .tab-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.8; }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 24px 20px 0; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .filter-label { font-size: 0.78rem; color: var(--text2); }
+    .filter-btn {
+      padding: 6px 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; color: var(--text2);
+      font-size: 0.78rem; cursor: pointer; transition: all 0.15s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--tab-accent); color: var(--tab-accent);
+      background: color-mix(in srgb, var(--tab-accent) 10%, transparent);
+    }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .summary-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 14px; font-size: 0.78rem; color: var(--text2);
+    }
+    .summary-chip .num { color: var(--tab-accent); font-weight: 700; margin-right: 4px; }
+
+    /* ── CARDS GRID ── */
+    #cardsGrid { display: grid; gap: 16px; }
+
+    /* ── GENERIC CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px 20px 26px;
+      position: relative; overflow: hidden;
+      animation: fadeIn 0.35s ease both;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: var(--tab-accent);
+    }
+    .card:hover { transform: translateY(-3px); }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── EVENT CARD ── */
+    .card[data-type="expo"]::before        { background: var(--clr-expo); }
+    .card[data-type="conference"]::before  { background: var(--clr-conf); }
+    .card[data-type="seminar"]::before     { background: var(--clr-semi); }
+    .card[data-type="expo"]:hover          { box-shadow: 0 0 0 1px var(--clr-expo), 0 8px 32px rgba(124,92,252,.15); }
+    .card[data-type="conference"]:hover    { box-shadow: 0 0 0 1px var(--clr-conf), 0 8px 32px rgba(79,142,247,.15); }
+    .card[data-type="seminar"]:hover       { box-shadow: 0 0 0 1px var(--clr-semi), 0 8px 32px rgba(34,197,94,.15); }
+
+    .card-header-row {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px;
+    }
+    .card-title { font-size: 1.02rem; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
+    .card-subtitle { font-size: 0.79rem; color: var(--text2); }
+    .badges { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+    .badge {
+      padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; white-space: nowrap;
+    }
+    .badge.upcoming { background: rgba(34,197,94,.15); color: #22c55e; }
+    .badge.soon     { background: rgba(245,158,11,.15); color: #f59e0b; }
+    .badge.pending  { background: rgba(148,163,184,.1);  color: var(--text2); }
+    .badge.type-expo { background: rgba(124,92,252,.15); color: var(--clr-expo); }
+    .badge.type-conf { background: rgba(79,142,247,.15); color: var(--clr-conf); }
+    .badge.type-semi { background: rgba(34,197,94,.15);  color: var(--clr-semi); }
+
+    .info-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 10px; background: var(--surface2); border-radius: 10px;
+      padding: 14px; margin: 12px 0;
+    }
+    .info-item {}
+    .info-key  { font-size: 0.7rem; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+    .info-val  { font-size: 0.84rem; font-weight: 500; }
+    .price-tbd  { color: var(--text2); }
+    .price-paid { color: #22c55e; }
+
+    .card-desc {
+      font-size: 0.84rem; color: var(--text2); line-height: 1.65; margin-bottom: 12px;
+    }
+    .pending-notice {
+      background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25);
+      border-radius: 8px; padding: 9px 13px; font-size: 0.8rem; color: #f59e0b;
+      margin-bottom: 14px; line-height: 1.55;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+    .site-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 15px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--accent, var(--tab-accent)); font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; transition: background 0.15s, box-shadow 0.15s;
+    }
+    .site-link:hover { background: rgba(79,142,247,.1); box-shadow: 0 0 0 1px var(--tab-accent); }
+    .d-day { font-size: 0.79rem; color: var(--text2); }
+    .d-day strong { color: var(--tab-accent); }
+
+    /* ── NEWS CARD ── */
+    .news-card::before { background: var(--c-news); }
+    .news-card:hover   { box-shadow: 0 0 0 1px var(--c-news), 0 8px 28px rgba(245,158,11,.12); }
+    .source-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+      background: rgba(245,158,11,.15); color: var(--c-news);
+    }
+    .pub-date { font-size: 0.73rem; color: var(--text2); }
+    .meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+
+    /* ── PAPER CARD ── */
+    .paper-card::before { background: var(--c-papers); }
+    .paper-card:hover   { box-shadow: 0 0 0 1px var(--c-papers), 0 8px 28px rgba(124,92,252,.12); }
+    .arxiv-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+      background: rgba(124,92,252,.15); color: var(--c-papers); font-family: monospace;
+    }
+    .authors { font-size: 0.78rem; color: var(--text2); margin-bottom: 8px; }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+    .tag {
+      padding: 3px 9px; border-radius: 6px; font-size: 0.71rem; font-weight: 500;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text2);
+    }
+
+    /* ── JOB CARD ── */
+    .job-card::before { background: var(--c-jobs); }
+    .job-card:hover   { box-shadow: 0 0 0 1px var(--c-jobs), 0 8px 28px rgba(34,197,94,.12); }
+    .company-name { font-size: 0.85rem; font-weight: 600; color: var(--c-jobs); margin-bottom: 2px; }
+    .job-location { font-size: 0.75rem; color: var(--text2); }
+
+    /* ── TOOL CARD ── */
+    .tool-card::before { background: var(--c-tools); }
+    .tool-card:hover   { box-shadow: 0 0 0 1px var(--c-tools), 0 8px 28px rgba(249,115,22,.12); }
+    .tool-source-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+      background: rgba(249,115,22,.15); color: var(--c-tools);
+    }
+
+    /* ── LOADING / EMPTY ── */
+    .loading-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,17,23,.55); backdrop-filter: blur(8px);
+      z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+    }
+    .loading-overlay.show { display: flex; }
+    .spinner {
+      width: 38px; height: 38px; border: 3px solid var(--border);
+      border-top-color: var(--tab-accent); border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .loading-text { color: var(--text2); font-size: 0.86rem; }
+    .empty-state  { text-align: center; padding: 60px 20px; color: var(--text2); }
+    .empty-state p { margin-top: 12px; font-size: 0.88rem; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      max-width: 960px; margin: 48px auto 0;
+      padding: 18px 20px 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.74rem; color: var(--text2);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.15rem; }
+      .header-top { flex-direction: column; align-items: flex-start; }
+      .last-updated { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <p class="loading-text" id="loadingText">데이터를 불러오는 중...</p>
+</div>
+
+<header>
+  <div class="header-top">
+    <div>
+      <h1>🧠 나만의 AI 정보 창고</h1>
+      <p class="subtitle">행사 · 뉴스 · 논문 · 채용 · 도구 — 주 3회 자동 업데이트</p>
+    </div>
+    <div class="header-right">
+      <div class="last-updated">
+        마지막 수집<span id="lastUpdated">—</span>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" onclick="refreshCurrentTab()">
+        <span class="refresh-icon">↻</span>새로고침
+      </button>
+    </div>
+  </div>
+
+  <nav class="tab-nav" id="tabNav">
+    <button class="tab-btn active" data-tab="events"  onclick="switchTab('events')">
+      <span class="tab-dot"></span>행사
+    </button>
+    <button class="tab-btn" data-tab="news"   onclick="switchTab('news')">
+      <span class="tab-dot"></span>뉴스
+    </button>
+    <button class="tab-btn" data-tab="papers" onclick="switchTab('papers')">
+      <span class="tab-dot"></span>논문
+    </button>
+    <button class="tab-btn" data-tab="jobs"   onclick="switchTab('jobs')">
+      <span class="tab-dot"></span>채용
+    </button>
+    <button class="tab-btn" data-tab="tools"  onclick="switchTab('tools')">
+      <span class="tab-dot"></span>도구
+    </button>
+  </nav>
+</header>
+
+<main>
+  <div class="filter-bar" id="filterBar"></div>
+  <div class="summary-bar" id="summaryBar"></div>
+  <div id="cardsGrid"></div>
+</main>
+
+<footer class="page-footer">
+  <span>기준일: <strong id="baseDate">—</strong></span>
+  <span>출처: arXiv · HuggingFace · AI Times · 원티드 · RemoteOK · GitHub</span>
+</footer>
+
+<script>
+  /* ── 탭 설정 ── */
+  const TABS = {
+    events: {
+      label:    "행사",
+      accent:   "#4f8ef7",
+      dataFile: "data/events.json",
+      filters: [
+        { key: "all",        label: "전체" },
+        { key: "expo",       label: "박람회" },
+        { key: "conference", label: "컨퍼런스" },
+        { key: "seminar",    label: "세미나" },
+        { key: "pending",    label: "정보 예정" },
+      ],
+    },
+    news: {
+      label:    "뉴스",
+      accent:   "#f59e0b",
+      dataFile: "data/news.json",
+      filters: [
+        { key: "all",        label: "전체" },
+        { key: "AI Times",   label: "AI Times" },
+        { key: "블로터",      label: "블로터" },
+        { key: "TechCrunch AI", label: "TechCrunch" },
+        { key: "VentureBeat AI","label": "VentureBeat" },
+      ],
+    },
+    papers: {
+      label:    "논문",
+      accent:   "#7c5cfc",
+      dataFile: "data/papers.json",
+      filters: [
+        { key: "all",   label: "전체" },
+        { key: "cs.AI", label: "cs.AI" },
+        { key: "cs.LG", label: "cs.LG" },
+        { key: "cs.CL", label: "cs.CL" },
+      ],
+    },
+    jobs: {
+      label:    "채용",
+      accent:   "#22c55e",
+      dataFile: "data/jobs.json",
+      filters: [
+        { key: "all",      label: "전체" },
+        { key: "원티드",   label: "원티드" },
+        { key: "RemoteOK", label: "RemoteOK" },
+      ],
+    },
+    tools: {
+      label:    "도구",
+      accent:   "#f97316",
+      dataFile: "data/tools.json",
+      filters: [
+        { key: "all",                 label: "전체" },
+        { key: "HuggingFace Papers",  label: "HF Papers" },
+        { key: "HuggingFace Models",  label: "HF Models" },
+        { key: "GitHub",              label: "GitHub" },
+      ],
+    },
+  };
+
+  let currentTab    = "events";
+  let currentFilter = "all";
+  const cache = {};   // tab -> { updatedAt, items }
+
+  /* ── 탭 전환 ── */
+  function switchTab(tab) {
+    currentTab    = tab;
+    currentFilter = "all";
+    document.documentElement.style.setProperty("--tab-accent", TABS[tab].accent);
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+    renderFilterBar();
+    if (cache[tab]) {
+      renderCards(cache[tab].items);
+      updateTimestamp(cache[tab].updatedAt);
+    } else {
+      loadTab(tab);
+    }
+  }
+
+  async function loadTab(tab, force = false) {
+    if (!force && cache[tab]) { renderCards(cache[tab].items); return; }
+    showLoading(`${TABS[tab].label} 데이터를 불러오는 중...`);
+    try {
+      const resp = await fetch(`${TABS[tab].dataFile}?t=${Date.now()}`);
+      if (!resp.ok) throw new Error(resp.statusText);
+      const json = await resp.json();
+      cache[tab] = json;
+      renderCards(json.items || []);
+      updateTimestamp(json.updatedAt);
+    } catch (e) {
+      document.getElementById("cardsGrid").innerHTML =
+        `<div class="empty-state"><div style="font-size:2rem">⚠️</div><p>데이터 로드 실패: ${e.message}<br>로컬 실행 시 <code>python -m http.server 8000</code> 후 열어주세요.</p></div>`;
+    } finally {
+      hideLoading();
+    }
+  }
+
+  /* ── 필터 바 ── */
+  function renderFilterBar() {
+    const bar = document.getElementById("filterBar");
+    bar.innerHTML = `<span class="filter-label">필터:</span>` +
+      TABS[currentTab].filters.map(f =>
+        `<button class="filter-btn${currentFilter === f.key ? " active" : ""}"
+          onclick="setFilter('${f.key}')">${f.label}</button>`
+      ).join("");
+  }
+
+  function setFilter(key) {
+    currentFilter = key;
+    renderFilterBar();
+    if (cache[currentTab]) renderCards(cache[currentTab].items);
+  }
+
+  /* ── 카드 렌더 ── */
+  function renderCards(items) {
+    const grid = document.getElementById("cardsGrid");
+    const filtered = filterItems(items);
+    renderSummary(filtered, items.length);
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p>해당 조건의 항목이 없습니다.</p></div>`;
+      return;
+    }
+    const builders = { events: buildEventCard, news: buildNewsCard, papers: buildPaperCard, jobs: buildJobCard, tools: buildToolCard };
+    grid.innerHTML = filtered.map((item, i) => builders[currentTab](item, i)).join("");
+  }
+
+  function filterItems(items) {
+    if (currentFilter === "all") return items.filter(item => {
+      if (currentTab !== "events") return true;
+      const todayStr = today();
+      return !item.endDate || item.endDate >= todayStr;
+    });
+
+    return items.filter(item => {
+      switch (currentTab) {
+        case "events":
+          if (currentFilter === "pending") return !item.startDate;
+          const todayStr = today();
+          const notPast = !item.endDate || item.endDate >= todayStr;
+          return notPast && item.type === currentFilter;
+        case "news":   return item.source === currentFilter;
+        case "papers": return (item.categories || []).includes(currentFilter);
+        case "jobs":   return item.source === currentFilter;
+        case "tools":  return item.source === currentFilter;
+        default: return true;
+      }
+    });
+  }
+
+  function renderSummary(filtered, total) {
+    document.getElementById("summaryBar").innerHTML =
+      `<div class="summary-chip"><span class="num">${filtered.length}</span>건 표시</div>` +
+      `<div class="summary-chip">전체 <span class="num">${total}</span>건</div>`;
+  }
+
+  /* ── 행사 카드 ── */
+  function buildEventCard(ev, idx) {
+    const status = statusBadge(ev.startDate, ev.endDate);
+    if (status === null) return "";
+    const dd = dDay(ev.startDate);
+    const dateRange = ev.startDate
+      ? (ev.startDate === ev.endDate ? formatDate(ev.startDate) : `${formatDate(ev.startDate)} ~ ${formatDate(ev.endDate)}`)
+      : "미정";
+    return `
+      <div class="card" style="animation-delay:${idx*60}ms" data-type="${ev.type}">
+        <div class="card-header-row">
+          <div>
+            <div class="card-subtitle">${ev.typeLabel}</div>
+            <div class="card-title">${ev.name}</div>
+            <div class="card-subtitle">${ev.subtitle}</div>
+          </div>
+          <div class="badges">
+            ${status ? `<span class="badge ${status.cls}">● ${status.label}</span>` : ""}
+            <span class="badge type-${ev.type === 'expo' ? 'expo' : ev.type === 'conference' ? 'conf' : 'semi'}">${ev.typeLabel}</span>
+          </div>
+        </div>
+        <div class="info-grid">
+          <div class="info-item"><div class="info-key">📅 날짜</div><div class="info-val">${dateRange}</div></div>
+          <div class="info-item"><div class="info-key">⏰ 시간</div><div class="info-val">${ev.time}</div></div>
+          <div class="info-item"><div class="info-key">📍 장소</div><div class="info-val">${ev.venue}</div></div>
+          <div class="info-item"><div class="info-key">💰 참가비</div><div class="info-val ${ev.priceClass}">${ev.price}</div></div>
+        </div>
+        <p class="card-desc">${ev.desc}</p>
+        ${ev.pendingInfo ? `<div class="pending-notice">⚠️ ${ev.pendingInfo}</div>` : ""}
+        <div class="card-footer">
+          <a href="${ev.site}" target="_blank" rel="noopener" class="site-link">🔗 ${ev.siteLabel}</a>
+          ${dd ? `<span class="d-day">개막까지 <strong>${dd}</strong></span>` : ""}
+        </div>
+      </div>`;
+  }
+
+  /* ── 뉴스 카드 ── */
+  function buildNewsCard(item, idx) {
+    return `
+      <div class="card news-card" style="animation-delay:${idx*50}ms">
+        <div class="meta-row">
+          <span class="source-badge">${item.source}</span>
+          <span class="pub-date">${item.pubDate}</span>
+        </div>
+        <div class="card-title" style="margin-bottom:8px">${item.title}</div>
+        <p class="card-desc">${item.summary || "요약 없음"}</p>
+        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">기사 보기 →</a>
+      </div>`;
+  }
+
+  /* ── 논문 카드 ── */
+  function buildPaperCard(item, idx) {
+    const tags = (item.categories || []).map(c => `<span class="tag">${c}</span>`).join("");
+    return `
+      <div class="card paper-card" style="animation-delay:${idx*50}ms">
+        <div class="meta-row">
+          <span class="arxiv-badge">arXiv:${item.arxivId}</span>
+          <span class="pub-date">${item.pubDate}</span>
+        </div>
+        <div class="card-title" style="margin-bottom:6px">${item.title}</div>
+        <div class="authors">${(item.authors || []).join(", ")}${item.authors?.length > 3 ? " 외" : ""}</div>
+        <p class="card-desc">${item.abstract}</p>
+        <div class="tag-row">${tags}</div>
+        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">arXiv 보기 →</a>
+      </div>`;
+  }
+
+  /* ── 채용 카드 ── */
+  function buildJobCard(item, idx) {
+    const tags = (item.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
+    return `
+      <div class="card job-card" style="animation-delay:${idx*50}ms">
+        <div class="meta-row">
+          <div>
+            <div class="company-name">${item.company}</div>
+            <div class="job-location">📍 ${item.location}</div>
+          </div>
+          <span class="pub-date">${item.pubDate}</span>
+        </div>
+        <div class="card-title" style="margin-bottom:10px">${item.title}</div>
+        <div class="tag-row">${tags}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <a href="${item.url}" target="_blank" rel="noopener" class="site-link">지원하기 →</a>
+          <span class="pub-date">${item.source}</span>
+        </div>
+      </div>`;
+  }
+
+  /* ── 도구 카드 ── */
+  function buildToolCard(item, idx) {
+    const tags = (item.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
+    return `
+      <div class="card tool-card" style="animation-delay:${idx*50}ms">
+        <div class="meta-row">
+          <span class="tool-source-badge">${item.source}</span>
+          <span class="pub-date">${item.pubDate}</span>
+        </div>
+        <div class="card-title" style="margin-bottom:8px">${item.name}</div>
+        <p class="card-desc">${item.desc}</p>
+        <div class="tag-row">${tags}</div>
+        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">보러 가기 →</a>
+      </div>`;
+  }
+
+  /* ── 유틸 ── */
+  function today() { return new Date().toISOString().slice(0,10); }
+
+  function formatDate(iso) {
+    if (!iso) return "미정";
+    return new Date(iso + "T00:00:00").toLocaleDateString("ko-KR", { year:"numeric", month:"long", day:"numeric", weekday:"short" });
+  }
+
+  function dDay(startIso) {
+    if (!startIso) return null;
+    const now = new Date(); now.setHours(0,0,0,0);
+    const diff = Math.round((new Date(startIso + "T00:00:00") - now) / 86400000);
+    if (diff < 0) return null;
+    return diff === 0 ? "오늘 개막" : `D-${diff}`;
+  }
+
+  function statusBadge(startIso, endIso) {
+    if (!startIso) return { cls: "pending", label: "일정 미정" };
+    const now = new Date(); now.setHours(0,0,0,0);
+    const end = new Date((endIso || startIso) + "T23:59:59");
+    if (now > end) return null;
+    const diff = Math.round((new Date(startIso + "T00:00:00") - now) / 86400000);
+    return diff <= 30 ? { cls: "soon", label: "곧 개최" } : { cls: "upcoming", label: "예정" };
+  }
+
+  function updateTimestamp(isoStr) {
+    const d = isoStr ? new Date(isoStr) : new Date();
+    document.getElementById("lastUpdated").textContent =
+      d.toLocaleString("ko-KR", { month:"long", day:"numeric", hour:"2-digit", minute:"2-digit" });
+    document.getElementById("baseDate").textContent =
+      new Date().toLocaleDateString("ko-KR", { year:"numeric", month:"long", day:"numeric" });
+  }
+
+  function showLoading(msg) {
+    document.getElementById("loadingText").textContent = msg;
+    document.getElementById("loadingOverlay").classList.add("show");
+  }
+  function hideLoading() {
+    document.getElementById("loadingOverlay").classList.remove("show");
+  }
+
+  function refreshCurrentTab() {
+    const btn = document.getElementById("refreshBtn");
+    if (btn.classList.contains("loading")) return;
+    btn.classList.add("loading");
+    delete cache[currentTab];
+    loadTab(currentTab, true).finally(() => btn.classList.remove("loading"));
+  }
+
+  /* ── 초기화 ── */
+  document.documentElement.style.setProperty("--tab-accent", TABS["events"].accent);
+  renderFilterBar();
+  loadTab("events");
+</script>
+</body>
+</html>
