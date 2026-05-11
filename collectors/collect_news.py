@@ -6,9 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 RSS_FEEDS = [
-    ("AI Times",  "https://www.aitimes.com/rss/allArticle.xml"),
-    ("GeekNews",  "https://news.hada.io/rss"),
-    ("Python KR", "https://discuss.python.kr/latest.rss"),
+    ("AI Times", "https://www.aitimes.com/rss/allArticle.xml"),
+    ("GeekNews", "https://news.hada.io/rss/news"),
 ]
 
 AI_KEYWORDS = [

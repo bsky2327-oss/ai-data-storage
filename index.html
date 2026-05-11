@@ -380,7 +380,7 @@ const TABS = {
     label: '뉴스', accent: '#e09a40', file: 'data/news.json',
     filters: [
       { k: 'all', label: '전체' }, { k: 'AI Times', label: 'AI Times' },
-      { k: 'GeekNews', label: 'GeekNews' }, { k: 'Python KR', label: 'Python KR' },
+      { k: 'GeekNews', label: 'GeekNews' },
     ],
   },
   papers: {
@@ -549,7 +549,7 @@ function buildEvent(ev, i) {
 }
 
 function buildNews(item, i) {
-  const c = { 'AI Times':'var(--c-events)', 'GeekNews':'#4caf72', 'Python KR':'var(--c-news)' }[item.source] || 'var(--c-news)';
+  const c = { 'AI Times':'var(--c-events)', 'GeekNews':'#4caf72' }[item.source] || 'var(--c-news)';
   return `
   <a class="news-item ani" style="animation-delay:${i*12}ms" href="${item.url}" target="_blank" rel="noopener">
     <span class="badge" style="background:color-mix(in srgb,${c} 12%,transparent);color:${c};border:1px solid color-mix(in srgb,${c} 22%,transparent)">${item.source}</span>

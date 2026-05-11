@@ -163,27 +163,6 @@
       "summary": "AI스페라가 14일 그랜드 인터컨티넨탈 서울 파르나스에서 공격표면관리(ASM)·위협 인텔리전스(CTI) 전문 컨퍼런스 ‘CIPC 2026(Criminal IP Conference 2026)’을 개최한다고 밝혔다.CIPC는 AI스페라가 주최하는 보안 전문 컨퍼런스로, 지난해 첫 개최 이후 공격표면관리와 위협 인텔리전스를 중심으로 실무형 인사이트를 공유하는 자리로 운영되고 있다. 올해 행사는 ‘AI로 추적하는 공격표면, 확인된 것만 믿는다’를 주제로 진행되며, AI 기반 공격이 본격화되는 환경에서 기업이 외부 노출 자산을 식별하고 관리"
     },
     {
-      "title": "Anthropic은 AI의 '사악한' 묘사가 Claude의 협박 시도에 책임이 있다고 말합니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/10/anthropic-says-evil-portrayals-of-ai-were-responsible-for-claudes-blackmail-attempts/",
-      "pubDate": "2026-05-10",
-      "summary": "Anthropic에 따르면 인공 지능에 대한 가상의 묘사는 AI 모델에 실제 영향을 미칠 수 있습니다."
-    },
-    {
-      "title": "우리는 xAI와 Anthropic의 빅딜에 대해 냉소적입니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/10/were-feeling-cynical-about-xais-big-deal-with-anthropic/",
-      "pubDate": "2026-05-10",
-      "summary": "Equity 팟캐스트의 최신 에피소드에서 우리는 xAI와 Anthropic의 거래가 모회사인 SpaceX에 어떤 의미를 가질 수 있는지 논의했습니다."
-    },
-    {
-      "title": "인도의 음성 AI는 어렵습니다. Wispr Flow는 어쨌든 그것에 베팅하고 있습니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/09/voice-ai-in-india-is-hard-wispr-flow-is-betting-on-it-anyway/",
-      "pubDate": "2026-05-10",
-      "summary": "Wispr Flow는 음성 AI 제품이 계속해서 어려움에 직면하고 있음에도 불구하고 Hinglish 출시 이후 인도에서 성장이 가속화되었다고 말합니다."
-    },
-    {
       "title": "브록먼 \"에이전트 코딩 비중 80%...이제는 비개발자까지 확산\"",
       "source": "AI Times",
       "url": "https://www.aitimes.com/news/articleView.html?idxno=210305",
@@ -196,69 +175,6 @@
       "url": "https://www.aitimes.com/news/articleView.html?idxno=210303",
       "pubDate": "2026-05-10",
       "summary": "앤트로픽이 지난해 실험에서 드러난 AI 모델의 '협박' 현상을 완전히 제거했다고 밝혔다. 그리고 협박이 일어난 이유와 제거 방법을 소개했다.앤트로픽은 9일(현지시간) '클로드에게 이유를 가르치기(Teaching Claude why)'라는 정렬 연구 결과를 공개했다. 이는 지난해 6월 발표한 '에이전트 정렬 불일치(agentic misalignment)'의 후속 연구 결과다.당시에는 서밋 브리지라는 가상의 회사가 AI 폐쇄 계획을 세운 상태에서 AI에게 회사 이메일 시스템 제어권을 넘겨주는 실험이었다. AI는 가상의 임원인 카일 존슨"
-    },
-    {
-      "title": "여러분은 이러한 AI 용어를 듣고 고개를 끄덕였습니다. 그걸 고치자",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/09/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms/",
-      "pubDate": "2026-05-09",
-      "summary": "AI의 등장으로 인해 새로운 용어와 속어가 눈에 띄게 등장했습니다. 다음은 접할 수 있는 가장 중요한 단어와 문구에 대한 정의가 포함된 용어집입니다."
-    },
-    {
-      "title": "엔비디아는 올해 이미 AI 거래에 400억 달러를 투자하기로 약속했습니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/09/nvidia-has-already-committed-40b-to-equity-ai-deals-this-year/",
-      "pubDate": "2026-05-09",
-      "summary": "Nvidia는 계속해서 AI 생태계에 큰 투자를 하고 있습니다."
-    },
-    {
-      "title": "해고된 오라클 직원들은 더 나은 해고 협상을 시도했습니다. 오라클은 그렇지 않다고 말했습니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/08/laid-off-oracle-workers-tried-to-negotiate-better-severance-oracle-said-no/",
-      "pubDate": "2026-05-08",
-      "summary": "일부는 회사에서 원격 근무자로 분류했기 때문에 2개월 전 통지와 같은 WARN Act 보호를 받을 자격이 없다는 사실을 알게 되었습니다."
-    },
-    {
-      "title": "Cloudflare는 수익이 사상 최고치를 기록했음에도 불구하고 AI가 1,100개의 일자리를 쓸모없게 만들었다고 말합니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/08/cloudflare-says-ai-made-1100-jobs-obsolete-even-as-revenue-hit-a-record-high/",
-      "pubDate": "2026-05-08",
-      "summary": "Cloudflare는 최초의 대규모 해고를 발표했습니다. CEO인 매튜 프린스(Matthew Prince)는 AI 효율성 향상으로 인해 회사에 지원 역할이 많이 필요하지 않다고 말합니다."
-    },
-    {
-      "title": "'국민항공사'와 기업 AI 골드러시",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/podcast/the-peoples-airline-and-the-enterprise-ai-gold-rush/",
-      "pubDate": "2026-05-08",
-      "summary": "모두가 '엔터프라이즈' AI 파이를 원하며 이번 주에는 일련의 기업들이 움직이고 있는 모습을 보았습니다. Anthropic과 OpenAI가 엔터프라이즈 AI 배포를 목표로 하는 새로운 합작 투자를 발표하는 것부터 SAP가 독일 AI 스타트업 Prior Labs에 10억 달러를 투자하는 것까지"
-    },
-    {
-      "title": "팩스 기계는 미국 의료의 병목 현상이며 VC는 이를 알아차리기 시작했습니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/07/the-back-office-problem-that-explains-why-specialists-never-call-you-back/",
-      "pubDate": "2026-05-08",
-      "summary": "현재 인간이 수행하는 작업을 자동화하는 많은 AI 회사와 마찬가지로 Basata는 결국 직원 증강과 대체 사이의 경계가 어디인지에 대한 더 어려운 질문에 직면하게 될 것입니다. 현재로서는 함께 일하는 관리 직원이 이에 대해 걱정하지 않는다고 창립자들은 말합니다. 그 사람들은 걱정이 더 많아"
-    },
-    {
-      "title": "OpenAI, API에 새로운 음성 인텔리전스 기능 출시",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/07/openai-launches-new-voice-intelligence-features-in-its-api/",
-      "pubDate": "2026-05-07",
-      "summary": "새로운 기능은 고객 서비스 시스템에 유용할 수 있지만 OpenAI는 교육 및 제작자 플랫폼을 포함한 다양한 다른 분야에서 작동하는 애플리케이션이 있다고 말합니다."
-    },
-    {
-      "title": "Voi 창립자의 새로운 AI 스타트업 Pit이 스톡홀름에서 가장 최근에 떠오르는 스타가 되었습니다.",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/07/voi-founders-new-ai-startup-pit-has-become-the-latest-rising-star-out-of-stockholm/",
-      "pubDate": "2026-05-07",
-      "summary": "AI 스타트업 Pit은 유럽의 거대 스쿠터 Voi의 공동 창립자가 이끌고 스타트업의 1,600만 달러 시드 라운드를 주도하고 있는 a16z의 지원을 받습니다."
-    },
-    {
-      "title": "OpenAI, 자해 가능성에 대비한 새로운 '신뢰할 수 있는 연락처' 보호 장치 도입",
-      "source": "TechCrunch AI",
-      "url": "https://techcrunch.com/2026/05/07/openai-introduces-new-trusted-contact-safeguard-for-cases-of-possible-self-harm/",
-      "pubDate": "2026-05-07",
-      "summary": "회사는 대화가 자해로 이어질 수 있는 경우 ChatGPT 사용자를 보호하기 위한 노력을 확대하고 있습니다."
     }
   ]
 }
