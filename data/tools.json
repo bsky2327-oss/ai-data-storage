@@ -1,251 +1,250 @@
 {
-  "updatedAt": "2026-05-11T04:08:09Z",
+  "updatedAt": "2026-05-11T06:59:17Z",
   "items": [
     {
-      "name": "redmlovesyou333/arcgentica",
-      "desc": "🤖 Solve ARC-AGI challenges efficiently using LLM-powered agentic AI for high accuracy and robust task performance.",
-      "url": "https://github.com/redmlovesyou333/arcgentica",
+      "name": "debanga/debanga.github.io",
+      "desc": "",
+      "url": "https://github.com/debanga/debanga.github.io",
       "tags": [
-        "ai-models",
-        "arcgentica",
         "artificial-intelligence",
-        "computer-vision"
+        "coding",
+        "deep-learning"
       ],
       "source": "GitHub",
       "pubDate": "2026-05-11"
     },
     {
-      "name": "hrabanazviking/Verdandi",
-      "desc": "VERÐANDI — The Norn of Becoming. AI nervous system for real-time cross-instance awareness via Unix domain sockets. Self-healing, self-correcting, cons",
-      "url": "https://github.com/hrabanazviking/Verdandi",
+      "name": "ksbisht941/ai-engineer",
+      "desc": "Python, Statistics, NumPy, Pandas, Matplotlib, 기계 학습, 딥 러닝(ANN, CNN), 컴퓨터 비전(OpenCV, YOLO), NLP, LangChain, LangGraph 및",
+      "url": "https://github.com/ksbisht941/ai-engineer",
+      "tags": [
+        "artificial-intelligence",
+        "computer-vision",
+        "data-science",
+        "data-visualization"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "Significant-Gravitas/AutoGPT",
+      "desc": "AutoGPT는 모든 사람이 사용하고 구축할 수 있는 접근 가능한 AI에 대한 비전입니다. 우리의 임무는 귀하가 중요한 일에 집중할 수 있도록 도구를 제공하는 것입니다.",
+      "url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "tags": [
+        "agentic-ai",
+        "agents",
+        "ai",
+        "artificial-intelligence"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "apache/texera",
+      "desc": "시각적 워크플로를 사용한 인간-AI ​​협업 데이터 과학",
+      "url": "https://github.com/apache/texera",
+      "tags": [
+        "ai-agents",
+        "artificial-intelligence",
+        "cloud-native",
+        "data-science"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "dfordivyansh/Cosmo-Predict",
+      "desc": "🚀 CosmoPredict는 실시간 NASA/NOAA 데이터, 기계 학습 및 3D 시각화를 사용하여 지자기 폭풍을 예측하고 그 정보를 분석하는 AI 기반 우주 기상 및 로켓 시뮬레이션 플랫폼입니다.",
+      "url": "https://github.com/dfordivyansh/Cosmo-Predict",
+      "tags": [
+        "ai",
+        "artificial-intelligence",
+        "data-visualization",
+        "final-year-project"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "kamb-code/Voynich",
+      "desc": "보이니치 원고는 엘루-싱할라어의 음성 표기로 해독되었습니다. 디코더, 4,591개 항목 어휘 및 통계 검증이 포함됩니다.",
+      "url": "https://github.com/kamb-code/Voynich",
+      "tags": [
+        "abugida",
+        "algorithms",
+        "anthropic",
+        "artificial-intelligence"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "fegennari/3DWorld",
+      "desc": "OpenGL을 이용한 3D 절차적 게임 엔진",
+      "url": "https://github.com/fegennari/3DWorld",
+      "tags": [
+        "artificial-intelligence",
+        "building-generator",
+        "city-generator",
+        "computer-graphics"
+      ],
+      "source": "GitHub",
+      "pubDate": "2026-05-11"
+    },
+    {
+      "name": "ZenAlexa/agi-brief-history",
+      "desc": "AGI의 간략한 역사: 오픈 소스 LLM 시대를 위한 서적, 지식 기반 및 생태계 추적",
+      "url": "https://github.com/ZenAlexa/agi-brief-history",
       "tags": [
         "agi",
-        "ai",
-        "ai-agent",
-        "ai-agents"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
-    },
-    {
-      "name": "HoppyCat/soul-stack",
-      "desc": "The SoulMode working archive. Prism competitions, soul file research, experimental frameworks, and the source material behind the soulmode-agent templ",
-      "url": "https://github.com/HoppyCat/soul-stack",
-      "tags": [
-        "agentic-ai",
         "artificial-intelligence",
-        "persistent-memory",
-        "soul-files"
+        "arxiv",
+        "deep-learning"
       ],
       "source": "GitHub",
       "pubDate": "2026-05-11"
     },
     {
-      "name": "antonpictures/ANTON-SIFTA",
-      "desc": "Born alive on Silicon. #SIFTA is an embodied operating system layer for AI. ",
-      "url": "https://github.com/antonpictures/ANTON-SIFTA",
+      "name": "The-Cognitive-Architect/The-Resonant-Architecture-of-Cognition-and-Structural-AI-Framework",
+      "desc": "인지 설계, 신경발산 모델링, AI 공동 개발 및 \"구조적 AI\"를 위한 재귀적 존재론적 프레임워크",
+      "url": "https://github.com/The-Cognitive-Architect/The-Resonant-Architecture-of-Cognition-and-Structural-AI-Framework",
       "tags": [
-        "agents",
-        "artificial-intelligence",
-        "autonomous-agents",
-        "cryptography"
+        "agent-architecture",
+        "ai-ethics",
+        "ai-safety",
+        "analog-computing"
       ],
       "source": "GitHub",
       "pubDate": "2026-05-11"
     },
     {
-      "name": "RichardWoz/WOZ",
-      "desc": "",
-      "url": "https://github.com/RichardWoz/WOZ",
+      "name": "sangwook236/SWDT",
+      "desc": "상욱님의 개발 및 테스트(SWDT)",
+      "url": "https://github.com/sangwook236/SWDT",
       "tags": [
         "artificial-intelligence",
-        "creative-ai",
-        "open-source",
-        "philosophy"
+        "computer-vision",
+        "deep-learning",
+        "failure-analysis"
       ],
       "source": "GitHub",
       "pubDate": "2026-05-11"
     },
     {
-      "name": "thedotmack/claude-mem",
-      "desc": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant",
-      "url": "https://github.com/thedotmack/claude-mem",
-      "tags": [
-        "ai",
-        "ai-agents",
-        "ai-memory",
-        "anthropic"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
+      "name": "오류 제어 역학을 통해 반복 모델의 상태 추적 재고",
+      "desc": "순환 아키텍처의 상태 추적 이론은 주로 표현 능력, 즉 고정 아키텍처가 이론적으로 일련의 상징적 전환 규칙을 실현할 수 있는지 여부에 초점을 맞췄습니다. 우리는 d를 따라 숨겨진 상태 표류를 지배하는 역학인 오류 제어도 똑같이 중요하다고 주장합니다.",
+      "url": "https://huggingface.co/papers/2605.07755",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
     },
     {
-      "name": "Ratnesh-181998/Resume-and-Social-Profiles",
-      "desc": "Experienced 4+ Yrs across the full AI/ML lifecycle, from DE , DS and model development to API driven deployment, cloud infrastructure, and monitoring.",
-      "url": "https://github.com/Ratnesh-181998/Resume-and-Social-Profiles",
-      "tags": [
-        "agentic-ai",
-        "aiops",
-        "artificial-intelligence",
-        "aws"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
+      "name": "AEM: 다중 회전 에이전트 강화 학습을 위한 적응형 엔트로피 변조",
+      "desc": "강화 학습(RL)은 환경과 상호 작용하고 다중 턴 작업을 해결하는 LLM(대형 언어 모델) 에이전트의 능력을 크게 향상시켰습니다. 그러나 효과적인 에이전트 RL은 여전히 ​​어려운 문제입니다. 희소한 결과 전용 보상은 개인에게 크레딧을 할당하는 데 제한적인 지침을 제공합니다.",
+      "url": "https://huggingface.co/papers/2605.00425",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
     },
     {
-      "name": "SeriousOldMan/Simulator-Controller",
-      "desc": "A virtual AI-based pit crew  for Sim Racing. Use the latest GPT technology to create a real life like experience when out on the track.",
-      "url": "https://github.com/SeriousOldMan/Simulator-Controller",
-      "tags": [
-        "agent",
-        "artificial-intelligence",
-        "assistant",
-        "autohotkey"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
+      "name": "범위: 복잡한 이미지 생성을 위한 구조적 분해 및 조건부 기술 오케스트레이션",
+      "desc": "텍스트-이미지 모델이 시각적 충실도 측면에서 큰 진전을 이루었지만 접지, 생성 및 검증 전반에 걸쳐 많은 요구 사항을 추적해야 하기 때문에 복잡한 시각적 의도를 충실하게 실현하는 것은 여전히 ​​어려운 일입니다. 우리는 이러한 요구사항을 의미론적 약속이라고 부르고 이를 공식화합니다.",
+      "url": "https://huggingface.co/papers/2605.08043",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
     },
     {
-      "name": "cdtalley/DocuMind",
-      "desc": "Local-first RAG platform for technical document libraries. Features FastAPI, ChromaDB, and active retrieval (FLARE) powered by Ollama.",
-      "url": "https://github.com/cdtalley/DocuMind",
-      "tags": [
-        "active-retrieval",
-        "artificial-intelligence",
-        "chromadb",
-        "document-intelligence-rag"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
+      "name": "SpecBlock: 동적 트리 제도를 사용한 블록 반복 추측 디코딩",
+      "desc": "추론적 디코딩은 후보 연속 트리의 초안을 작성하고 앞으로 하나의 대상에서 이를 검증함으로써 LLM 추론을 가속화합니다. 기존 초안 작성자는 서로 반대되는 약점을 지닌 두 진영으로 나뉩니다. EAGLE-3과 같은 자동 회귀 제도자는 각 제도 경로에 따라 종속성을 유지하지만 제도자를 호출합니다.",
+      "url": "https://huggingface.co/papers/2605.07243",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-07"
     },
     {
-      "name": "EalZz/IT-AI-NEWS",
-      "desc": "A curated collection of the latest news, trends, and updates in Information Technology and Artificial Intelligence.",
-      "url": "https://github.com/EalZz/IT-AI-NEWS",
-      "tags": [
-        "aggregator",
-        "ai",
-        "artificial-intelligence",
-        "it"
-      ],
-      "source": "GitHub",
-      "pubDate": "2026-05-11"
-    },
-    {
-      "name": "TextLDM: Language Modeling with Continuous Latent Diffusion",
-      "desc": "Diffusion Transformers (DiT) trained with flow matching in a VAE latent space have unified visual generation across images and videos. A natural next step toward a single architecture for both generat",
+      "name": "TextLDM: 연속 잠재 확산을 사용한 언어 모델링",
+      "desc": "VAE 잠재 공간에서 흐름 매칭으로 훈련된 DiT(확산 변환기)는 이미지와 비디오 전반에 걸쳐 통합된 시각적 생성을 제공합니다. 생성(시각적 합성)과 이해(텍스트 생성) 모두를 위한 단일 아키텍처를 향한 자연스러운 다음 단계는 이 프레임워크를 언어 모에 적용하는 것입니다.",
       "url": "https://huggingface.co/papers/2605.07748",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-07"
     },
     {
-      "name": "HyperEyes: Dual-Grained Efficiency-Aware Reinforcement Learning for Parallel Multimodal Search Agents",
-      "desc": "Existing multimodal search agents process target entities sequentially, issuing one tool call per entity and accumulating redundant interaction rounds whenever a query decomposes into independent sub-",
+      "name": "HyperEyes: 병렬 다중 모드 검색 에이전트를 위한 이중 단위 효율성 인식 강화 학습",
+      "desc": "기존 다중 모드 검색 에이전트는 대상 엔터티를 순차적으로 처리하여 엔터티당 하나의 도구 호출을 실행하고 쿼리가 독립적인 하위 검색으로 분해될 때마다 중복 상호 작용 라운드를 축적합니다. 우리는 효과적인 다중 모드 에이전트가 더 긴 검색보다는 더 넓은 검색을 수행해야 한다고 주장합니다.",
       "url": "https://huggingface.co/papers/2605.07177",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-07"
     },
     {
-      "name": "Anisotropic Modality Align",
-      "desc": "Training multimodal large language models has long been limited by the scarcity of high-quality paired multimodal data. Recent studies show that the shared representation space of pretrained multimoda",
+      "name": "이방성 양식 정렬",
+      "desc": "다중 모드 대형 언어 모델을 훈련하는 것은 고품질 쌍 다중 모드 데이터의 부족으로 인해 오랫동안 제한되어 왔습니다. 최근 연구에 따르면 사전 훈련된 다중 모드 대조 모델의 공유 표현 공간은 모델이 unim을 사용하여 다중 모드 훈련을 수행할 수 있도록 하는 다리 역할을 할 수 있습니다.",
       "url": "https://huggingface.co/papers/2605.07825",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-07"
     },
     {
-      "name": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
-      "desc": "Existing Flow Matching (FM) text-to-image models suffer from two critical bottlenecks under multi-task alignment: the reward sparsity induced by scalar-valued rewards, and the gradient interference ar",
+      "name": "Flow-OPD: 흐름 일치 모델을 위한 정책에 따른 증류",
+      "desc": "기존 FM(Flow Matching) 텍스트-이미지 모델은 다중 작업 정렬에서 두 가지 중요한 병목 현상, 즉 스칼라 값 보상으로 인한 보상 희소성과 이종 목표를 공동으로 최적화하여 발생하는 그래디언트 간섭으로 인해 어려움을 겪습니다. 이는 함께 '시소 효과'를 발생시킵니다.",
       "url": "https://huggingface.co/papers/2605.08063",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-07"
     },
     {
-      "name": "What Matters for Diffusion-Friendly Latent Manifold? Prior-Aligned Autoencoders for Latent Diffusion",
-      "desc": "Tokenizers are a crucial component of latent diffusion models, as they define the latent space in which diffusion models operate. However, existing tokenizers are primarily designed to improve reconst",
+      "name": "확산 친화적인 잠재성 다기관에 중요한 것은 무엇입니까? 잠재 확산을 위한 사전 정렬된 자동 인코더",
+      "desc": "토크나이저는 확산 모델이 작동하는 잠재 공간을 정의하므로 잠재 확산 모델의 중요한 구성 요소입니다. 그러나 기존 토크나이저는 주로 재구성 충실도를 향상시키거나 사전 훈련된 표현을 상속하도록 설계되어 잠재 공간이 어떤 종류인지 불분명합니다.",
       "url": "https://huggingface.co/papers/2605.07915",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-07"
     },
     {
-      "name": "Scaling Continual Learning to 300+ Tasks with Bi-Level Routing Mixture-of-Experts",
-      "desc": "Continual learning, especially class-incremental learning (CIL), on the basis of a pre-trained model (PTM) has garnered substantial research interest in recent years. However, how to effectively learn",
-      "url": "https://huggingface.co/papers/2602.03473",
+      "name": "얕은 사전 채우기, 심층 디코딩: 레이어 비대칭 KV 가시성을 통한 효율적인 장기 컨텍스트 추론",
+      "desc": "디코더 전용 언어 모델의 긴 컨텍스트 추론은 긴 프롬프트가 프리필 중에 처리되고, 모든 레이어에 캐시되며, 자동 회귀 디코드 중에 반복적으로 처리되기 때문에 비용이 많이 듭니다. 위상 비대칭 KV 가시성 정책인 SPEED(Shallow Prefill, dEEp Decode)를 소개합니다.",
+      "url": "https://huggingface.co/papers/2605.06105",
       "tags": [],
       "source": "HuggingFace Papers",
-      "pubDate": "2026-05-07"
+      "pubDate": "2026-05-06"
     },
     {
-      "name": "CPCANet: Deep Unfolding Common Principal Component Analysis for Domain Generalization",
-      "desc": "Domain Generalization (DG) aims to learn representations that remain robust under out-of-distribution (OOD) shifts and generalize effectively to unseen target domains. While recent invariant learning ",
+      "name": "이미지 분류기의 단순 연결 결정 영역에 대한 경험적 증거",
+      "desc": "결정 영역의 토폴로지를 이해하는 것은 심층 신경망의 내부 작동을 설명하는 데 핵심입니다. 이전의 경험적 연구는 이들 영역이 경로로 연결되어 있다는 증거를 제공했습니다. 우리는 더 강력한 토폴로지 질문인 결정 영역 내부의 폐쇄 루프가 계약될 수 있는지 여부를 연구합니다.",
+      "url": "https://huggingface.co/papers/2605.06380",
+      "tags": [],
+      "source": "HuggingFace Papers",
+      "pubDate": "2026-05-06"
+    },
+    {
+      "name": "CPCANet: 도메인 일반화를 위한 심층 전개 공통 주성분 분석",
+      "desc": "도메인 일반화(DG)는 OOD(배포 외) 변화에도 견고하게 유지되고 보이지 않는 대상 도메인에 효과적으로 일반화되는 표현을 학습하는 것을 목표로 합니다. 최근의 불변 학습 전략과 아키텍처 발전이 강력한 성능을 달성했지만 명시적으로 str을 발견했습니다.",
       "url": "https://huggingface.co/papers/2605.05136",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-06"
     },
     {
-      "name": "Steering Visual Generation in Unified Multimodal Models with Understanding Supervision",
-      "desc": "Unified multimodal models are envisioned to bridge the gap between understanding and generation. Yet, to achieve competitive performance, state-of-the-art models adopt largely decoupled understanding ",
+      "name": "감독에 대한 이해를 바탕으로 통합 다중 모드 모델의 시각적 생성 조정",
+      "desc": "이해와 생성 사이의 격차를 해소하기 위해 통합된 다중 모드 모델이 구상됩니다. 그러나 경쟁력 있는 성능을 달성하기 위해 최첨단 모델은 크게 분리된 이해 및 생성 구성 요소를 채택합니다. 이 디자인은 개별 작업에는 효과적이지만 연결을 약화시킵니다.",
       "url": "https://huggingface.co/papers/2605.05781",
       "tags": [],
       "source": "HuggingFace Papers",
       "pubDate": "2026-05-06"
     },
     {
-      "name": "LiVeAction: a Lightweight, Versatile, and Asymmetric Neural Codec Design for Real-time Operation",
-      "desc": "Modern sensors generate rich, high-fidelity data, yet applications operating on wearable or remote sensing devices remain constrained by bandwidth and power budgets. Standardized codecs such as JPEG a",
-      "url": "https://huggingface.co/papers/2605.06628",
+      "name": "DecodingTrust-Agent Platform(DTap): AI 에이전트를 위한 제어 가능한 대화형 레드팀 플랫폼",
+      "desc": "AI 에이전트는 장기적, 고위험 작업 실행을 통해 복잡한 워크플로를 자동화하기 위해 다양한 도메인에 점점 더 많이 배포되고 있습니다. 높은 기능과 유연성으로 인해 이러한 에이전트는 심각한 보안 및 안전 문제를 야기합니다. 점점 더 많은 실제 사건이 발생하고 있습니다.",
+      "url": "https://huggingface.co/papers/2605.04808",
       "tags": [],
       "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
+      "pubDate": "2026-05-05"
     },
     {
-      "name": "UniSD: Towards a Unified Self-Distillation Framework for Large Language Models",
-      "desc": "Self-distillation (SD) offers a promising path for adapting large language models (LLMs) without relying on stronger external teachers. However, SD in autoregressive LLMs remains challenging because s",
-      "url": "https://huggingface.co/papers/2605.06597",
-      "tags": [],
-      "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
-    },
-    {
-      "name": "MDN: Parallelizing Stepwise Momentum for Delta Linear Attention",
-      "desc": "Linear Attention (LA) offers a promising paradigm for scaling large language models (LLMs) to long sequences by avoiding the quadratic complexity of self-attention. Recent LA models such as Mamba2 and",
-      "url": "https://huggingface.co/papers/2605.05838",
-      "tags": [],
-      "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
-    },
-    {
-      "name": "HumanNet: Scaling Human-centric Video Learning to One Million Hours",
-      "desc": "Progress in embodied intelligence increasingly depends on scalable data infrastructure. While vision and language have scaled with internet corpora, learning physical interaction remains constrained b",
-      "url": "https://huggingface.co/papers/2605.06747",
-      "tags": [],
-      "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
-    },
-    {
-      "name": "UniPrefill: Universal Long-Context Prefill Acceleration via Block-wise Dynamic Sparsification",
-      "desc": "As large language models (LLMs) continue to advance rapidly, they are becoming increasingly capable while simultaneously demanding ever-longer context lengths. To improve the inference efficiency of l",
-      "url": "https://huggingface.co/papers/2605.06221",
-      "tags": [],
-      "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
-    },
-    {
-      "name": "From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms",
-      "desc": "Large Language Model (LLM)-based agents have fundamentally reshaped artificial intelligence by integrating external tools and planning capabilities. While memory mechanisms have emerged as the archite",
-      "url": "https://huggingface.co/papers/2605.06716",
-      "tags": [],
-      "source": "HuggingFace Papers",
-      "pubDate": "2026-05-06"
-    },
-    {
-      "name": "Beyond Retrieval: A Multitask Benchmark and Model for Code Search",
-      "desc": "Code search has usually been evaluated as first-stage retrieval, even though production systems rely on broader pipelines with reranking and developer-style queries. Existing benchmarks also suffer fr",
+      "name": "검색 그 이상: 코드 검색을 위한 멀티태스킹 벤치마크 및 모델",
+      "desc": "프로덕션 시스템이 순위 재지정 및 개발자 스타일 쿼리를 통해 더 광범위한 파이프라인에 의존하더라도 코드 검색은 일반적으로 1단계 검색으로 평가되었습니다. 기존 벤치마크도 데이터 오염, 라벨 노이즈, 바이너리 관련성 저하로 어려움을 겪고 있습니다. 본 논문에서는 CoR을 소개한다.",
       "url": "https://huggingface.co/papers/2605.04615",
       "tags": [],
       "source": "HuggingFace Papers",
@@ -253,7 +252,7 @@
     },
     {
       "name": "z-lab/gemma-4-31B-it-DFlash",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 74",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 74개",
       "url": "https://huggingface.co/z-lab/gemma-4-31B-it-DFlash",
       "tags": [
         "transformers",
@@ -266,7 +265,7 @@
     },
     {
       "name": "XiaomiMiMo/MiMo-V2.5-Pro",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 506",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 506개",
       "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.5-Pro",
       "tags": [
         "safetensors",
@@ -279,7 +278,7 @@
     },
     {
       "name": "HuggingFaceTB/nanowhale-100m",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 46",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 47개",
       "url": "https://huggingface.co/HuggingFaceTB/nanowhale-100m",
       "tags": [
         "transformers",
@@ -292,7 +291,7 @@
     },
     {
       "name": "google/gemma-4-31B-it-assistant",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 198",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 199개",
       "url": "https://huggingface.co/google/gemma-4-31B-it-assistant",
       "tags": [
         "transformers",
@@ -305,7 +304,7 @@
     },
     {
       "name": "google/gemma-4-26B-A4B-it-assistant",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 105",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 107개",
       "url": "https://huggingface.co/google/gemma-4-26B-A4B-it-assistant",
       "tags": [
         "transformers",
@@ -317,21 +316,8 @@
       "pubDate": "2026-04-23"
     },
     {
-      "name": "google/gemma-4-E4B-it-assistant",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 57",
-      "url": "https://huggingface.co/google/gemma-4-E4B-it-assistant",
-      "tags": [
-        "transformers",
-        "safetensors",
-        "gemma4_assistant",
-        "text-generation"
-      ],
-      "source": "HuggingFace Models",
-      "pubDate": "2026-04-23"
-    },
-    {
       "name": "z-lab/Qwen3.6-27B-DFlash",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 279",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 280개",
       "url": "https://huggingface.co/z-lab/Qwen3.6-27B-DFlash",
       "tags": [
         "transformers",
@@ -343,8 +329,21 @@
       "pubDate": "2026-04-23"
     },
     {
+      "name": "google/gemma-4-E4B-it-assistant",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 57개",
+      "url": "https://huggingface.co/google/gemma-4-E4B-it-assistant",
+      "tags": [
+        "transformers",
+        "safetensors",
+        "gemma4_assistant",
+        "text-generation"
+      ],
+      "source": "HuggingFace Models",
+      "pubDate": "2026-04-23"
+    },
+    {
       "name": "poolside/Laguna-XS.2",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 240",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 241개",
       "url": "https://huggingface.co/poolside/Laguna-XS.2",
       "tags": [
         "transformers",
@@ -357,7 +356,7 @@
     },
     {
       "name": "deepseek-ai/DeepSeek-V4-Pro",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 3823",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 3,832개",
       "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
       "tags": [
         "transformers",
@@ -370,7 +369,7 @@
     },
     {
       "name": "deepseek-ai/DeepSeek-V4-Flash",
-      "desc": "🤗 HuggingFace 모델 | 좋아요(7일): 1026",
+      "desc": "🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: 1,026개",
       "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash",
       "tags": [
         "transformers",
