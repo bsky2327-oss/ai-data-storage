@@ -6,27 +6,23 @@
   <title>AI Data Storage</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ══════════════════════════════════════════
-       DESIGN TOKENS — Linear + Vercel 영감
-    ══════════════════════════════════════════ */
     :root {
-      --bg:          #0c0c0e;
-      --sidebar:     #111113;
-      --surface:     #111113;
-      --surface-2:   #161619;
-      --surface-3:   #1c1c20;
-      --border:      #27272a;
-      --border-dim:  #1e1e21;
-      --text:        #e4e4e7;
-      --text-2:      #a1a1aa;
-      --text-3:      #52525b;
+      --bg:         #0a0a0c;
+      --sidebar:    #0f0f12;
+      --surface:    #0f0f12;
+      --surface-2:  #141417;
+      --surface-3:  #18181c;
+      --border:     #242428;
+      --border-dim: #1a1a1e;
+      --text:       #e2e2e6;
+      --text-2:     #9898a6;
+      --text-3:     #4e4e5a;
 
       --c-events: #3b82f6;
       --c-news:   #f59e0b;
       --c-papers: #8b5cf6;
-      --c-jobs:   #10b981;
       --c-tools:  #f97316;
 
       --clr-expo: #8b5cf6;
@@ -34,11 +30,10 @@
       --clr-semi: #10b981;
 
       --accent: var(--c-events);
-      --r: 7px;
+      --r: 6px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { height: 100%; }
     body {
       font-family: 'Inter', -apple-system, sans-serif;
@@ -47,16 +42,15 @@
       font-size: 13px;
       line-height: 1.5;
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 210px 1fr;
       height: 100%;
     }
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
 
-    /* ══ SIDEBAR ══════════════════════════════ */
+    /* ── SIDEBAR ── */
     .sidebar {
       background: var(--sidebar);
       border-right: 1px solid var(--border-dim);
@@ -65,115 +59,118 @@
       height: 100vh;
       position: sticky;
       top: 0;
-      overflow: hidden;
     }
-
     .s-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 16px 14px;
+      padding: 15px 14px;
       border-bottom: 1px solid var(--border-dim);
-      flex-shrink: 0;
     }
     .s-logo-icon {
-      width: 30px; height: 30px;
-      border-radius: 8px;
+      width: 28px; height: 28px;
+      border-radius: 7px;
       background: linear-gradient(135deg, var(--c-events) 0%, var(--c-papers) 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; flex-shrink: 0;
+      font-size: 14px; flex-shrink: 0;
     }
-    .s-logo-name { font-size: 13.5px; font-weight: 600; }
-    .s-logo-sub  { font-size: 10px; color: var(--text-3); display: block; margin-top: 1px; }
+    .s-logo-name { font-size: 13px; font-weight: 600; letter-spacing: -.01em; }
+    .s-logo-sub  { font-size: 10px; color: var(--text-3); margin-top: 1px; display: block; }
 
-    .s-nav { flex: 1; padding: 6px; overflow-y: auto; }
-    .s-nav-label {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: var(--text-3); padding: 10px 8px 4px;
+    .s-nav { flex: 1; padding: 8px 6px; overflow-y: auto; }
+    .s-section-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .07em;
+      text-transform: uppercase; color: var(--text-3);
+      padding: 8px 8px 4px;
     }
-
     .nav-item {
-      display: flex; align-items: center; gap: 8px;
-      padding: 7px 10px;
-      border-radius: 6px; cursor: pointer;
-      border: 1px solid transparent;
-      margin-bottom: 1px;
+      display: flex; align-items: center; gap: 9px;
+      padding: 7px 9px; border-radius: 5px; cursor: pointer;
+      border: 1px solid transparent; margin-bottom: 1px;
       transition: background .1s, border-color .1s;
       user-select: none;
     }
     .nav-item:hover { background: var(--surface-2); }
     .nav-item.active {
-      background: color-mix(in srgb, var(--accent) 8%, transparent);
-      border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+      background: color-mix(in srgb, var(--accent) 9%, transparent);
+      border-color: color-mix(in srgb, var(--accent) 20%, transparent);
     }
     .nav-dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 5px; height: 5px; border-radius: 50%;
       background: var(--text-3); flex-shrink: 0;
       transition: background .15s;
     }
     .nav-item.active .nav-dot {
       background: var(--accent);
-      box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+      box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 70%, transparent);
     }
     .nav-label { flex: 1; font-size: 13px; color: var(--text-2); font-weight: 500; }
     .nav-item.active .nav-label { color: var(--text); }
     .nav-count {
       font-size: 10px; font-family: 'JetBrains Mono', monospace;
       color: var(--text-3); background: var(--surface-2);
-      padding: 1px 6px; border-radius: 10px;
+      padding: 1px 5px; border-radius: 9px;
     }
-    .nav-item.active .nav-count {
-      color: var(--accent);
-      background: color-mix(in srgb, var(--accent) 12%, transparent);
-    }
+    .nav-item.active .nav-count { color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent); }
 
     .s-footer {
       padding: 12px 14px;
       border-top: 1px solid var(--border-dim);
-      flex-shrink: 0;
     }
     .s-footer-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
     .s-footer-time  { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-2); }
     .refresh-btn {
-      width: 100%; margin-top: 8px; padding: 7px 0;
+      width: 100%; margin-top: 8px; padding: 6px 0;
       background: transparent; border: 1px solid var(--border-dim);
-      border-radius: 6px; color: var(--text-2);
-      font-size: 12px; font-family: inherit; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      border-radius: 5px; color: var(--text-2);
+      font-size: 11px; font-family: inherit; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
       transition: border-color .15s, color .15s;
     }
     .refresh-btn:hover { border-color: var(--accent); color: var(--text); }
-    .refresh-btn.loading .spin { display: inline-block; animation: spin .7s linear infinite; }
+    .refresh-btn.loading .spin { animation: spin .7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ══ MAIN ══════════════════════════════ */
+    /* ── MAIN ── */
     .main { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
     .topbar {
       display: flex; align-items: center;
-      padding: 0 20px;
+      padding: 0 20px; gap: 12px;
       border-bottom: 1px solid var(--border-dim);
-      flex-shrink: 0; min-height: 48px; gap: 12px;
+      flex-shrink: 0; min-height: 46px;
     }
-    .topbar-left { display: flex; align-items: baseline; gap: 10px; }
-    .section-title { font-size: 15px; font-weight: 600; }
-    .section-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+    .topbar-left { display: flex; align-items: baseline; gap: 8px; flex-shrink: 0; }
+    .section-title { font-size: 14px; font-weight: 600; }
+    .section-count { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-3); }
+
+    .search-wrap {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface-2); border: 1px solid var(--border-dim);
+      border-radius: 6px; padding: 0 10px;
+      transition: border-color .15s;
+      margin-left: auto;
+    }
+    .search-wrap:focus-within { border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
+    .search-icon { font-size: 11px; color: var(--text-3); }
+    .search-input {
+      border: none; background: transparent; outline: none;
+      color: var(--text); font-size: 12px; font-family: inherit;
+      width: 160px; padding: 6px 0;
+    }
+    .search-input::placeholder { color: var(--text-3); }
 
     .filter-tabs {
       display: flex; gap: 0;
       border-left: 1px solid var(--border-dim);
       padding-left: 12px;
       overflow-x: auto; scrollbar-width: none;
-      margin-left: auto;
     }
     .filter-tabs::-webkit-scrollbar { display: none; }
     .ftab {
-      padding: 5px 12px;
-      font-size: 12px; font-weight: 500;
+      padding: 5px 11px; font-size: 11.5px; font-weight: 500;
       color: var(--text-3); cursor: pointer;
-      border-bottom: 2px solid transparent;
-      white-space: nowrap;
+      border-bottom: 2px solid transparent; white-space: nowrap;
       transition: color .12s, border-color .12s;
       background: transparent; border-top: none; border-left: none; border-right: none;
       font-family: inherit;
@@ -183,115 +180,147 @@
 
     .content { flex: 1; overflow-y: auto; }
 
-    /* ══ LIST VIEW — news / jobs ══════════ */
+    /* ── NEWS ROW ── */
     .row-list { display: flex; flex-direction: column; }
     .row-item {
       display: flex; align-items: center; gap: 10px;
-      padding: 11px 20px;
-      border-bottom: 1px solid var(--border-dim);
-      text-decoration: none; color: inherit;
-      transition: background .08s;
+      padding: 10px 20px; border-bottom: 1px solid var(--border-dim);
+      text-decoration: none; color: inherit; transition: background .08s;
     }
     .row-item:last-child { border-bottom: none; }
     .row-item:hover { background: var(--surface-2); }
 
-    /* ══ CARD VIEW — papers / tools ══════ */
+    /* ── PAPER CARD ── */
     .card-grid { display: flex; flex-direction: column; }
     .info-card {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border-dim);
-      border-left: 3px solid transparent;
-      transition: background .1s;
+      padding: 16px 20px; border-bottom: 1px solid var(--border-dim);
+      border-left: 3px solid transparent; transition: background .1s;
     }
     .info-card:last-child { border-bottom: none; }
     .info-card:hover { background: var(--surface-2); }
 
-    /* ══ EVENT VIEW ═══════════════════════ */
+    /* ── REPO GRID (tools) ── */
+    .repo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+    .repo-card {
+      display: block; padding: 16px 20px;
+      border-bottom: 1px solid var(--border-dim);
+      border-right: 1px solid var(--border-dim);
+      text-decoration: none; color: inherit;
+      transition: background .1s;
+    }
+    .repo-card:hover { background: var(--surface-2); }
+    .repo-card-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 8px; margin-bottom: 6px;
+    }
+    .repo-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 600;
+      color: var(--accent); word-break: break-all; line-height: 1.4;
+    }
+    .repo-stats { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .trending-badge {
+      font-size: 10px; padding: 2px 7px; border-radius: 10px;
+      background: rgba(249,115,22,.1); color: #fb923c;
+      border: 1px solid rgba(249,115,22,.2); white-space: nowrap;
+    }
+    .star-count {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--text-2); white-space: nowrap;
+    }
+    .repo-desc {
+      font-size: 12px; color: var(--text-2); line-height: 1.65;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      min-height: 2em;
+    }
+    .repo-footer {
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .repo-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .lang-badge { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-2); }
+    .lang-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── EVENT CARD ── */
     .event-list { display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; }
     .ev-card {
-      background: var(--surface);
-      border: 1px solid var(--border-dim);
-      border-left: 3px solid var(--clr-conf);
-      border-radius: var(--r);
-      padding: 16px;
-      transition: background .12s;
+      background: var(--surface); border: 1px solid var(--border-dim);
+      border-left: 3px solid var(--clr-conf); border-radius: var(--r);
+      padding: 16px; transition: background .12s;
     }
     .ev-card:hover { background: var(--surface-2); }
     .ev-card[data-type="expo"]       { border-left-color: var(--clr-expo); }
     .ev-card[data-type="conference"] { border-left-color: var(--clr-conf); }
     .ev-card[data-type="seminar"]    { border-left-color: var(--clr-semi); }
-
     .ev-meta {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-      gap: 6px 16px;
-      background: var(--surface-2); border: 1px solid var(--border-dim);
-      border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 6px 16px; background: var(--surface-2); border: 1px solid var(--border-dim);
+      border-radius: 5px; padding: 10px 14px; margin: 10px 0;
     }
     .ev-meta-key { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
     .ev-meta-val { font-size: 12px; }
 
-    /* ══ SHARED ══════════════════════════ */
+    /* ── SHARED ── */
     .badge {
       display: inline-flex; align-items: center;
-      padding: 2px 8px; border-radius: 4px;
-      font-size: 11px; font-weight: 500;
-      white-space: nowrap; flex-shrink: 0;
+      padding: 2px 7px; border-radius: 4px;
+      font-size: 10.5px; font-weight: 500; white-space: nowrap; flex-shrink: 0;
     }
     .tag-row { display: flex; gap: 4px; flex-wrap: wrap; }
     .tag {
-      padding: 2px 7px;
-      background: var(--surface-3); border: 1px solid var(--border-dim);
-      border-radius: 4px; font-size: 11px; color: var(--text-2);
-      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 6px; background: var(--surface-3);
+      border: 1px solid var(--border-dim); border-radius: 4px;
+      font-size: 10.5px; color: var(--text-2); font-family: 'JetBrains Mono', monospace;
     }
     .link-btn {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 5px 12px;
-      background: var(--surface-2); border: 1px solid var(--border-dim);
-      border-radius: 5px; color: var(--text-2);
-      font-size: 12px; text-decoration: none; white-space: nowrap;
+      padding: 4px 11px; background: var(--surface-2);
+      border: 1px solid var(--border-dim); border-radius: 5px;
+      color: var(--text-2); font-size: 11.5px; text-decoration: none; white-space: nowrap;
       transition: border-color .12s, color .12s;
     }
     .link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
-    .b-soon     { background: rgba(59,130,246,.12);  color: #60a5fa; }
-    .b-upcoming { background: rgba(16,185,129,.12);  color: #34d399; }
-    .b-pending  { background: rgba(82,82,91,.15);    color: var(--text-2); }
+    .b-soon     { background: rgba(59,130,246,.10);  color: #60a5fa; }
+    .b-upcoming { background: rgba(16,185,129,.10);  color: #34d399; }
+    .b-pending  { background: rgba(82,82,91,.14);    color: var(--text-2); }
     .b-dday     { background: var(--surface-3); border: 1px solid var(--border); color: var(--accent); }
 
     .pending-box {
       font-size: 11.5px; color: #fbbf24;
-      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.14);
-      border-radius: 5px; padding: 8px 12px; margin: 10px 0; line-height: 1.6;
+      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.13);
+      border-radius: 5px; padding: 8px 12px; margin: 8px 0; line-height: 1.6;
     }
 
     .empty {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 80px 20px; gap: 10px; color: var(--text-3);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 80px 20px; gap: 10px; color: var(--text-3);
     }
-    .empty-icon { font-size: 28px; }
+    .empty-icon { font-size: 26px; }
     .empty-text { font-size: 13px; text-align: center; line-height: 1.7; }
 
     .overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+      background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
       z-index: 300; align-items: center; justify-content: center;
     }
     .overlay.show { display: flex; }
     .spinner {
-      width: 30px; height: 30px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%; animation: spin .7s linear infinite;
+      width: 28px; height: 28px; border: 2px solid var(--border);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .7s linear infinite;
     }
 
-    @keyframes fadeUp { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
-    .ani { animation: fadeUp .2s ease both; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+    .ani { animation: fadeUp .18s ease both; }
 
-    /* ══ MOBILE ═══════════════════════════ */
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
       body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: auto; }
       .sidebar {
@@ -300,23 +329,24 @@
         overflow-x: auto; scrollbar-width: none;
       }
       .sidebar::-webkit-scrollbar { display: none; }
-      .s-logo { border-bottom: none; border-right: 1px solid var(--border-dim); padding: 10px 12px; }
+      .s-logo { border-bottom: none; border-right: 1px solid var(--border-dim); padding: 8px 12px; }
       .s-logo-sub { display: none; }
       .s-nav { display: flex; flex-direction: row; padding: 4px; align-items: center; }
-      .s-nav-label { display: none; }
+      .s-section-label, .nav-count, .s-footer { display: none; }
       .nav-item { margin-bottom: 0; margin-right: 1px; }
-      .nav-count { display: none; }
-      .s-footer { display: none; }
       .main { height: auto; overflow: visible; }
       .content { overflow: visible; }
-      .topbar { flex-wrap: wrap; padding: 8px 14px; min-height: auto; }
-      .filter-tabs { margin-left: 0; padding-left: 0; border-left: none; border-top: 1px solid var(--border-dim); width: 100%; padding-top: 6px; }
+      .topbar { flex-wrap: wrap; padding: 8px 14px; min-height: auto; gap: 8px; }
+      .search-wrap { margin-left: 0; width: 100%; order: 3; }
+      .search-input { width: 100%; }
+      .filter-tabs { order: 4; margin-left: 0; padding-left: 0; border-left: none; border-top: 1px solid var(--border-dim); width: 100%; padding-top: 6px; }
+      .repo-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- ════ SIDEBAR ════ -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="s-logo">
     <div class="s-logo-icon">🧠</div>
@@ -325,28 +355,30 @@
       <span class="s-logo-sub">주 3회 자동 갱신</span>
     </div>
   </div>
-
   <nav class="s-nav" id="sidebarNav"></nav>
-
   <div class="s-footer">
     <div class="s-footer-label">마지막 수집</div>
     <div class="s-footer-time" id="lastUpdated">—</div>
     <button class="refresh-btn" id="refreshBtn" onclick="refresh()">
-      <span class="spin">↻</span>새로고침
+      <span class="spin">↻</span> 새로고침
     </button>
   </div>
 </aside>
 
-<!-- ════ MAIN ════ -->
+<!-- MAIN -->
 <main class="main">
   <header class="topbar">
     <div class="topbar-left">
       <h1 class="section-title" id="sectionTitle">행사</h1>
       <span class="section-count" id="sectionCount"></span>
     </div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" class="search-input" id="searchInput"
+        placeholder="검색..." oninput="setSearch(this.value)" autocomplete="off">
+    </div>
     <div class="filter-tabs" id="filterTabs"></div>
   </header>
-
   <div class="content">
     <div id="grid"></div>
   </div>
@@ -355,7 +387,7 @@
 <div class="overlay" id="overlay"><div class="spinner"></div></div>
 
 <script>
-/* ══ TAB CONFIG ══════════════════════════ */
+/* ── TAB CONFIG ── */
 const TABS = {
   events: {
     label: '행사', accent: '#3b82f6', file: 'data/events.json',
@@ -369,8 +401,7 @@ const TABS = {
     label: '뉴스', accent: '#f59e0b', file: 'data/news.json',
     filters: [
       { k: 'all', label: '전체' }, { k: 'AI Times', label: 'AI Times' },
-      { k: 'TechCrunch AI', label: 'TechCrunch' },
-      { k: 'VentureBeat AI', label: 'VentureBeat' }, { k: '블로터', label: '블로터' },
+      { k: 'GeekNews', label: 'GeekNews' }, { k: 'Python KR', label: 'Python KR' },
     ],
   },
   papers: {
@@ -380,36 +411,39 @@ const TABS = {
       { k: 'cs.LG', label: 'cs.LG' }, { k: 'cs.CL', label: 'cs.CL' },
     ],
   },
-  jobs: {
-    label: '채용', accent: '#10b981', file: 'data/jobs.json',
-    filters: [
-      { k: 'all', label: '전체' }, { k: '원티드', label: '원티드' },
-      { k: 'RemoteOK', label: 'RemoteOK' },
-    ],
-  },
   tools: {
-    label: '도구', accent: '#f97316', file: 'data/tools.json',
+    label: '레포', accent: '#f97316', file: 'data/tools.json',
     filters: [
-      { k: 'all', label: '전체' }, { k: 'HuggingFace Papers', label: 'HF Papers' },
-      { k: 'HuggingFace Models', label: 'HF Models' }, { k: 'GitHub', label: 'GitHub' },
+      { k: 'all', label: '전체' }, { k: 'trending', label: '🔥 화제' },
     ],
   },
 };
 
 let tab    = 'events';
 let filter = 'all';
+let searchQuery = '';
 const cache = {};
 
-/* ══ SWITCH ══ */
+const LANG_COLORS = {
+  Python: '#3572A5', JavaScript: '#f1e05a', TypeScript: '#3178c6',
+  Rust: '#dea584', Go: '#00ADD8', 'C++': '#f34b7d', C: '#555555',
+  Java: '#b07219', Kotlin: '#A97BFF', Swift: '#F05138',
+  Ruby: '#701516', Shell: '#89e051', 'Jupyter Notebook': '#DA5B0B',
+  'C#': '#178600', Scala: '#c22d40', HTML: '#e34c26', CSS: '#563d7c',
+};
+
+/* ── TAB SWITCH ── */
 function switchTab(key) {
   tab = key; filter = 'all';
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
   document.documentElement.style.setProperty('--accent', TABS[key].accent);
   renderNav(); renderFilterTabs();
   document.getElementById('sectionTitle').textContent = TABS[key].label;
   cache[key] ? renderCards(cache[key].items) : loadTab(key);
 }
 
-/* ══ LOAD ══ */
+/* ── LOAD ── */
 async function loadTab(key, force = false) {
   if (!force && cache[key]) { renderCards(cache[key].items); return; }
   document.getElementById('overlay').classList.add('show');
@@ -433,34 +467,59 @@ async function loadTab(key, force = false) {
   }
 }
 
-/* ══ FILTER ══ */
+/* ── FILTER & SEARCH ── */
 function setFilter(k) {
   filter = k; renderFilterTabs();
   if (cache[tab]) renderCards(cache[tab].items);
 }
 
-function applyFilter(items) {
-  if (filter === 'all') {
-    return tab === 'events'
-      ? items.filter(e => !e.endDate || e.endDate >= today())
-      : items;
-  }
-  switch (tab) {
-    case 'events':
-      if (filter === 'pending') return items.filter(e => !e.startDate);
-      return items.filter(e => (!e.endDate || e.endDate >= today()) && e.type === filter);
-    case 'news':   return items.filter(i => i.source === filter);
-    case 'papers': return items.filter(i => (i.categories || []).includes(filter));
-    case 'jobs':   return items.filter(i => i.source === filter);
-    case 'tools':  return items.filter(i => i.source === filter);
-  }
-  return items;
+function setSearch(q) {
+  searchQuery = q.trim().toLowerCase();
+  if (cache[tab]) renderCards(cache[tab].items);
 }
 
-/* ══ RENDER NAV ══ */
+function applyFilter(items) {
+  let result = items;
+
+  // Tab-specific filter
+  if (filter !== 'all') {
+    switch (tab) {
+      case 'events':
+        if (filter === 'pending') result = items.filter(e => !e.startDate);
+        else result = items.filter(e => (!e.endDate || e.endDate >= today()) && e.type === filter);
+        break;
+      case 'news':   result = items.filter(i => i.source === filter); break;
+      case 'papers': result = items.filter(i => (i.categories || []).includes(filter)); break;
+      case 'tools':  result = items.filter(i => i.trending); break;
+    }
+  } else if (tab === 'events') {
+    result = items.filter(e => !e.endDate || e.endDate >= today());
+  }
+
+  // Search filter
+  if (searchQuery) {
+    result = result.filter(item => {
+      const haystack = [
+        item.title || item.name || '',
+        item.desc || item.summary || item.abstract || '',
+        item.source || '',
+        (item.tags || []).join(' '),
+        item.company || '',
+        item.venue || '',
+        (item.authors || []).join(' '),
+        item.language || '',
+      ].join(' ').toLowerCase();
+      return haystack.includes(searchQuery);
+    });
+  }
+
+  return result;
+}
+
+/* ── RENDER NAV ── */
 function renderNav() {
   document.getElementById('sidebarNav').innerHTML =
-    `<div class="s-nav-label">카테고리</div>` +
+    `<div class="s-section-label">카테고리</div>` +
     Object.entries(TABS).map(([k, t]) => {
       const n = cache[k]?.items?.length ?? '';
       return `<div class="nav-item${k === tab ? ' active' : ''}" onclick="switchTab('${k}')">
@@ -471,7 +530,7 @@ function renderNav() {
     }).join('');
 }
 
-/* ══ RENDER FILTER TABS ══ */
+/* ── RENDER FILTER TABS ── */
 function renderFilterTabs() {
   document.getElementById('filterTabs').innerHTML =
     TABS[tab].filters.map(f =>
@@ -479,7 +538,7 @@ function renderFilterTabs() {
     ).join('');
 }
 
-/* ══ RENDER CARDS ══ */
+/* ── RENDER CARDS ── */
 function renderCards(items) {
   const filtered = applyFilter(items);
   document.getElementById('sectionCount').textContent = `${filtered.length} / ${items.length}건`;
@@ -490,22 +549,19 @@ function renderCards(items) {
     return;
   }
 
-  const B = { events: buildEvent, news: buildNews, papers: buildPaper, jobs: buildJob, tools: buildTool };
-  const W = { events: 'event-list', news: 'row-list', papers: 'card-grid', jobs: 'row-list', tools: 'card-grid' };
+  const builders = { events: buildEvent, news: buildNews, papers: buildPaper, tools: buildTool };
+  const wrappers = { events: 'event-list', news: 'row-list', papers: 'card-grid', tools: 'repo-grid' };
 
-  grid.innerHTML = `<div class="${W[tab]}">${filtered.map((x, i) => B[tab](x, i)).join('')}</div>`;
+  grid.innerHTML = `<div class="${wrappers[tab]}">${filtered.map((x, i) => builders[tab](x, i)).join('')}</div>`;
 }
 
-/* ══ BUILDERS ══════════════════════════ */
-
+/* ── BUILDERS ── */
 function buildEvent(ev, i) {
   const st = statusBadge(ev.startDate, ev.endDate);
   if (st === null) return '';
   const dd = dDay(ev.startDate);
   const dr = ev.startDate
-    ? (ev.startDate === ev.endDate
-        ? fmtDate(ev.startDate)
-        : `${fmtDate(ev.startDate)} ~ ${fmtDate(ev.endDate)}`)
+    ? (ev.startDate === ev.endDate ? fmtDate(ev.startDate) : `${fmtDate(ev.startDate)} ~ ${fmtDate(ev.endDate)}`)
     : '미정';
   const tColor = { expo: 'var(--clr-expo)', conference: 'var(--clr-conf)', seminar: 'var(--clr-semi)' }[ev.type] || 'var(--text-3)';
 
@@ -515,43 +571,40 @@ function buildEvent(ev, i) {
       <div>
         <div style="font-size:10px;color:${tColor};text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-bottom:4px">${ev.typeLabel}</div>
         <div style="font-size:15px;font-weight:700;margin-bottom:3px;line-height:1.3">${ev.name}</div>
-        <div style="font-size:11.5px;color:var(--text-2)">${ev.subtitle}</div>
+        <div style="font-size:11.5px;color:var(--text-2)">${ev.subtitle || ''}</div>
       </div>
       <div style="display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
         ${st ? `<span class="badge b-${st.cls}">${st.label}</span>` : ''}
         ${dd ? `<span class="badge b-dday mono" style="font-size:11px">${dd}</span>` : ''}
       </div>
     </div>
-
     <div class="ev-meta">
       <div><div class="ev-meta-key">날짜</div><div class="ev-meta-val">${dr}</div></div>
       ${ev.time && ev.time !== '미정' ? `<div><div class="ev-meta-key">시간</div><div class="ev-meta-val">${ev.time}</div></div>` : ''}
-      <div><div class="ev-meta-key">장소</div><div class="ev-meta-val">${ev.venue}</div></div>
-      <div>
-        <div class="ev-meta-key">참가비</div>
-        <div class="ev-meta-val" style="${ev.priceClass === 'price-free' ? 'color:var(--c-jobs)' : 'color:var(--text-2)'}">${ev.price}</div>
-      </div>
+      ${ev.venue ? `<div><div class="ev-meta-key">장소</div><div class="ev-meta-val">${ev.venue}</div></div>` : ''}
+      ${ev.price ? `<div><div class="ev-meta-key">참가비</div><div class="ev-meta-val" style="${ev.priceClass === 'price-free' ? 'color:var(--c-tools)' : 'color:var(--text-2)'}">${ev.price}</div></div>` : ''}
     </div>
-
-    <p style="font-size:12.5px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${ev.desc}</p>
-
+    <p style="font-size:12.5px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${ev.desc || ''}</p>
     ${ev.pendingInfo ? `<div class="pending-box">⚠ ${ev.pendingInfo}</div>` : ''}
-
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <a href="${ev.site}" target="_blank" rel="noopener" class="link-btn">↗ ${ev.siteLabel}</a>
+      <a href="${ev.site}" target="_blank" rel="noopener" class="link-btn">↗ ${ev.siteLabel || '공식 사이트'}</a>
       ${dd ? `<span style="font-size:11px;color:var(--text-3)">개막까지 <strong style="color:var(--accent)">${dd}</strong></span>` : ''}
     </div>
   </div>`;
 }
 
 function buildNews(item, i) {
-  const colors = { 'AI Times': 'var(--c-events)', 'TechCrunch AI': 'var(--c-news)', 'VentureBeat AI': 'var(--c-papers)', '블로터': 'var(--c-jobs)' };
+  const colors = {
+    'AI Times':  'var(--c-events)',
+    'GeekNews':  '#10b981',
+    'Python KR': 'var(--c-news)',
+  };
   const c = colors[item.source] || 'var(--c-news)';
   return `
-  <a class="row-item ani" style="animation-delay:${i*16}ms" href="${item.url}" target="_blank" rel="noopener">
+  <a class="row-item ani" style="animation-delay:${i*14}ms" href="${item.url}" target="_blank" rel="noopener">
     <span class="badge" style="background:color-mix(in srgb,${c} 10%,transparent);color:${c}">${item.source}</span>
     <span style="flex:1;font-size:13px;color:var(--text);line-height:1.4">${item.title}</span>
-    <span class="mono" style="font-size:10.5px;color:var(--text-3);flex-shrink:0">${(item.pubDate || '').slice(5)}</span>
+    <span class="mono" style="font-size:10px;color:var(--text-3);flex-shrink:0">${(item.pubDate || '').slice(5)}</span>
     <span style="color:var(--text-3);font-size:11px">↗</span>
   </a>`;
 }
@@ -559,12 +612,12 @@ function buildNews(item, i) {
 function buildPaper(item, i) {
   const cats = (item.categories || []).map(c => `<span class="tag">${c}</span>`).join('');
   return `
-  <div class="info-card ani" style="border-left-color:var(--c-papers);animation-delay:${i*25}ms">
+  <div class="info-card ani" style="border-left-color:var(--c-papers);animation-delay:${i*22}ms">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px">
       <span class="badge mono" style="background:color-mix(in srgb,var(--c-papers) 10%,transparent);color:var(--c-papers);font-size:10px">arXiv:${item.arxivId}</span>
-      <span class="mono" style="font-size:10.5px;color:var(--text-3)">${item.pubDate}</span>
+      <span class="mono" style="font-size:10px;color:var(--text-3)">${item.pubDate}</span>
     </div>
-    <div style="font-size:14px;font-weight:600;margin-bottom:5px;line-height:1.4">${item.title}</div>
+    <div style="font-size:13.5px;font-weight:600;margin-bottom:5px;line-height:1.4">${item.title}</div>
     <div style="font-size:11.5px;color:var(--text-2);margin-bottom:8px">${(item.authors || []).join(', ')}${(item.authors||[]).length >= 3 ? ' 외' : ''}</div>
     <p style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${item.abstract}</p>
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
@@ -574,39 +627,33 @@ function buildPaper(item, i) {
   </div>`;
 }
 
-function buildJob(item, i) {
-  const tags = (item.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('');
+function buildTool(item, i) {
+  const stars   = item.stars ? fmtStars(item.stars) : null;
+  const langC   = LANG_COLORS[item.language] || '#8b8b8b';
+  const tags    = (item.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('');
+  const date    = item.pushed || item.pubDate || '';
+
   return `
-  <a class="row-item ani" style="animation-delay:${i*16}ms;flex-wrap:wrap;gap:8px" href="${item.url}" target="_blank" rel="noopener">
-    <span class="badge" style="background:color-mix(in srgb,var(--c-jobs) 10%,transparent);color:var(--c-jobs)">${item.source}</span>
-    <span style="font-weight:600;color:var(--text)">${item.company}</span>
-    <span style="color:var(--text-2);flex:1;min-width:100px">${item.title}</span>
-    <div class="tag-row">${tags}</div>
-    <span class="mono" style="font-size:10.5px;color:var(--text-3);flex-shrink:0">${(item.pubDate||'').slice(5)}</span>
-    <span style="color:var(--text-3);font-size:11px">↗</span>
+  <a class="repo-card ani" href="${item.url}" target="_blank" rel="noopener" style="animation-delay:${i*18}ms">
+    <div class="repo-card-top">
+      <div class="repo-name">${item.name}</div>
+      <div class="repo-stats">
+        ${item.trending ? '<span class="trending-badge">🔥 화제</span>' : ''}
+        ${stars ? `<span class="star-count">⭐ ${stars}</span>` : ''}
+      </div>
+    </div>
+    <p class="repo-desc">${item.desc || ''}</p>
+    <div class="repo-footer">
+      <div class="repo-meta">
+        ${item.language ? `<span class="lang-badge"><span class="lang-dot" style="background:${langC}"></span>${item.language}</span>` : ''}
+        <div class="tag-row">${tags}</div>
+      </div>
+      <span class="mono" style="font-size:10px;color:var(--text-3)">${date.slice(0,7)}</span>
+    </div>
   </a>`;
 }
 
-function buildTool(item, i) {
-  const tags = (item.tags || []).slice(0, 5).map(t => `<span class="tag">${t}</span>`).join('');
-  const srcC = { 'GitHub': '#6e7681', 'HuggingFace Papers': 'var(--c-papers)', 'HuggingFace Models': 'var(--c-news)' };
-  const c = srcC[item.source] || 'var(--c-tools)';
-  return `
-  <div class="info-card ani" style="border-left-color:var(--c-tools);animation-delay:${i*22}ms">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <span class="badge" style="background:color-mix(in srgb,var(--c-tools) 10%,transparent);color:var(--c-tools)">${item.source}</span>
-      <span class="mono" style="font-size:10.5px;color:var(--text-3)">${item.pubDate}</span>
-    </div>
-    <div style="font-size:13.5px;font-weight:600;margin-bottom:5px;font-family:'JetBrains Mono',monospace;word-break:break-all">${item.name}</div>
-    <p style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${item.desc}</p>
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <div class="tag-row">${tags}</div>
-      <a href="${item.url}" target="_blank" rel="noopener" class="link-btn">↗ 보기</a>
-    </div>
-  </div>`;
-}
-
-/* ══ UTILS ══════════════════════════════ */
+/* ── UTILS ── */
 function today() { return new Date().toISOString().slice(0, 10); }
 
 function fmtDate(iso) {
@@ -615,9 +662,14 @@ function fmtDate(iso) {
     { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
 }
 
+function fmtStars(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
+  return String(n);
+}
+
 function dDay(startIso) {
   if (!startIso) return null;
-  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const now = new Date(); now.setHours(0,0,0,0);
   const diff = Math.round((new Date(startIso + 'T00:00:00') - now) / 86400000);
   if (diff < 0) return null;
   return diff === 0 ? 'D-Day' : `D-${diff}`;
@@ -625,7 +677,7 @@ function dDay(startIso) {
 
 function statusBadge(startIso, endIso) {
   if (!startIso) return { cls: 'pending', label: '일정 미정' };
-  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const now = new Date(); now.setHours(0,0,0,0);
   if (now > new Date((endIso || startIso) + 'T23:59:59')) return null;
   const diff = Math.round((new Date(startIso + 'T00:00:00') - now) / 86400000);
   return diff <= 30 ? { cls: 'soon', label: '곧 개최' } : { cls: 'upcoming', label: '예정' };
@@ -645,7 +697,7 @@ function refresh() {
   loadTab(tab, true).finally(() => btn.classList.remove('loading'));
 }
 
-/* ══ INIT ══ */
+/* ── INIT ── */
 document.documentElement.style.setProperty('--accent', TABS.events.accent);
 renderNav();
 renderFilterTabs();

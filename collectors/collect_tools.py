@@ -1,14 +1,26 @@
-"""AI 도구/모델 출시 정보 수집 — HuggingFace + GitHub + 한국어 번역"""
+"""GitHub AI 레포 수집 — 누적 저장 + 트렌딩 감지 + 한국어 번역"""
 import json
 import requests
 from datetime import datetime, timezone
 from pathlib import Path
 from deep_translator import GoogleTranslator
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; AI-Tools-Bot/1.0)"}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; AI-Tools-Bot/1.0)",
+    "Accept":     "application/vnd.github+json",
+}
+
+# (쿼리, 가져올 수)
+GITHUB_QUERIES = [
+    ("topic:artificial-intelligence stars:>200 pushed:>2025-01-01", 10),
+    ("topic:llm stars:>100 pushed:>2025-01-01",                     10),
+    ("topic:large-language-model stars:>100",                        8),
+    ("topic:generative-ai stars:>100 pushed:>2025-01-01",           8),
+    ("topic:machine-learning stars:>500 pushed:>2025-01-01",         8),
+    ("topic:deep-learning stars:>300 pushed:>2025-01-01",            6),
+]
 
 def _tr(text: str) -> str:
-    """영문 → 한국어 번역. 실패 시 원문 반환."""
     if not text or not text.strip():
         return text
     try:
@@ -16,102 +28,97 @@ def _tr(text: str) -> str:
     except Exception:
         return text
 
-def _hf_daily_papers() -> list[dict]:
-    """HuggingFace 커뮤니티 선정 일일 주요 논문"""
-    try:
-        resp = requests.get("https://huggingface.co/api/daily_papers", headers=HEADERS, timeout=15)
-        resp.raise_for_status()
-        items = []
-        for paper in resp.json()[:15]:
-            p = paper.get("paper", {})
-            title = p.get("title", "")
-            desc  = (p.get("summary") or "")[:300]
-            print(f"  번역 중 (HF Paper): {title[:40]}...")
-            items.append({
-                "name":    _tr(title),
-                "desc":    _tr(desc),
-                "url":     f"https://huggingface.co/papers/{p.get('id', '')}",
-                "tags":    [],
-                "source":  "HuggingFace Papers",
-                "pubDate": (paper.get("publishedAt") or "")[:10],
-            })
-        return items
-    except Exception as e:
-        print(f"[WARN] HF Daily Papers 실패: {e}")
-        return []
+def _is_trending(item: dict) -> bool:
+    pub   = item.get("pubDate", "")
+    stars = item.get("stars", 0)
+    if pub and stars >= 500:
+        try:
+            days_old = (datetime.now() - datetime.strptime(pub, "%Y-%m-%d")).days
+            return days_old <= 60
+        except Exception:
+            pass
+    return False
 
-def _hf_trending_models() -> list[dict]:
-    """HuggingFace 인기 모델 (text-generation)"""
-    url = "https://huggingface.co/api/models"
-    params = {"sort": "likes7d", "direction": -1, "limit": 10, "filter": "text-generation"}
+def _fetch(query: str, limit: int) -> list[dict]:
     try:
-        resp = requests.get(url, params=params, headers=HEADERS, timeout=15)
+        resp = requests.get(
+            "https://api.github.com/search/repositories",
+            params={"q": query, "sort": "stars", "order": "desc", "per_page": limit},
+            headers=HEADERS, timeout=15,
+        )
         resp.raise_for_status()
-        items = []
-        for m in resp.json():
-            mid = m.get("modelId") or m.get("id", "")
-            items.append({
-                "name":    mid,  # 모델 ID는 번역하지 않음 (고유명사)
-                "desc":    f"🤗 HuggingFace 텍스트 생성 모델 | 7일 좋아요: {m.get('likes', 0):,}개",
-                "url":     f"https://huggingface.co/{mid}",
-                "tags":    (m.get("tags") or [])[:4],
-                "source":  "HuggingFace Models",
-                "pubDate": (m.get("createdAt") or "")[:10],
-            })
-        return items
-    except Exception as e:
-        print(f"[WARN] HF Models 실패: {e}")
-        return []
-
-def _github_trending_ai() -> list[dict]:
-    """GitHub 최신 AI 관련 레포"""
-    url = "https://api.github.com/search/repositories"
-    params = {
-        "q":        "topic:artificial-intelligence pushed:>2026-01-01",
-        "sort":     "updated",
-        "order":    "desc",
-        "per_page": 10,
-    }
-    try:
-        resp = requests.get(url, params=params, headers={**HEADERS, "Accept": "application/vnd.github+json"}, timeout=15)
-        resp.raise_for_status()
-        items = []
+        repos = []
         for repo in resp.json().get("items", []):
-            desc = (repo.get("description") or "")[:200]
-            if desc:
-                print(f"  번역 중 (GitHub): {repo.get('full_name', '')[:40]}...")
-                desc = _tr(desc)
-            items.append({
-                "name":    repo.get("full_name", ""),  # 레포 경로는 원문 유지
-                "desc":    desc,
-                "url":     repo.get("html_url", ""),
-                "tags":    (repo.get("topics") or [])[:4],
-                "source":  "GitHub",
-                "pubDate": (repo.get("pushed_at") or "")[:10],
+            repos.append({
+                "name":     repo.get("full_name", ""),
+                "desc":     (repo.get("description") or "")[:300],
+                "url":      repo.get("html_url", ""),
+                "tags":     (repo.get("topics") or [])[:5],
+                "source":   "GitHub",
+                "pubDate":  (repo.get("created_at") or "")[:10],
+                "stars":    repo.get("stargazers_count", 0),
+                "language": repo.get("language") or "",
+                "pushed":   (repo.get("pushed_at") or "")[:10],
             })
-        return items
+        return repos
     except Exception as e:
-        print(f"[WARN] GitHub 실패: {e}")
+        print(f"[WARN] GitHub 쿼리 실패 ({query[:40]}): {e}")
         return []
 
 def collect():
-    tools: list[dict] = []
-    seen: set[str] = set()
-
-    for item in _hf_daily_papers() + _hf_trending_models() + _github_trending_ai():
-        url = item.get("url", "")
-        if url and url not in seen and item.get("name"):
-            seen.add(url)
-            tools.append(item)
-
-    tools.sort(key=lambda x: x.get("pubDate", ""), reverse=True)
-
     out = Path(__file__).parent.parent / "data" / "tools.json"
+
+    # 기존 데이터 로드 (누적용)
+    existing: dict[str, dict] = {}
+    if out.exists():
+        try:
+            data = json.loads(out.read_text(encoding="utf-8"))
+            existing = {item["url"]: item for item in data.get("items", [])}
+        except Exception:
+            pass
+
+    # GitHub에서 최신 레포 수집
+    seen: set[str] = set()
+    new_repos: list[dict] = []
+    for query, limit in GITHUB_QUERIES:
+        for repo in _fetch(query, limit):
+            if repo["url"] not in seen:
+                seen.add(repo["url"])
+                new_repos.append(repo)
+
+    new_count = 0
+    for repo in new_repos:
+        url = repo["url"]
+        if url in existing:
+            # 별점·최신화 날짜만 업데이트, 기존 한국어 번역 유지
+            existing[url]["stars"]  = repo["stars"]
+            existing[url]["pushed"] = repo["pushed"]
+        else:
+            # 신규 레포: 설명 번역
+            if repo["desc"]:
+                print(f"  번역 중: {repo['name'][:40]}")
+                repo["desc"] = _tr(repo["desc"])
+            existing[url] = repo
+            new_count += 1
+
+    print(f"[OK] GitHub 신규 {new_count}건 추가, 합계 {len(existing)}건")
+
+    all_tools = list(existing.values())
+
+    # trending 필드 설정
+    for item in all_tools:
+        item["trending"] = _is_trending(item)
+
+    # 정렬: 트렌딩 먼저, 그 다음 별점 순
+    trending = sorted([t for t in all_tools if t["trending"]],     key=lambda x: x.get("stars", 0), reverse=True)
+    normal   = sorted([t for t in all_tools if not t["trending"]], key=lambda x: x.get("stars", 0), reverse=True)
+    result   = trending + normal
+
     out.write_text(
-        json.dumps({"updatedAt": _now(), "items": tools[:40]}, ensure_ascii=False, indent=2),
+        json.dumps({"updatedAt": _now(), "items": result[:300]}, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"[OK] 도구/모델 {len(tools[:40])}건 저장")
+    print(f"[OK] 도구 {len(result[:300])}건 저장 (트렌딩 {len(trending)}건)")
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

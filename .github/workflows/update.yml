@@ -22,14 +22,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Collect events
+        run: python collectors/collect_events.py
+
       - name: Collect news
         run: python collectors/collect_news.py
 
       - name: Collect papers
         run: python collectors/collect_papers.py
-
-      - name: Collect jobs
-        run: python collectors/collect_jobs.py
 
       - name: Collect tools
         run: python collectors/collect_tools.py

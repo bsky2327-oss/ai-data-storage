@@ -1,28 +1,28 @@
-"""AI 뉴스 수집 — RSS 기반 + 영문 기사 한국어 번역"""
+"""AI 뉴스 수집 — AI Times + GeekNews + Python KR + 누적 저장"""
 import re
 import json
 import feedparser
 from datetime import datetime, timezone
 from pathlib import Path
-from deep_translator import GoogleTranslator
 
 RSS_FEEDS = [
-    ("AI Times",       "https://www.aitimes.com/rss/allArticle.xml"),
-    ("블로터",          "https://www.bloter.net/feed"),
-    ("TechCrunch AI",  "https://techcrunch.com/category/artificial-intelligence/feed/"),
-    ("VentureBeat AI", "https://venturebeat.com/ai/feed/"),
+    ("AI Times",  "https://www.aitimes.com/rss/allArticle.xml"),
+    ("GeekNews",  "https://news.hada.io/rss"),
+    ("Python KR", "https://discuss.python.kr/latest.rss"),
 ]
-
-# 이미 한국어인 소스 — 번역 생략
-KO_SOURCES = {"AI Times", "블로터"}
 
 AI_KEYWORDS = [
     "AI", "인공지능", "머신러닝", "딥러닝", "LLM", "GPT", "생성형", "모델",
     "neural", "machine learning", "deep learning", "agent", "anthropic",
-    "openai", "gemini", "claude", "chatgpt", "llama",
+    "openai", "gemini", "claude", "chatgpt", "llama", "transformer",
+    "파이썬", "python", "데이터", "자동화", "개발", "코딩",
 ]
 
-def _is_ai(text: str) -> bool:
+NO_FILTER_SOURCES = {"Python KR", "AI Times"}
+
+def _is_relevant(source: str, text: str) -> bool:
+    if source in NO_FILTER_SOURCES:
+        return True
     t = text.lower()
     return any(kw.lower() in t for kw in AI_KEYWORDS)
 
@@ -39,57 +39,51 @@ def _parse_date(entry) -> str:
 def _strip_html(text: str) -> str:
     return re.sub(r"<[^>]+>", "", text or "").strip()
 
-def _tr(text: str) -> str:
-    """영문 → 한국어 번역. 실패 시 원문 반환."""
-    if not text or not text.strip():
-        return text
-    try:
-        return GoogleTranslator(source="auto", target="ko").translate(text[:4999])
-    except Exception:
-        return text
-
 def collect():
-    articles = []
-    seen_urls: set[str] = set()
+    out = Path(__file__).parent.parent / "data" / "news.json"
 
+    # 기존 데이터 로드 (누적용)
+    existing: dict[str, dict] = {}
+    if out.exists():
+        try:
+            data = json.loads(out.read_text(encoding="utf-8"))
+            existing = {item["url"]: item for item in data.get("items", [])}
+        except Exception:
+            pass
+
+    new_count = 0
     for source, url in RSS_FEEDS:
         try:
             feed = feedparser.parse(url, request_headers={"User-Agent": "Mozilla/5.0"})
-            for entry in feed.entries[:15]:
+            for entry in feed.entries[:25]:
                 title = (entry.get("title") or "").strip()
                 link  = (entry.get("link")  or "").strip()
-                if not title or not link or link in seen_urls:
-                    continue
-                if not _is_ai(title) and not _is_ai(entry.get("summary") or ""):
+                if not title or not link or link in existing:
                     continue
 
-                seen_urls.add(link)
                 summary = _strip_html(entry.get("summary") or "")[:300]
+                if not _is_relevant(source, title + " " + summary):
+                    continue
 
-                # 영문 소스만 번역
-                if source not in KO_SOURCES:
-                    print(f"  번역 중: {title[:40]}...")
-                    title   = _tr(title)
-                    summary = _tr(summary)
-
-                articles.append({
+                existing[link] = {
                     "title":   title,
                     "source":  source,
                     "url":     link,
                     "pubDate": _parse_date(entry),
                     "summary": summary,
-                })
+                }
+                new_count += 1
         except Exception as e:
             print(f"[WARN] {source} 실패: {e}")
 
-    articles.sort(key=lambda x: x["pubDate"], reverse=True)
+    print(f"[OK] 뉴스 신규 {new_count}건 추가, 합계 {len(existing)}건")
 
-    out = Path(__file__).parent.parent / "data" / "news.json"
+    all_articles = sorted(existing.values(), key=lambda x: x["pubDate"], reverse=True)
+
     out.write_text(
-        json.dumps({"updatedAt": _now(), "items": articles[:40]}, ensure_ascii=False, indent=2),
+        json.dumps({"updatedAt": _now(), "items": all_articles[:400]}, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"[OK] 뉴스 {len(articles[:40])}건 저장")
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
