@@ -1,10 +1,9 @@
-name: AI 데이터 자동 업데이트
+name: Update AI Data
 
 on:
   schedule:
-    # 월·수·금 09:00 KST (= UTC 00:00)
     - cron: '0 0 * * 1,3,5'
-  workflow_dispatch:   # 수동 실행 버튼
+  workflow_dispatch:
 
 jobs:
   update:
@@ -20,22 +19,22 @@ jobs:
           python-version: '3.11'
           cache: pip
 
-      - name: 패키지 설치
+      - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: 뉴스 수집
+      - name: Collect news
         run: python collectors/collect_news.py
 
-      - name: 논문 수집
+      - name: Collect papers
         run: python collectors/collect_papers.py
 
-      - name: 채용 수집
+      - name: Collect jobs
         run: python collectors/collect_jobs.py
 
-      - name: 도구/모델 수집
+      - name: Collect tools
         run: python collectors/collect_tools.py
 
-      - name: 변경사항 커밋
+      - name: Commit changes
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
