@@ -3,648 +3,653 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>나만의 AI 정보 창고</title>
+  <title>AI Data Storage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ══════════════════════════════════════════
+       DESIGN TOKENS — Linear + Vercel 영감
+    ══════════════════════════════════════════ */
     :root {
-      --bg:       #0f1117;
-      --surface:  #1a1d27;
-      --surface2: #22263a;
-      --border:   #2e3350;
-      --text:     #e2e8f0;
-      --text2:    #94a3b8;
-      --radius:   14px;
+      --bg:          #0c0c0e;
+      --sidebar:     #111113;
+      --surface:     #111113;
+      --surface-2:   #161619;
+      --surface-3:   #1c1c20;
+      --border:      #27272a;
+      --border-dim:  #1e1e21;
+      --text:        #e4e4e7;
+      --text-2:      #a1a1aa;
+      --text-3:      #52525b;
 
-      /* 탭별 강조색 */
-      --c-events:  #4f8ef7;
-      --c-news:    #f59e0b;
-      --c-papers:  #7c5cfc;
-      --c-jobs:    #22c55e;
-      --c-tools:   #f97316;
+      --c-events: #3b82f6;
+      --c-news:   #f59e0b;
+      --c-papers: #8b5cf6;
+      --c-jobs:   #10b981;
+      --c-tools:  #f97316;
 
-      /* 행사 유형 */
-      --clr-expo: #7c5cfc;
-      --clr-conf: #4f8ef7;
-      --clr-semi: #22c55e;
+      --clr-expo: #8b5cf6;
+      --clr-conf: #3b82f6;
+      --clr-semi: #10b981;
 
-      --tab-accent: var(--c-events);
+      --accent: var(--c-events);
+      --r: 7px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { height: 100%; }
     body {
-      font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 60px;
+      font-size: 13px;
+      line-height: 1.5;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      height: 100%;
     }
 
-    /* ── HEADER ── */
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13,17,34,0.72);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      box-shadow: 0 4px 32px rgba(0,0,0,0.4);
-    }
-    .header-top {
-      max-width: 960px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-      padding: 20px 24px 0;
-    }
-    h1 {
-      font-size: 1.4rem; font-weight: 700;
-      background: linear-gradient(90deg,#4f8ef7 0%,#7c5cfc 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .subtitle { font-size: 0.76rem; color: var(--text2); margin-top: 3px; }
-    .header-right { display: flex; align-items: center; gap: 14px; }
-    .last-updated { font-size: 0.75rem; color: var(--text2); text-align: right; }
-    .last-updated span { display: block; color: var(--tab-accent); font-weight: 600; transition: color 0.3s; }
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
 
-    /* ── REFRESH BUTTON ── */
+    /* ══ SIDEBAR ══════════════════════════════ */
+    .sidebar {
+      background: var(--sidebar);
+      border-right: 1px solid var(--border-dim);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow: hidden;
+    }
+
+    .s-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--border-dim);
+      flex-shrink: 0;
+    }
+    .s-logo-icon {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--c-events) 0%, var(--c-papers) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .s-logo-name { font-size: 13.5px; font-weight: 600; }
+    .s-logo-sub  { font-size: 10px; color: var(--text-3); display: block; margin-top: 1px; }
+
+    .s-nav { flex: 1; padding: 6px; overflow-y: auto; }
+    .s-nav-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-3); padding: 10px 8px 4px;
+    }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px;
+      border-radius: 6px; cursor: pointer;
+      border: 1px solid transparent;
+      margin-bottom: 1px;
+      transition: background .1s, border-color .1s;
+      user-select: none;
+    }
+    .nav-item:hover { background: var(--surface-2); }
+    .nav-item.active {
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .nav-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--text-3); flex-shrink: 0;
+      transition: background .15s;
+    }
+    .nav-item.active .nav-dot {
+      background: var(--accent);
+      box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 60%, transparent);
+    }
+    .nav-label { flex: 1; font-size: 13px; color: var(--text-2); font-weight: 500; }
+    .nav-item.active .nav-label { color: var(--text); }
+    .nav-count {
+      font-size: 10px; font-family: 'JetBrains Mono', monospace;
+      color: var(--text-3); background: var(--surface-2);
+      padding: 1px 6px; border-radius: 10px;
+    }
+    .nav-item.active .nav-count {
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+    }
+
+    .s-footer {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border-dim);
+      flex-shrink: 0;
+    }
+    .s-footer-label { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+    .s-footer-time  { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--text-2); }
     .refresh-btn {
-      display: flex; align-items: center; gap: 7px;
-      padding: 9px 18px;
-      background: linear-gradient(135deg, var(--tab-accent), color-mix(in srgb, var(--tab-accent) 70%, #000));
-      border: none; border-radius: 10px;
-      color: #fff; font-size: 0.8rem; font-weight: 600;
-      cursor: pointer; transition: opacity 0.2s;
+      width: 100%; margin-top: 8px; padding: 7px 0;
+      background: transparent; border: 1px solid var(--border-dim);
+      border-radius: 6px; color: var(--text-2);
+      font-size: 12px; font-family: inherit; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: border-color .15s, color .15s;
     }
-    .refresh-btn:hover { opacity: 0.85; }
-    .refresh-btn.loading .refresh-icon { animation: spin 0.7s linear infinite; display: inline-block; }
+    .refresh-btn:hover { border-color: var(--accent); color: var(--text); }
+    .refresh-btn.loading .spin { display: inline-block; animation: spin .7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── TAB NAV ── */
-    .tab-nav {
-      max-width: 960px; margin: 0 auto;
-      display: flex; gap: 2px;
-      padding: 12px 24px 0;
+    /* ══ MAIN ══════════════════════════════ */
+    .main { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+    .topbar {
+      display: flex; align-items: center;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border-dim);
+      flex-shrink: 0; min-height: 48px; gap: 12px;
+    }
+    .topbar-left { display: flex; align-items: baseline; gap: 10px; }
+    .section-title { font-size: 15px; font-weight: 600; }
+    .section-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-3); }
+
+    .filter-tabs {
+      display: flex; gap: 0;
+      border-left: 1px solid var(--border-dim);
+      padding-left: 12px;
       overflow-x: auto; scrollbar-width: none;
+      margin-left: auto;
     }
-    .tab-nav::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 9px 18px;
-      background: transparent;
-      border: none; border-radius: 10px 10px 0 0;
-      color: var(--text2); font-size: 0.82rem; font-weight: 500;
-      cursor: pointer; white-space: nowrap;
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    .ftab {
+      padding: 5px 12px;
+      font-size: 12px; font-weight: 500;
+      color: var(--text-3); cursor: pointer;
       border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+      transition: color .12s, border-color .12s;
+      background: transparent; border-top: none; border-left: none; border-right: none;
+      font-family: inherit;
     }
-    .tab-btn:hover { color: var(--text); background: var(--surface); }
-    .tab-btn.active {
-      color: var(--tab-accent);
-      border-bottom-color: var(--tab-accent);
+    .ftab:hover { color: var(--text-2); }
+    .ftab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .content { flex: 1; overflow-y: auto; }
+
+    /* ══ LIST VIEW — news / jobs ══════════ */
+    .row-list { display: flex; flex-direction: column; }
+    .row-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--border-dim);
+      text-decoration: none; color: inherit;
+      transition: background .08s;
+    }
+    .row-item:last-child { border-bottom: none; }
+    .row-item:hover { background: var(--surface-2); }
+
+    /* ══ CARD VIEW — papers / tools ══════ */
+    .card-grid { display: flex; flex-direction: column; }
+    .info-card {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-dim);
+      border-left: 3px solid transparent;
+      transition: background .1s;
+    }
+    .info-card:last-child { border-bottom: none; }
+    .info-card:hover { background: var(--surface-2); }
+
+    /* ══ EVENT VIEW ═══════════════════════ */
+    .event-list { display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; }
+    .ev-card {
       background: var(--surface);
+      border: 1px solid var(--border-dim);
+      border-left: 3px solid var(--clr-conf);
+      border-radius: var(--r);
+      padding: 16px;
+      transition: background .12s;
     }
-    .tab-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.8; }
+    .ev-card:hover { background: var(--surface-2); }
+    .ev-card[data-type="expo"]       { border-left-color: var(--clr-expo); }
+    .ev-card[data-type="conference"] { border-left-color: var(--clr-conf); }
+    .ev-card[data-type="seminar"]    { border-left-color: var(--clr-semi); }
 
-    /* ── MAIN ── */
-    main { max-width: 960px; margin: 0 auto; padding: 24px 20px 0; }
+    .ev-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 6px 16px;
+      background: var(--surface-2); border: 1px solid var(--border-dim);
+      border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+    }
+    .ev-meta-key { font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+    .ev-meta-val { font-size: 12px; }
 
-    /* ── FILTER BAR ── */
-    .filter-bar {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
-    }
-    .filter-label { font-size: 0.78rem; color: var(--text2); }
-    .filter-btn {
-      padding: 6px 14px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; color: var(--text2);
-      font-size: 0.78rem; cursor: pointer; transition: all 0.15s;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      border-color: var(--tab-accent); color: var(--tab-accent);
-      background: color-mix(in srgb, var(--tab-accent) 10%, transparent);
-    }
-
-    /* ── SUMMARY BAR ── */
-    .summary-bar {
-      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
-    }
-    .summary-chip {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 8px; padding: 7px 14px; font-size: 0.78rem; color: var(--text2);
-    }
-    .summary-chip .num { color: var(--tab-accent); font-weight: 700; margin-right: 4px; }
-
-    /* ── CARDS GRID ── */
-    #cardsGrid { display: grid; gap: 16px; }
-
-    /* ── GENERIC CARD ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 22px 20px 26px;
-      position: relative; overflow: hidden;
-      animation: fadeIn 0.35s ease both;
-      transition: transform 0.18s, box-shadow 0.18s;
-    }
-    .card::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-      background: var(--tab-accent);
-    }
-    .card:hover { transform: translateY(-3px); }
-
-    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-
-    /* ── EVENT CARD ── */
-    .card[data-type="expo"]::before        { background: var(--clr-expo); }
-    .card[data-type="conference"]::before  { background: var(--clr-conf); }
-    .card[data-type="seminar"]::before     { background: var(--clr-semi); }
-    .card[data-type="expo"]:hover          { box-shadow: 0 0 0 1px var(--clr-expo), 0 8px 32px rgba(124,92,252,.15); }
-    .card[data-type="conference"]:hover    { box-shadow: 0 0 0 1px var(--clr-conf), 0 8px 32px rgba(79,142,247,.15); }
-    .card[data-type="seminar"]:hover       { box-shadow: 0 0 0 1px var(--clr-semi), 0 8px 32px rgba(34,197,94,.15); }
-
-    .card-header-row {
-      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px;
-    }
-    .card-title { font-size: 1.02rem; font-weight: 700; line-height: 1.4; margin-bottom: 4px; }
-    .card-subtitle { font-size: 0.79rem; color: var(--text2); }
-    .badges { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+    /* ══ SHARED ══════════════════════════ */
     .badge {
-      padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; white-space: nowrap;
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 4px;
+      font-size: 11px; font-weight: 500;
+      white-space: nowrap; flex-shrink: 0;
     }
-    .badge.upcoming { background: rgba(34,197,94,.15); color: #22c55e; }
-    .badge.soon     { background: rgba(245,158,11,.15); color: #f59e0b; }
-    .badge.pending  { background: rgba(148,163,184,.1);  color: var(--text2); }
-    .badge.type-expo { background: rgba(124,92,252,.15); color: var(--clr-expo); }
-    .badge.type-conf { background: rgba(79,142,247,.15); color: var(--clr-conf); }
-    .badge.type-semi { background: rgba(34,197,94,.15);  color: var(--clr-semi); }
-
-    .info-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 10px; background: var(--surface2); border-radius: 10px;
-      padding: 14px; margin: 12px 0;
-    }
-    .info-item {}
-    .info-key  { font-size: 0.7rem; color: var(--text2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
-    .info-val  { font-size: 0.84rem; font-weight: 500; }
-    .price-tbd  { color: var(--text2); }
-    .price-paid { color: #22c55e; }
-
-    .card-desc {
-      font-size: 0.84rem; color: var(--text2); line-height: 1.65; margin-bottom: 12px;
-    }
-    .pending-notice {
-      background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25);
-      border-radius: 8px; padding: 9px 13px; font-size: 0.8rem; color: #f59e0b;
-      margin-bottom: 14px; line-height: 1.55;
-    }
-    .card-footer {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-    }
-    .site-link {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 7px 15px;
-      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-      color: var(--accent, var(--tab-accent)); font-size: 0.8rem; font-weight: 600;
-      text-decoration: none; transition: background 0.15s, box-shadow 0.15s;
-    }
-    .site-link:hover { background: rgba(79,142,247,.1); box-shadow: 0 0 0 1px var(--tab-accent); }
-    .d-day { font-size: 0.79rem; color: var(--text2); }
-    .d-day strong { color: var(--tab-accent); }
-
-    /* ── NEWS CARD ── */
-    .news-card::before { background: var(--c-news); }
-    .news-card:hover   { box-shadow: 0 0 0 1px var(--c-news), 0 8px 28px rgba(245,158,11,.12); }
-    .source-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
-      background: rgba(245,158,11,.15); color: var(--c-news);
-    }
-    .pub-date { font-size: 0.73rem; color: var(--text2); }
-    .meta-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
-
-    /* ── PAPER CARD ── */
-    .paper-card::before { background: var(--c-papers); }
-    .paper-card:hover   { box-shadow: 0 0 0 1px var(--c-papers), 0 8px 28px rgba(124,92,252,.12); }
-    .arxiv-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
-      background: rgba(124,92,252,.15); color: var(--c-papers); font-family: monospace;
-    }
-    .authors { font-size: 0.78rem; color: var(--text2); margin-bottom: 8px; }
-    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+    .tag-row { display: flex; gap: 4px; flex-wrap: wrap; }
     .tag {
-      padding: 3px 9px; border-radius: 6px; font-size: 0.71rem; font-weight: 500;
-      background: var(--surface2); border: 1px solid var(--border); color: var(--text2);
+      padding: 2px 7px;
+      background: var(--surface-3); border: 1px solid var(--border-dim);
+      border-radius: 4px; font-size: 11px; color: var(--text-2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .link-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 5px 12px;
+      background: var(--surface-2); border: 1px solid var(--border-dim);
+      border-radius: 5px; color: var(--text-2);
+      font-size: 12px; text-decoration: none; white-space: nowrap;
+      transition: border-color .12s, color .12s;
+    }
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .b-soon     { background: rgba(59,130,246,.12);  color: #60a5fa; }
+    .b-upcoming { background: rgba(16,185,129,.12);  color: #34d399; }
+    .b-pending  { background: rgba(82,82,91,.15);    color: var(--text-2); }
+    .b-dday     { background: var(--surface-3); border: 1px solid var(--border); color: var(--accent); }
+
+    .pending-box {
+      font-size: 11.5px; color: #fbbf24;
+      background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.14);
+      border-radius: 5px; padding: 8px 12px; margin: 10px 0; line-height: 1.6;
     }
 
-    /* ── JOB CARD ── */
-    .job-card::before { background: var(--c-jobs); }
-    .job-card:hover   { box-shadow: 0 0 0 1px var(--c-jobs), 0 8px 28px rgba(34,197,94,.12); }
-    .company-name { font-size: 0.85rem; font-weight: 600; color: var(--c-jobs); margin-bottom: 2px; }
-    .job-location { font-size: 0.75rem; color: var(--text2); }
-
-    /* ── TOOL CARD ── */
-    .tool-card::before { background: var(--c-tools); }
-    .tool-card:hover   { box-shadow: 0 0 0 1px var(--c-tools), 0 8px 28px rgba(249,115,22,.12); }
-    .tool-source-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
-      background: rgba(249,115,22,.15); color: var(--c-tools);
+    .empty {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 20px; gap: 10px; color: var(--text-3);
     }
+    .empty-icon { font-size: 28px; }
+    .empty-text { font-size: 13px; text-align: center; line-height: 1.7; }
 
-    /* ── LOADING / EMPTY ── */
-    .loading-overlay {
+    .overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(15,17,23,.55); backdrop-filter: blur(8px);
-      z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+      background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+      z-index: 300; align-items: center; justify-content: center;
     }
-    .loading-overlay.show { display: flex; }
+    .overlay.show { display: flex; }
     .spinner {
-      width: 38px; height: 38px; border: 3px solid var(--border);
-      border-top-color: var(--tab-accent); border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
-    .loading-text { color: var(--text2); font-size: 0.86rem; }
-    .empty-state  { text-align: center; padding: 60px 20px; color: var(--text2); }
-    .empty-state p { margin-top: 12px; font-size: 0.88rem; }
-
-    /* ── FOOTER ── */
-    .page-footer {
-      max-width: 960px; margin: 48px auto 0;
-      padding: 18px 20px 0;
-      border-top: 1px solid var(--border);
-      font-size: 0.74rem; color: var(--text2);
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+      width: 30px; height: 30px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%; animation: spin .7s linear infinite;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.15rem; }
-      .header-top { flex-direction: column; align-items: flex-start; }
-      .last-updated { text-align: left; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
+    .ani { animation: fadeUp .2s ease both; }
+
+    /* ══ MOBILE ═══════════════════════════ */
+    @media (max-width: 768px) {
+      body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; height: auto; }
+      .sidebar {
+        height: auto; position: static; flex-direction: row;
+        border-right: none; border-bottom: 1px solid var(--border-dim);
+        overflow-x: auto; scrollbar-width: none;
+      }
+      .sidebar::-webkit-scrollbar { display: none; }
+      .s-logo { border-bottom: none; border-right: 1px solid var(--border-dim); padding: 10px 12px; }
+      .s-logo-sub { display: none; }
+      .s-nav { display: flex; flex-direction: row; padding: 4px; align-items: center; }
+      .s-nav-label { display: none; }
+      .nav-item { margin-bottom: 0; margin-right: 1px; }
+      .nav-count { display: none; }
+      .s-footer { display: none; }
+      .main { height: auto; overflow: visible; }
+      .content { overflow: visible; }
+      .topbar { flex-wrap: wrap; padding: 8px 14px; min-height: auto; }
+      .filter-tabs { margin-left: 0; padding-left: 0; border-left: none; border-top: 1px solid var(--border-dim); width: 100%; padding-top: 6px; }
     }
   </style>
 </head>
 <body>
 
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="spinner"></div>
-  <p class="loading-text" id="loadingText">데이터를 불러오는 중...</p>
-</div>
-
-<header>
-  <div class="header-top">
+<!-- ════ SIDEBAR ════ -->
+<aside class="sidebar">
+  <div class="s-logo">
+    <div class="s-logo-icon">🧠</div>
     <div>
-      <h1>🧠 나만의 AI 정보 창고</h1>
-      <p class="subtitle">행사 · 뉴스 · 논문 · 채용 · 도구 — 주 3회 자동 업데이트</p>
-    </div>
-    <div class="header-right">
-      <div class="last-updated">
-        마지막 수집<span id="lastUpdated">—</span>
-      </div>
-      <button class="refresh-btn" id="refreshBtn" onclick="refreshCurrentTab()">
-        <span class="refresh-icon">↻</span>새로고침
-      </button>
+      <div class="s-logo-name">AI Storage</div>
+      <span class="s-logo-sub">주 3회 자동 갱신</span>
     </div>
   </div>
 
-  <nav class="tab-nav" id="tabNav">
-    <button class="tab-btn active" data-tab="events"  onclick="switchTab('events')">
-      <span class="tab-dot"></span>행사
-    </button>
-    <button class="tab-btn" data-tab="news"   onclick="switchTab('news')">
-      <span class="tab-dot"></span>뉴스
-    </button>
-    <button class="tab-btn" data-tab="papers" onclick="switchTab('papers')">
-      <span class="tab-dot"></span>논문
-    </button>
-    <button class="tab-btn" data-tab="jobs"   onclick="switchTab('jobs')">
-      <span class="tab-dot"></span>채용
-    </button>
-    <button class="tab-btn" data-tab="tools"  onclick="switchTab('tools')">
-      <span class="tab-dot"></span>도구
-    </button>
-  </nav>
-</header>
+  <nav class="s-nav" id="sidebarNav"></nav>
 
-<main>
-  <div class="filter-bar" id="filterBar"></div>
-  <div class="summary-bar" id="summaryBar"></div>
-  <div id="cardsGrid"></div>
+  <div class="s-footer">
+    <div class="s-footer-label">마지막 수집</div>
+    <div class="s-footer-time" id="lastUpdated">—</div>
+    <button class="refresh-btn" id="refreshBtn" onclick="refresh()">
+      <span class="spin">↻</span>새로고침
+    </button>
+  </div>
+</aside>
+
+<!-- ════ MAIN ════ -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1 class="section-title" id="sectionTitle">행사</h1>
+      <span class="section-count" id="sectionCount"></span>
+    </div>
+    <div class="filter-tabs" id="filterTabs"></div>
+  </header>
+
+  <div class="content">
+    <div id="grid"></div>
+  </div>
 </main>
 
-<footer class="page-footer">
-  <span>기준일: <strong id="baseDate">—</strong></span>
-  <span>출처: arXiv · HuggingFace · AI Times · 원티드 · RemoteOK · GitHub</span>
-</footer>
+<div class="overlay" id="overlay"><div class="spinner"></div></div>
 
 <script>
-  /* ── 탭 설정 ── */
-  const TABS = {
-    events: {
-      label:    "행사",
-      accent:   "#4f8ef7",
-      dataFile: "data/events.json",
-      filters: [
-        { key: "all",        label: "전체" },
-        { key: "expo",       label: "박람회" },
-        { key: "conference", label: "컨퍼런스" },
-        { key: "seminar",    label: "세미나" },
-        { key: "pending",    label: "정보 예정" },
-      ],
-    },
-    news: {
-      label:    "뉴스",
-      accent:   "#f59e0b",
-      dataFile: "data/news.json",
-      filters: [
-        { key: "all",        label: "전체" },
-        { key: "AI Times",   label: "AI Times" },
-        { key: "블로터",      label: "블로터" },
-        { key: "TechCrunch AI", label: "TechCrunch" },
-        { key: "VentureBeat AI","label": "VentureBeat" },
-      ],
-    },
-    papers: {
-      label:    "논문",
-      accent:   "#7c5cfc",
-      dataFile: "data/papers.json",
-      filters: [
-        { key: "all",   label: "전체" },
-        { key: "cs.AI", label: "cs.AI" },
-        { key: "cs.LG", label: "cs.LG" },
-        { key: "cs.CL", label: "cs.CL" },
-      ],
-    },
-    jobs: {
-      label:    "채용",
-      accent:   "#22c55e",
-      dataFile: "data/jobs.json",
-      filters: [
-        { key: "all",      label: "전체" },
-        { key: "원티드",   label: "원티드" },
-        { key: "RemoteOK", label: "RemoteOK" },
-      ],
-    },
-    tools: {
-      label:    "도구",
-      accent:   "#f97316",
-      dataFile: "data/tools.json",
-      filters: [
-        { key: "all",                 label: "전체" },
-        { key: "HuggingFace Papers",  label: "HF Papers" },
-        { key: "HuggingFace Models",  label: "HF Models" },
-        { key: "GitHub",              label: "GitHub" },
-      ],
-    },
-  };
+/* ══ TAB CONFIG ══════════════════════════ */
+const TABS = {
+  events: {
+    label: '행사', accent: '#3b82f6', file: 'data/events.json',
+    filters: [
+      { k: 'all', label: '전체' }, { k: 'expo', label: '박람회' },
+      { k: 'conference', label: '컨퍼런스' }, { k: 'seminar', label: '세미나' },
+      { k: 'pending', label: '일정 미정' },
+    ],
+  },
+  news: {
+    label: '뉴스', accent: '#f59e0b', file: 'data/news.json',
+    filters: [
+      { k: 'all', label: '전체' }, { k: 'AI Times', label: 'AI Times' },
+      { k: 'TechCrunch AI', label: 'TechCrunch' },
+      { k: 'VentureBeat AI', label: 'VentureBeat' }, { k: '블로터', label: '블로터' },
+    ],
+  },
+  papers: {
+    label: '논문', accent: '#8b5cf6', file: 'data/papers.json',
+    filters: [
+      { k: 'all', label: '전체' }, { k: 'cs.AI', label: 'cs.AI' },
+      { k: 'cs.LG', label: 'cs.LG' }, { k: 'cs.CL', label: 'cs.CL' },
+    ],
+  },
+  jobs: {
+    label: '채용', accent: '#10b981', file: 'data/jobs.json',
+    filters: [
+      { k: 'all', label: '전체' }, { k: '원티드', label: '원티드' },
+      { k: 'RemoteOK', label: 'RemoteOK' },
+    ],
+  },
+  tools: {
+    label: '도구', accent: '#f97316', file: 'data/tools.json',
+    filters: [
+      { k: 'all', label: '전체' }, { k: 'HuggingFace Papers', label: 'HF Papers' },
+      { k: 'HuggingFace Models', label: 'HF Models' }, { k: 'GitHub', label: 'GitHub' },
+    ],
+  },
+};
 
-  let currentTab    = "events";
-  let currentFilter = "all";
-  const cache = {};   // tab -> { updatedAt, items }
+let tab    = 'events';
+let filter = 'all';
+const cache = {};
 
-  /* ── 탭 전환 ── */
-  function switchTab(tab) {
-    currentTab    = tab;
-    currentFilter = "all";
-    document.documentElement.style.setProperty("--tab-accent", TABS[tab].accent);
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
-    renderFilterBar();
-    if (cache[tab]) {
-      renderCards(cache[tab].items);
-      updateTimestamp(cache[tab].updatedAt);
-    } else {
-      loadTab(tab);
-    }
-  }
+/* ══ SWITCH ══ */
+function switchTab(key) {
+  tab = key; filter = 'all';
+  document.documentElement.style.setProperty('--accent', TABS[key].accent);
+  renderNav(); renderFilterTabs();
+  document.getElementById('sectionTitle').textContent = TABS[key].label;
+  cache[key] ? renderCards(cache[key].items) : loadTab(key);
+}
 
-  async function loadTab(tab, force = false) {
-    if (!force && cache[tab]) { renderCards(cache[tab].items); return; }
-    showLoading(`${TABS[tab].label} 데이터를 불러오는 중...`);
-    try {
-      const resp = await fetch(`${TABS[tab].dataFile}?t=${Date.now()}`);
-      if (!resp.ok) throw new Error(resp.statusText);
-      const json = await resp.json();
-      cache[tab] = json;
-      renderCards(json.items || []);
-      updateTimestamp(json.updatedAt);
-    } catch (e) {
-      document.getElementById("cardsGrid").innerHTML =
-        `<div class="empty-state"><div style="font-size:2rem">⚠️</div><p>데이터 로드 실패: ${e.message}<br>로컬 실행 시 <code>python -m http.server 8000</code> 후 열어주세요.</p></div>`;
-    } finally {
-      hideLoading();
-    }
-  }
-
-  /* ── 필터 바 ── */
-  function renderFilterBar() {
-    const bar = document.getElementById("filterBar");
-    bar.innerHTML = `<span class="filter-label">필터:</span>` +
-      TABS[currentTab].filters.map(f =>
-        `<button class="filter-btn${currentFilter === f.key ? " active" : ""}"
-          onclick="setFilter('${f.key}')">${f.label}</button>`
-      ).join("");
-  }
-
-  function setFilter(key) {
-    currentFilter = key;
-    renderFilterBar();
-    if (cache[currentTab]) renderCards(cache[currentTab].items);
-  }
-
-  /* ── 카드 렌더 ── */
-  function renderCards(items) {
-    const grid = document.getElementById("cardsGrid");
-    const filtered = filterItems(items);
-    renderSummary(filtered, items.length);
-    if (filtered.length === 0) {
-      grid.innerHTML = `<div class="empty-state"><div style="font-size:2.5rem">🔍</div><p>해당 조건의 항목이 없습니다.</p></div>`;
-      return;
-    }
-    const builders = { events: buildEventCard, news: buildNewsCard, papers: buildPaperCard, jobs: buildJobCard, tools: buildToolCard };
-    grid.innerHTML = filtered.map((item, i) => builders[currentTab](item, i)).join("");
-  }
-
-  function filterItems(items) {
-    if (currentFilter === "all") return items.filter(item => {
-      if (currentTab !== "events") return true;
-      const todayStr = today();
-      return !item.endDate || item.endDate >= todayStr;
-    });
-
-    return items.filter(item => {
-      switch (currentTab) {
-        case "events":
-          if (currentFilter === "pending") return !item.startDate;
-          const todayStr = today();
-          const notPast = !item.endDate || item.endDate >= todayStr;
-          return notPast && item.type === currentFilter;
-        case "news":   return item.source === currentFilter;
-        case "papers": return (item.categories || []).includes(currentFilter);
-        case "jobs":   return item.source === currentFilter;
-        case "tools":  return item.source === currentFilter;
-        default: return true;
-      }
-    });
-  }
-
-  function renderSummary(filtered, total) {
-    document.getElementById("summaryBar").innerHTML =
-      `<div class="summary-chip"><span class="num">${filtered.length}</span>건 표시</div>` +
-      `<div class="summary-chip">전체 <span class="num">${total}</span>건</div>`;
-  }
-
-  /* ── 행사 카드 ── */
-  function buildEventCard(ev, idx) {
-    const status = statusBadge(ev.startDate, ev.endDate);
-    if (status === null) return "";
-    const dd = dDay(ev.startDate);
-    const dateRange = ev.startDate
-      ? (ev.startDate === ev.endDate ? formatDate(ev.startDate) : `${formatDate(ev.startDate)} ~ ${formatDate(ev.endDate)}`)
-      : "미정";
-    return `
-      <div class="card" style="animation-delay:${idx*60}ms" data-type="${ev.type}">
-        <div class="card-header-row">
-          <div>
-            <div class="card-subtitle">${ev.typeLabel}</div>
-            <div class="card-title">${ev.name}</div>
-            <div class="card-subtitle">${ev.subtitle}</div>
-          </div>
-          <div class="badges">
-            ${status ? `<span class="badge ${status.cls}">● ${status.label}</span>` : ""}
-            <span class="badge type-${ev.type === 'expo' ? 'expo' : ev.type === 'conference' ? 'conf' : 'semi'}">${ev.typeLabel}</span>
-          </div>
-        </div>
-        <div class="info-grid">
-          <div class="info-item"><div class="info-key">📅 날짜</div><div class="info-val">${dateRange}</div></div>
-          <div class="info-item"><div class="info-key">⏰ 시간</div><div class="info-val">${ev.time}</div></div>
-          <div class="info-item"><div class="info-key">📍 장소</div><div class="info-val">${ev.venue}</div></div>
-          <div class="info-item"><div class="info-key">💰 참가비</div><div class="info-val ${ev.priceClass}">${ev.price}</div></div>
-        </div>
-        <p class="card-desc">${ev.desc}</p>
-        ${ev.pendingInfo ? `<div class="pending-notice">⚠️ ${ev.pendingInfo}</div>` : ""}
-        <div class="card-footer">
-          <a href="${ev.site}" target="_blank" rel="noopener" class="site-link">🔗 ${ev.siteLabel}</a>
-          ${dd ? `<span class="d-day">개막까지 <strong>${dd}</strong></span>` : ""}
-        </div>
+/* ══ LOAD ══ */
+async function loadTab(key, force = false) {
+  if (!force && cache[key]) { renderCards(cache[key].items); return; }
+  document.getElementById('overlay').classList.add('show');
+  try {
+    const r = await fetch(`${TABS[key].file}?t=${Date.now()}`);
+    if (!r.ok) throw new Error(r.statusText);
+    const json = await r.json();
+    cache[key] = json;
+    renderCards(json.items || []);
+    updateTimestamp(json.updatedAt);
+    renderNav();
+  } catch (e) {
+    document.getElementById('grid').innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">⚠</div>
+        <p class="empty-text">로드 실패: ${e.message}<br>
+        <span style="color:var(--text-3);font-size:11px">로컬: python -m http.server 8000</span></p>
       </div>`;
+  } finally {
+    document.getElementById('overlay').classList.remove('show');
   }
+}
 
-  /* ── 뉴스 카드 ── */
-  function buildNewsCard(item, idx) {
-    return `
-      <div class="card news-card" style="animation-delay:${idx*50}ms">
-        <div class="meta-row">
-          <span class="source-badge">${item.source}</span>
-          <span class="pub-date">${item.pubDate}</span>
-        </div>
-        <div class="card-title" style="margin-bottom:8px">${item.title}</div>
-        <p class="card-desc">${item.summary || "요약 없음"}</p>
-        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">기사 보기 →</a>
+/* ══ FILTER ══ */
+function setFilter(k) {
+  filter = k; renderFilterTabs();
+  if (cache[tab]) renderCards(cache[tab].items);
+}
+
+function applyFilter(items) {
+  if (filter === 'all') {
+    return tab === 'events'
+      ? items.filter(e => !e.endDate || e.endDate >= today())
+      : items;
+  }
+  switch (tab) {
+    case 'events':
+      if (filter === 'pending') return items.filter(e => !e.startDate);
+      return items.filter(e => (!e.endDate || e.endDate >= today()) && e.type === filter);
+    case 'news':   return items.filter(i => i.source === filter);
+    case 'papers': return items.filter(i => (i.categories || []).includes(filter));
+    case 'jobs':   return items.filter(i => i.source === filter);
+    case 'tools':  return items.filter(i => i.source === filter);
+  }
+  return items;
+}
+
+/* ══ RENDER NAV ══ */
+function renderNav() {
+  document.getElementById('sidebarNav').innerHTML =
+    `<div class="s-nav-label">카테고리</div>` +
+    Object.entries(TABS).map(([k, t]) => {
+      const n = cache[k]?.items?.length ?? '';
+      return `<div class="nav-item${k === tab ? ' active' : ''}" onclick="switchTab('${k}')">
+        <div class="nav-dot"></div>
+        <span class="nav-label">${t.label}</span>
+        ${n !== '' ? `<span class="nav-count">${n}</span>` : ''}
       </div>`;
+    }).join('');
+}
+
+/* ══ RENDER FILTER TABS ══ */
+function renderFilterTabs() {
+  document.getElementById('filterTabs').innerHTML =
+    TABS[tab].filters.map(f =>
+      `<button class="ftab${filter === f.k ? ' active' : ''}" onclick="setFilter('${f.k}')">${f.label}</button>`
+    ).join('');
+}
+
+/* ══ RENDER CARDS ══ */
+function renderCards(items) {
+  const filtered = applyFilter(items);
+  document.getElementById('sectionCount').textContent = `${filtered.length} / ${items.length}건`;
+
+  const grid = document.getElementById('grid');
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty"><div class="empty-icon">○</div><p class="empty-text">항목이 없습니다.</p></div>`;
+    return;
   }
 
-  /* ── 논문 카드 ── */
-  function buildPaperCard(item, idx) {
-    const tags = (item.categories || []).map(c => `<span class="tag">${c}</span>`).join("");
-    return `
-      <div class="card paper-card" style="animation-delay:${idx*50}ms">
-        <div class="meta-row">
-          <span class="arxiv-badge">arXiv:${item.arxivId}</span>
-          <span class="pub-date">${item.pubDate}</span>
-        </div>
-        <div class="card-title" style="margin-bottom:6px">${item.title}</div>
-        <div class="authors">${(item.authors || []).join(", ")}${item.authors?.length > 3 ? " 외" : ""}</div>
-        <p class="card-desc">${item.abstract}</p>
-        <div class="tag-row">${tags}</div>
-        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">arXiv 보기 →</a>
-      </div>`;
-  }
+  const B = { events: buildEvent, news: buildNews, papers: buildPaper, jobs: buildJob, tools: buildTool };
+  const W = { events: 'event-list', news: 'row-list', papers: 'card-grid', jobs: 'row-list', tools: 'card-grid' };
 
-  /* ── 채용 카드 ── */
-  function buildJobCard(item, idx) {
-    const tags = (item.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
-    return `
-      <div class="card job-card" style="animation-delay:${idx*50}ms">
-        <div class="meta-row">
-          <div>
-            <div class="company-name">${item.company}</div>
-            <div class="job-location">📍 ${item.location}</div>
-          </div>
-          <span class="pub-date">${item.pubDate}</span>
-        </div>
-        <div class="card-title" style="margin-bottom:10px">${item.title}</div>
-        <div class="tag-row">${tags}</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
-          <a href="${item.url}" target="_blank" rel="noopener" class="site-link">지원하기 →</a>
-          <span class="pub-date">${item.source}</span>
-        </div>
-      </div>`;
-  }
+  grid.innerHTML = `<div class="${W[tab]}">${filtered.map((x, i) => B[tab](x, i)).join('')}</div>`;
+}
 
-  /* ── 도구 카드 ── */
-  function buildToolCard(item, idx) {
-    const tags = (item.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
-    return `
-      <div class="card tool-card" style="animation-delay:${idx*50}ms">
-        <div class="meta-row">
-          <span class="tool-source-badge">${item.source}</span>
-          <span class="pub-date">${item.pubDate}</span>
-        </div>
-        <div class="card-title" style="margin-bottom:8px">${item.name}</div>
-        <p class="card-desc">${item.desc}</p>
-        <div class="tag-row">${tags}</div>
-        <a href="${item.url}" target="_blank" rel="noopener" class="site-link">보러 가기 →</a>
-      </div>`;
-  }
+/* ══ BUILDERS ══════════════════════════ */
 
-  /* ── 유틸 ── */
-  function today() { return new Date().toISOString().slice(0,10); }
+function buildEvent(ev, i) {
+  const st = statusBadge(ev.startDate, ev.endDate);
+  if (st === null) return '';
+  const dd = dDay(ev.startDate);
+  const dr = ev.startDate
+    ? (ev.startDate === ev.endDate
+        ? fmtDate(ev.startDate)
+        : `${fmtDate(ev.startDate)} ~ ${fmtDate(ev.endDate)}`)
+    : '미정';
+  const tColor = { expo: 'var(--clr-expo)', conference: 'var(--clr-conf)', seminar: 'var(--clr-semi)' }[ev.type] || 'var(--text-3)';
 
-  function formatDate(iso) {
-    if (!iso) return "미정";
-    return new Date(iso + "T00:00:00").toLocaleDateString("ko-KR", { year:"numeric", month:"long", day:"numeric", weekday:"short" });
-  }
+  return `
+  <div class="ev-card ani" style="animation-delay:${i*40}ms" data-type="${ev.type}">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px">
+      <div>
+        <div style="font-size:10px;color:${tColor};text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-bottom:4px">${ev.typeLabel}</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:3px;line-height:1.3">${ev.name}</div>
+        <div style="font-size:11.5px;color:var(--text-2)">${ev.subtitle}</div>
+      </div>
+      <div style="display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end">
+        ${st ? `<span class="badge b-${st.cls}">${st.label}</span>` : ''}
+        ${dd ? `<span class="badge b-dday mono" style="font-size:11px">${dd}</span>` : ''}
+      </div>
+    </div>
 
-  function dDay(startIso) {
-    if (!startIso) return null;
-    const now = new Date(); now.setHours(0,0,0,0);
-    const diff = Math.round((new Date(startIso + "T00:00:00") - now) / 86400000);
-    if (diff < 0) return null;
-    return diff === 0 ? "오늘 개막" : `D-${diff}`;
-  }
+    <div class="ev-meta">
+      <div><div class="ev-meta-key">날짜</div><div class="ev-meta-val">${dr}</div></div>
+      ${ev.time && ev.time !== '미정' ? `<div><div class="ev-meta-key">시간</div><div class="ev-meta-val">${ev.time}</div></div>` : ''}
+      <div><div class="ev-meta-key">장소</div><div class="ev-meta-val">${ev.venue}</div></div>
+      <div>
+        <div class="ev-meta-key">참가비</div>
+        <div class="ev-meta-val" style="${ev.priceClass === 'price-free' ? 'color:var(--c-jobs)' : 'color:var(--text-2)'}">${ev.price}</div>
+      </div>
+    </div>
 
-  function statusBadge(startIso, endIso) {
-    if (!startIso) return { cls: "pending", label: "일정 미정" };
-    const now = new Date(); now.setHours(0,0,0,0);
-    const end = new Date((endIso || startIso) + "T23:59:59");
-    if (now > end) return null;
-    const diff = Math.round((new Date(startIso + "T00:00:00") - now) / 86400000);
-    return diff <= 30 ? { cls: "soon", label: "곧 개최" } : { cls: "upcoming", label: "예정" };
-  }
+    <p style="font-size:12.5px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${ev.desc}</p>
 
-  function updateTimestamp(isoStr) {
-    const d = isoStr ? new Date(isoStr) : new Date();
-    document.getElementById("lastUpdated").textContent =
-      d.toLocaleString("ko-KR", { month:"long", day:"numeric", hour:"2-digit", minute:"2-digit" });
-    document.getElementById("baseDate").textContent =
-      new Date().toLocaleDateString("ko-KR", { year:"numeric", month:"long", day:"numeric" });
-  }
+    ${ev.pendingInfo ? `<div class="pending-box">⚠ ${ev.pendingInfo}</div>` : ''}
 
-  function showLoading(msg) {
-    document.getElementById("loadingText").textContent = msg;
-    document.getElementById("loadingOverlay").classList.add("show");
-  }
-  function hideLoading() {
-    document.getElementById("loadingOverlay").classList.remove("show");
-  }
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <a href="${ev.site}" target="_blank" rel="noopener" class="link-btn">↗ ${ev.siteLabel}</a>
+      ${dd ? `<span style="font-size:11px;color:var(--text-3)">개막까지 <strong style="color:var(--accent)">${dd}</strong></span>` : ''}
+    </div>
+  </div>`;
+}
 
-  function refreshCurrentTab() {
-    const btn = document.getElementById("refreshBtn");
-    if (btn.classList.contains("loading")) return;
-    btn.classList.add("loading");
-    delete cache[currentTab];
-    loadTab(currentTab, true).finally(() => btn.classList.remove("loading"));
-  }
+function buildNews(item, i) {
+  const colors = { 'AI Times': 'var(--c-events)', 'TechCrunch AI': 'var(--c-news)', 'VentureBeat AI': 'var(--c-papers)', '블로터': 'var(--c-jobs)' };
+  const c = colors[item.source] || 'var(--c-news)';
+  return `
+  <a class="row-item ani" style="animation-delay:${i*16}ms" href="${item.url}" target="_blank" rel="noopener">
+    <span class="badge" style="background:color-mix(in srgb,${c} 10%,transparent);color:${c}">${item.source}</span>
+    <span style="flex:1;font-size:13px;color:var(--text);line-height:1.4">${item.title}</span>
+    <span class="mono" style="font-size:10.5px;color:var(--text-3);flex-shrink:0">${(item.pubDate || '').slice(5)}</span>
+    <span style="color:var(--text-3);font-size:11px">↗</span>
+  </a>`;
+}
 
-  /* ── 초기화 ── */
-  document.documentElement.style.setProperty("--tab-accent", TABS["events"].accent);
-  renderFilterBar();
-  loadTab("events");
+function buildPaper(item, i) {
+  const cats = (item.categories || []).map(c => `<span class="tag">${c}</span>`).join('');
+  return `
+  <div class="info-card ani" style="border-left-color:var(--c-papers);animation-delay:${i*25}ms">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px">
+      <span class="badge mono" style="background:color-mix(in srgb,var(--c-papers) 10%,transparent);color:var(--c-papers);font-size:10px">arXiv:${item.arxivId}</span>
+      <span class="mono" style="font-size:10.5px;color:var(--text-3)">${item.pubDate}</span>
+    </div>
+    <div style="font-size:14px;font-weight:600;margin-bottom:5px;line-height:1.4">${item.title}</div>
+    <div style="font-size:11.5px;color:var(--text-2);margin-bottom:8px">${(item.authors || []).join(', ')}${(item.authors||[]).length >= 3 ? ' 외' : ''}</div>
+    <p style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${item.abstract}</p>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div class="tag-row">${cats}</div>
+      <a href="${item.url}" target="_blank" rel="noopener" class="link-btn">↗ arXiv</a>
+    </div>
+  </div>`;
+}
+
+function buildJob(item, i) {
+  const tags = (item.tags || []).slice(0, 4).map(t => `<span class="tag">${t}</span>`).join('');
+  return `
+  <a class="row-item ani" style="animation-delay:${i*16}ms;flex-wrap:wrap;gap:8px" href="${item.url}" target="_blank" rel="noopener">
+    <span class="badge" style="background:color-mix(in srgb,var(--c-jobs) 10%,transparent);color:var(--c-jobs)">${item.source}</span>
+    <span style="font-weight:600;color:var(--text)">${item.company}</span>
+    <span style="color:var(--text-2);flex:1;min-width:100px">${item.title}</span>
+    <div class="tag-row">${tags}</div>
+    <span class="mono" style="font-size:10.5px;color:var(--text-3);flex-shrink:0">${(item.pubDate||'').slice(5)}</span>
+    <span style="color:var(--text-3);font-size:11px">↗</span>
+  </a>`;
+}
+
+function buildTool(item, i) {
+  const tags = (item.tags || []).slice(0, 5).map(t => `<span class="tag">${t}</span>`).join('');
+  const srcC = { 'GitHub': '#6e7681', 'HuggingFace Papers': 'var(--c-papers)', 'HuggingFace Models': 'var(--c-news)' };
+  const c = srcC[item.source] || 'var(--c-tools)';
+  return `
+  <div class="info-card ani" style="border-left-color:var(--c-tools);animation-delay:${i*22}ms">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span class="badge" style="background:color-mix(in srgb,var(--c-tools) 10%,transparent);color:var(--c-tools)">${item.source}</span>
+      <span class="mono" style="font-size:10.5px;color:var(--text-3)">${item.pubDate}</span>
+    </div>
+    <div style="font-size:13.5px;font-weight:600;margin-bottom:5px;font-family:'JetBrains Mono',monospace;word-break:break-all">${item.name}</div>
+    <p style="font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:10px">${item.desc}</p>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+      <div class="tag-row">${tags}</div>
+      <a href="${item.url}" target="_blank" rel="noopener" class="link-btn">↗ 보기</a>
+    </div>
+  </div>`;
+}
+
+/* ══ UTILS ══════════════════════════════ */
+function today() { return new Date().toISOString().slice(0, 10); }
+
+function fmtDate(iso) {
+  if (!iso) return '미정';
+  return new Date(iso + 'T00:00:00').toLocaleDateString('ko-KR',
+    { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+}
+
+function dDay(startIso) {
+  if (!startIso) return null;
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const diff = Math.round((new Date(startIso + 'T00:00:00') - now) / 86400000);
+  if (diff < 0) return null;
+  return diff === 0 ? 'D-Day' : `D-${diff}`;
+}
+
+function statusBadge(startIso, endIso) {
+  if (!startIso) return { cls: 'pending', label: '일정 미정' };
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  if (now > new Date((endIso || startIso) + 'T23:59:59')) return null;
+  const diff = Math.round((new Date(startIso + 'T00:00:00') - now) / 86400000);
+  return diff <= 30 ? { cls: 'soon', label: '곧 개최' } : { cls: 'upcoming', label: '예정' };
+}
+
+function updateTimestamp(iso) {
+  if (!iso) return;
+  document.getElementById('lastUpdated').textContent =
+    new Date(iso).toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function refresh() {
+  const btn = document.getElementById('refreshBtn');
+  if (btn.classList.contains('loading')) return;
+  btn.classList.add('loading');
+  delete cache[tab];
+  loadTab(tab, true).finally(() => btn.classList.remove('loading'));
+}
+
+/* ══ INIT ══ */
+document.documentElement.style.setProperty('--accent', TABS.events.accent);
+renderNav();
+renderFilterTabs();
+loadTab('events');
 </script>
 </body>
 </html>

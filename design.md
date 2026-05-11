@@ -1,133 +1,188 @@
-# Design System — AI Events Page
+# Design System — AI-DATA-STORAGE
 
-## 테마 개요
+## 디자인 방향
 
-다크 테마 기반의 정보 제공형 웹 페이지. 신뢰감·가독성·시각적 위계를 목표로 함.
+**Linear App + Vercel Dashboard** 영감의 다크 정보 대시보드.
+
+- 고밀도 정보 표시 (스크롤 최소화)
+- 빠른 시각적 스캔 (타입별 색상, 일관된 레이아웃)
+- 장식 최소화, 기능 중심
+- 모바일 대응 (사이드바 → 상단 탭 전환)
+
+---
+
+## 레이아웃
+
+```
+┌─────────────┬──────────────────────────────────┐
+│  🧠 로고     │  [섹션명]  [N/M건]  [필터 탭들]  │
+│             │─────────────────────────────────│
+│ ● 행사   5  │                                  │
+│ ● 뉴스  19  │  콘텐츠 영역                     │
+│ ● 논문      │  (탭에 따라 row-list / card-grid  │
+│ ● 채용      │   / event-list 전환)             │
+│ ● 도구  35  │                                  │
+│             │                                  │
+│─────────────│                                  │
+│ 마지막 수집  │                                  │
+│ [↻ 새로고침] │                                  │
+└─────────────┴──────────────────────────────────┘
+```
+
+- 데스크톱: `220px` 고정 사이드바 + 콘텐츠
+- 모바일 (≤768px): 사이드바 → 수평 스크롤 탭 바
 
 ---
 
 ## 색상 팔레트
 
+### 배경/서피스
+
 | 토큰 | 값 | 용도 |
 |------|----|------|
-| `--bg` | `#0f1117` | 페이지 배경 |
-| `--surface` | `#1a1d27` | 카드 배경 |
-| `--surface2` | `#22263a` | 카드 내부 정보 블록 |
-| `--border` | `#2e3350` | 테두리 |
-| `--accent` | `#4f8ef7` | 주 강조색 (컨퍼런스, 링크) |
-| `--accent2` | `#7c5cfc` | 보조 강조색 (박람회) |
-| `--green` | `#22c55e` | 세미나 / 무료 / 예정 뱃지 |
-| `--yellow` | `#f59e0b` | 경고 / 정보 미발표 |
-| `--text` | `#e2e8f0` | 본문 |
-| `--text2` | `#94a3b8` | 보조 텍스트 |
+| `--bg` | `#0c0c0e` | 페이지 배경 |
+| `--sidebar` | `#111113` | 사이드바 배경 |
+| `--surface` | `#111113` | 카드 배경 |
+| `--surface-2` | `#161619` | 호버, 중첩 배경 |
+| `--surface-3` | `#1c1c20` | 태그, 심층 배경 |
 
-### 행사 유형별 액센트 색상
+### 테두리
 
-| 유형 | 색상 | 토큰 |
+| 토큰 | 값 | 용도 |
+|------|----|------|
+| `--border` | `#27272a` | 명시적 구분선 |
+| `--border-dim` | `#1e1e21` | 섹션 간 구분, 행 하단 |
+
+### 텍스트
+
+| 토큰 | 값 | 용도 |
+|------|----|------|
+| `--text` | `#e4e4e7` | 주요 텍스트 |
+| `--text-2` | `#a1a1aa` | 보조 텍스트, 설명 |
+| `--text-3` | `#52525b` | 희미한 메타 정보, 날짜 |
+
+### 탭별 강조색
+
+| 탭 | 토큰 | 색상 | 기준 |
+|----|------|------|------|
+| 행사 | `--c-events` | `#3b82f6` | Tailwind Blue-500 |
+| 뉴스 | `--c-news` | `#f59e0b` | Tailwind Amber-400 |
+| 논문 | `--c-papers` | `#8b5cf6` | Tailwind Violet-500 |
+| 채용 | `--c-jobs` | `#10b981` | Tailwind Emerald-500 |
+| 도구 | `--c-tools` | `#f97316` | Tailwind Orange-500 |
+
+활성 탭 전환 시 `--accent`가 동적으로 해당 색으로 변경됨.
+
+### 행사 유형별 액센트
+
+| 유형 | 토큰 | 색상 |
 |------|------|------|
-| 박람회 | `#7c5cfc` (보라) | `--clr-expo` |
-| 컨퍼런스 | `#4f8ef7` (파랑) | `--clr-conf` |
-| 세미나/심포지엄 | `#22c55e` (초록) | `--clr-semi` |
-
----
-
-## 적용된 개선 3가지
-
-### 1. 좌측 컬러 액센트 바
-카드 왼쪽에 행사 유형별 색상의 4px 세로 바를 배치. 목록을 빠르게 스캔할 때 유형을 즉시 식별 가능.
-
-```css
-.event-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-}
-.event-card[data-type="expo"]::before       { background: #7c5cfc; }
-.event-card[data-type="conference"]::before  { background: #4f8ef7; }
-.event-card[data-type="seminar"]::before     { background: #22c55e; }
-```
-
-### 2. 헤더 글래스모피즘
-헤더를 반투명 + blur 처리하여 스크롤 시 뒤 콘텐츠가 비쳐 보이는 깊이감 연출.
-
-```css
-header {
-  background: rgba(13, 17, 34, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.4);
-}
-```
-
-로딩 오버레이에도 동일 기법 적용:
-```css
-.loading-overlay {
-  background: rgba(15, 17, 23, 0.55);
-  backdrop-filter: blur(8px);
-}
-```
-
-### 3. 호버 시 그라디언트 글로우
-`border-color` 변경 대신 `box-shadow`로 글로우 효과. 행사 유형 색상을 유지하면서 입체감 추가.
-
-```css
-/* 컨퍼런스 (기본) */
-.event-card:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 0 0 1px #4f8ef7,
-    0 8px 32px rgba(79, 142, 247, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* 박람회 */
-.event-card[data-type="expo"]:hover {
-  box-shadow:
-    0 0 0 1px #7c5cfc,
-    0 8px 32px rgba(124, 92, 252, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-}
-```
-
----
-
-## 레이아웃 원칙
-
-- **최대 너비**: `960px`, 중앙 정렬
-- **카드 그리드**: 단일 컬럼 (`grid-template-columns: 1fr`) — 정보 밀도가 높아 2열 시 가독성 저하
-- **정보 블록**: `auto-fill minmax(190px, 1fr)` — 반응형으로 2~4열 자동 조정
-- **카드 내 좌측 패딩**: `28px` (액센트 바 4px + 여백)
+| 박람회 | `--clr-expo` | `#8b5cf6` (보라) |
+| 컨퍼런스 | `--clr-conf` | `#3b82f6` (파랑) |
+| 세미나 | `--clr-semi` | `#10b981` (초록) |
 
 ---
 
 ## 타이포그래피
 
-- **폰트**: Pretendard → Apple SD Gothic Neo → Noto Sans KR (시스템 폰트 폴백)
-- **제목**: `1.08rem / 700 weight`
-- **본문**: `0.84–0.88rem / 1.65–1.7 line-height`
-- **레이블**: `0.7rem / uppercase / letter-spacing: 0.1em`
+| 용도 | 폰트 | 크기 | 굵기 |
+|------|------|------|------|
+| 기본 | Inter | 13px | 400 |
+| 카드 제목 | Inter | 14–15px | 600–700 |
+| 섹션 제목 | Inter | 15px | 600 |
+| 날짜 / ID | JetBrains Mono | 10.5–11px | 400 |
+| 레이블 | Inter | 10px uppercase | 600 |
+| 태그 | JetBrains Mono | 11px | 400 |
 
 ---
 
-## 인터랙션 패턴
+## 콘텐츠 레이아웃 타입
+
+### `row-list` — 뉴스 / 채용
+행 단위 고밀도 목록. RSS 리더 / Hacker News 스타일.
+
+```
+[소스 뱃지] [제목 (flex: 1)] [날짜 mono] [↗]
+```
+
+### `card-grid` — 논문 / 도구
+왼쪽 3px 컬러 바 카드. 중밀도.
+
+```
+[소스 뱃지]                      [날짜]
+제목 (큰 글씨, 굵게)
+보조 정보 (저자 / 설명)
+내용 요약 (12px, text-2)
+[태그들]                    [↗ 링크 버튼]
+```
+
+### `event-list` — 행사
+정보 격자 포함 고정 카드. 저밀도, 고정보.
+
+```
+[유형 레이블]                    [상태 뱃지] [D-N]
+행사 이름 (15px, bold)
+부제목
+┌─────────────────────────────┐
+│ 날짜 │ 시간 │ 장소 │ 참가비 │
+└─────────────────────────────┘
+설명 (12.5px)
+[⚠ 미확정 안내 (선택)]
+[↗ 공식 사이트]              [개막까지 D-N]
+```
+
+---
+
+## 컴포넌트
+
+### 뱃지 `.badge`
+```css
+padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500;
+```
+
+| 클래스 | 용도 |
+|--------|------|
+| `.b-soon` | 곧 개최 (30일 이내) — 파랑 |
+| `.b-upcoming` | 예정 — 초록 |
+| `.b-pending` | 일정 미정 — 회색 |
+| `.b-dday` | D-N 카운트다운 — 현재 탭 강조색 |
+
+### 태그 `.tag`
+```css
+background: --surface-3; border: 1px solid --border-dim;
+border-radius: 4px; font-family: JetBrains Mono; font-size: 11px;
+```
+
+### 링크 버튼 `.link-btn`
+기본: 회색 테두리. 호버: `--accent` 색상 테두리 + 텍스트.
+
+### 미확정 안내 `.pending-box`
+```css
+color: #fbbf24; background: rgba(245,158,11,.07);
+border: 1px solid rgba(245,158,11,.14);
+```
+
+---
+
+## 인터랙션
 
 | 요소 | 동작 |
 |------|------|
-| 카드 호버 | `translateY(-3px)` + 유형별 글로우 |
-| 새로고침 버튼 | 클릭 → 스피너 애니메이션 → 0.9초 후 카드 fadeIn 재생 |
-| 카드 등장 | `fadeIn` 애니메이션, 카드별 60ms delay로 순차 등장 |
-| 필터 전환 | 즉시 DOM 재렌더 (애니메이션 없이 빠르게) |
-| 링크 호버 | `box-shadow: 0 0 0 1px accent` (outline 대신 shadow 활용) |
+| 사이드바 탭 클릭 | `--accent` 전환, 데이터 로드 (캐시 우선) |
+| 필터 탭 클릭 | 즉시 필터링 (서버 요청 없음) |
+| 카드 / 행 호버 | `background: --surface-2` 전환 (100ms) |
+| 새로고침 버튼 | 캐시 삭제 → 데이터 재로드 → 스핀 애니메이션 |
+| 카드 등장 | `fadeUp` 0.2s, 항목별 16–40ms 딜레이 |
 
 ---
 
 ## 재사용 가이드
 
-동일 디자인을 다른 정보형 페이지(채용공고, 행사 외 목록 등)에 적용할 때 변경 최소화 포인트:
+새 카테고리 탭 추가 시 변경 포인트:
 
-1. `--clr-*` 토큰만 교체 → 유형별 색상 변경
-2. `EVENTS` 배열 교체 → 데이터 변경
-3. `filter-btn` `data-filter` 값 → 카테고리 변경
-4. `info-grid` 내 `info-item` 개수·레이블 → 표시 필드 변경
+1. `TABS` 객체에 항목 추가 (`label`, `accent`, `file`, `filters`)
+2. 수집기 스크립트 추가 (`collectors/collect_XXX.py`)
+3. 카드 빌더 함수 추가 (`buildXXX`)
+4. `B`, `W` 객체에 매핑 추가
+5. `data/XXX.json` 플레이스홀더 생성
+6. `.github/workflows/update.yml`에 수집 스텝 추가
