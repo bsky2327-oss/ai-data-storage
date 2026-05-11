@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-11T08:50:22Z",
+  "updatedAt": "2026-05-11T09:09:15Z",
   "items": [
     {
       "title": "GraphDC: A Divide-and-Conquer Multi-Agent System for Scalable Graph Algorithm Reasoning",
@@ -13,7 +13,8 @@
         "cs.AI",
         "cs.MA"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "GraphDC: 확장 가능한 그래프 알고리즘 추론을 위한 분할 정복 다중 에이전트 시스템"
     },
     {
       "title": "More Thinking, More Bias: Length-Driven Position Bias in Reasoning Models",
@@ -28,7 +29,8 @@
         "cs.CL",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "더 많이 생각하고 더 많은 편향: 추론 모델의 길이 중심 위치 편향"
     },
     {
       "title": "Fast and Effective Redistricting Optimization via Composite-Move Tabu Search",
@@ -42,7 +44,8 @@
         "cs.AI",
         "cs.CY"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "복합 이동 금기 검색을 통한 빠르고 효과적인 선거구 재조정 최적화"
     },
     {
       "title": "State Representation and Termination for Recursive Reasoning Systems",
@@ -57,7 +60,8 @@
         "cs.CL",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "재귀 추론 시스템에 대한 상태 표현 및 종료"
     },
     {
       "title": "Hidden Coalitions in Multi-Agent AI: A Spectral Diagnostic from Internal Representations",
@@ -72,7 +76,8 @@
         "cs.LG",
         "cs.MA"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "다중 에이전트 AI의 숨겨진 연합: 내부 표현을 통한 스펙트럼 진단"
     },
     {
       "title": "CASCADE: Case-Based Continual Adaptation for Large Language Models During Deployment",
@@ -87,7 +92,8 @@
         "cs.CL",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "CASCADE: 배포 중 대규모 언어 모델에 대한 사례 기반 지속적 적응"
     },
     {
       "title": "From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms",
@@ -101,7 +107,8 @@
         "cs.AI",
         "cs.CL"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "저장소에서 경험까지: LLM 에이전트 메모리 메커니즘의 진화에 대한 조사"
     },
     {
       "title": "When Does a Language Model Commit? A Finite-Answer Theory of Pre-Verbalization Commitment",
@@ -116,7 +123,8 @@
         "cs.CL",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "언어 모델은 언제 커밋합니까? 사전 언어화 헌신에 대한 유한 응답 이론"
     },
     {
       "title": "Weblica: Scalable and Reproducible Training Environments for Visual Web Agents",
@@ -131,7 +139,8 @@
         "cs.CV",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "Weblica: 시각적 웹 에이전트를 위한 확장 가능하고 재현 가능한 교육 환경"
     },
     {
       "title": "When Does Critique Improve AI-Assisted Theoretical Physics? SCALAR: Structured Critic--Actor Loop for Agentic Reasoning",
@@ -145,7 +154,8 @@
         "cs.AI",
         "cs.HC"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "비평은 언제 AI 지원 이론 물리학을 개선합니까? SCALAR: 구조적 비평가 - 행위적 추론을 위한 행위자 루프"
     },
     {
       "title": "RateQuant: Optimal Mixed-Precision KV Cache Quantization via Rate-Distortion Theory",
@@ -160,7 +170,8 @@
         "cs.CL",
         "cs.IT"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "RateQuant: 속도 왜곡 이론을 통한 최적의 혼합 정밀도 KV 캐시 양자화"
     },
     {
       "title": "LKV: End-to-End Learning of Head-wise Budgets and Token Selection for LLM KV Cache Eviction",
@@ -174,7 +185,8 @@
         "cs.LG",
         "cs.CL"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "LKV: LLM KV 캐시 제거를 위한 헤드별 예산 및 토큰 선택에 대한 엔드투엔드 학습"
     },
     {
       "title": "A Wasserstein GAN-based climate scenario generator for risk management and insurance: the case of soil subsidence",
@@ -187,7 +199,8 @@
       "categories": [
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "위험 관리 및 보험을 위한 Wasserstein GAN 기반 기후 시나리오 생성기: 토양 침하 사례"
     },
     {
       "title": "Breaking the Illusion: When Positive Meets Negative in Multimodal Decoding",
@@ -200,7 +213,8 @@
       "categories": [
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "환상 깨기: 다중 모드 디코딩에서 긍정이 부정을 만날 때"
     },
     {
       "title": "On the Role of Strain and Vorticity in Numerical Integration Error for Flow Matching",
@@ -214,7 +228,8 @@
         "cs.LG",
         "cs.CV"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "흐름 매칭을 위한 수치 적분 오류에서 변형률과 와도의 역할"
     },
     {
       "title": "A Hierarchical Ensemble Pipeline for Anomaly Detection in ESA Satellite Telemetry",
@@ -228,7 +243,8 @@
         "cs.LG",
         "cs.CV"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "ESA 위성 원격 측정의 이상 탐지를 위한 계층적 앙상블 파이프라인"
     },
     {
       "title": "Toeplitz MLP Mixers are Low Complexity, Information-Rich Sequence Models",
@@ -243,7 +259,8 @@
         "cs.AI",
         "cs.CL"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "Toeplitz MLP 믹서는 복잡성이 낮고 정보가 풍부한 시퀀스 모델입니다."
     },
     {
       "title": "From Canopy to Collision: A Hybrid Predictive Framework for Identifying Risk Factors in Tree-Involved Traffic Crashes",
@@ -256,7 +273,8 @@
       "categories": [
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "캐노피에서 충돌까지: 나무 관련 교통 충돌의 위험 요소를 식별하기 위한 하이브리드 예측 프레임워크"
     },
     {
       "title": "Robustness of Refugee-Matching Gains to Off-Policy Evaluation Choices",
@@ -269,7 +287,8 @@
       "categories": [
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "난민 매칭의 견고성은 정책 외 평가 선택에 대한 이점"
     },
     {
       "title": "Conditional generation of antibody sequences with classifier-guided germline-absorbing discrete diffusion",
@@ -283,7 +302,8 @@
         "cs.LG",
         "cs.AI"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "분류자 유도 생식세포 흡수 개별 확산을 통한 항체 서열의 조건부 생성"
     },
     {
       "title": "Domain-level metacognitive monitoring in frontier LLMs: A 33-model atlas",
@@ -298,7 +318,8 @@
         "cs.AI",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "프론티어 LLM의 도메인 수준 메타인지 모니터링: 33개 모델 아틀라스"
     },
     {
       "title": "VITA-QinYu: Expressive Spoken Language Model for Role-Playing and Singing",
@@ -312,7 +333,8 @@
         "cs.CL",
         "cs.AI"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "VITA-QinYu: 역할극과 노래를 위한 표현형 음성 언어 모델"
     },
     {
       "title": "IntentGrasp: A Comprehensive Benchmark for Intent Understanding",
@@ -327,7 +349,8 @@
         "cs.AI",
         "cs.LG"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "IntentGrasp: 의도 이해를 위한 포괄적인 벤치마크"
     },
     {
       "title": "TajPersLexon: A Tajik-Persian Lexical Resource and Hybrid Model for Cross-Script Low-Resource NLP",
@@ -340,7 +363,8 @@
       "categories": [
         "cs.CL"
       ],
-      "pubDate": "2026-05-11"
+      "pubDate": "2026-05-11",
+      "titleKo": "TajPersLexon: 크로스 스크립트 저자원 NLP를 위한 타지크어-페르시아 어휘 리소스 및 하이브리드 모델"
     },
     {
       "title": "MIST: Multimodal Interactive Speech-based Tool-calling Conversational Assistants for Smart Homes",
@@ -421,6 +445,94 @@
       "categories": [
         "cs.CL",
         "cs.AI"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Towards Security-Auditable LLM Agents: A Unified Graph Representation",
+      "titleKo": "보안 감사 가능한 LLM 에이전트를 향하여: 통합 그래프 표현",
+      "authors": [
+        "Chaofan Li, Lyuye Zhang, Jintao Zhai, Siyue Feng, Xichun Yang, Huahao Wang, Shihan Dou, Yu Ji, Yutao Hu, Yueming Wu, Yang Liu, Deqing Zou"
+      ],
+      "arxivId": "2605.06812",
+      "url": "https://arxiv.org/abs/2605.06812",
+      "abstract": "arXiv:2605.06812v1 Announce Type: new  Abstract: LLM-based agentic systems are rapidly evolving to perform complex autonomous tasks through dynamic tool invocation, stateful memory management, and multi-agent collaboration. However, this semantics-driven execution paradigm creates a severe semantic ",
+      "categories": [
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Uneven Evolution of Cognition Across Generations of Generative AI Models",
+      "titleKo": "생성 AI 모델의 세대에 걸친 고르지 못한 인지 진화",
+      "authors": [
+        "Isaac Galatzer-Levy, Daniel McDuff, Xin Liu, Jed McGiffin"
+      ],
+      "arxivId": "2605.06815",
+      "url": "https://arxiv.org/abs/2605.06815",
+      "abstract": "arXiv:2605.06815v1 Announce Type: new  Abstract: The pursuit of artificial general intelligence necessitates robust methods for evaluating the cognitive capabilities of models beyond narrow task performance. Here, we introduce a psychometric framework to assess the cognitive profiles of generative A",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Enabling Unsupervised Training of Deep EEG Denoisers With Intelligent Partitioning",
+      "titleKo": "지능형 분할을 통해 심층 EEG 잡음 제거 장치의 비지도 훈련 활성화",
+      "authors": [
+        "Qiyu Rao, Haozhe Tian, Homayoun Hamedmoghadam, Danilo Mandic"
+      ],
+      "arxivId": "2605.06724",
+      "url": "https://arxiv.org/abs/2605.06724",
+      "abstract": "arXiv:2605.06724v1 Announce Type: new  Abstract: Denoising wearable electroencephalogram (EEG) is inherently challenging since neural activity is not only subtle but also inseparable from spectrally overlapping noise artifacts. Classical signal processing methods, relying on fixed or heuristic rules",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Transformer-Based Wildlife Species Classification from Daily Movement Trajectories",
+      "titleKo": "일일 이동 궤적을 통한 변압기 기반 야생동물 종 분류",
+      "authors": [
+        "Obed Irakoze, Prasenjit Mitra"
+      ],
+      "arxivId": "2605.06726",
+      "url": "https://arxiv.org/abs/2605.06726",
+      "abstract": "arXiv:2605.06726v1 Announce Type: new  Abstract: Inferring the identity of wildlife species from daily movement data alone is a challenging task. We train sequence models on large-scale, 7-species GPS trajectories from the Movebank platform. Trajectories models are evaluated using a protocol in whic",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Towards Closing the Autoregressive Gap in Language Modeling via Entropy-Gated Continuous Bitstream Diffusion",
+      "titleKo": "엔트로피 게이트 연속 비트스트림 확산을 통한 언어 모델링의 자기회귀 격차 해소",
+      "authors": [
+        "Georgios Batzolis, Mark Girolami, Luca Ambrogioni"
+      ],
+      "arxivId": "2605.07013",
+      "url": "https://arxiv.org/abs/2605.07013",
+      "abstract": "arXiv:2605.07013v1 Announce Type: new  Abstract: Diffusion language models (DLMs) promise parallel, order-agnostic generation, but on standard benchmarks they have historically lagged behind autoregressive models in sample quality and diversity. Recent continuous flow and diffusion approaches over t",
+      "categories": [
+        "cs.CL"
+      ],
+      "pubDate": "2026-05-11"
+    },
+    {
+      "title": "Cognitive Agent Compilation for Explicit Problem Solver Modeling",
+      "titleKo": "명시적 문제 해결사 모델링을 위한 인지 에이전트 컴파일",
+      "authors": [
+        "Hyeongdon Moon, Carolyn Ros\\'e, John Stamper"
+      ],
+      "arxivId": "2605.07040",
+      "url": "https://arxiv.org/abs/2605.07040",
+      "abstract": "arXiv:2605.07040v1 Announce Type: new  Abstract: Large language models (LLMs) are widely used for tutoring, feedback generation, and content creation, but their broad pretraining makes them hard to constrain and poor substitutes for controllable learners. Educational systems often require inspectabl",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CY"
       ],
       "pubDate": "2026-05-11"
     }
