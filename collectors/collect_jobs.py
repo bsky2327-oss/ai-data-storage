@@ -1,4 +1,6 @@
-"""AI 채용 정보 수집 — 원티드 공개 API + 사람인"""
+"""AI 채용 정보 수집 — Remotive + Jobicy (공개 API, 해외 IP 차단 없음)
+원티드는 GitHub Actions의 해외 IP에서 403 차단되어 제외.
+"""
 import json
 import requests
 from datetime import datetime, timezone
@@ -9,70 +11,64 @@ HEADERS = {
     "Accept":     "application/json",
 }
 
-def _wanted() -> list[dict]:
-    """원티드 AI/ML 직군 검색 (tag_type_ids=669: 인공지능/머신러닝)"""
-    url = "https://www.wanted.co.kr/api/v4/jobs"
-    params = {
-        "job_sort":    "job.latest_order",
-        "limit":       20,
-        "offset":      0,
-        "tag_type_ids": 669,
-    }
-    try:
-        resp = requests.get(url, params=params, headers=HEADERS, timeout=15)
-        resp.raise_for_status()
-        data = resp.json()
-        jobs = []
-        for item in data.get("data", []):
-            position = item.get("position", {})
-            company  = item.get("company", {})
-            jobs.append({
-                "title":   position.get("name", ""),
-                "company": company.get("name", ""),
-                "location": position.get("location_str", "서울"),
-                "url":     f"https://www.wanted.co.kr/wd/{item.get('id', '')}",
-                "tags":    [t.get("title", "") for t in position.get("tags", [])[:5]],
-                "pubDate": (position.get("created_at") or "")[:10],
-                "source":  "원티드",
-            })
-        return jobs
-    except Exception as e:
-        print(f"[WARN] 원티드 실패: {e}")
-        return []
-
-def _remoteok() -> list[dict]:
-    """Remoteok.io — AI 원격 채용 (공개 API)"""
+def _remotive() -> list[dict]:
+    """Remotive — 공식 공개 API (인증 불필요)"""
     try:
         resp = requests.get(
-            "https://remoteok.io/api?tags=ai,machine-learning",
-            headers={**HEADERS, "Accept": "application/json"},
-            timeout=15,
+            "https://remotive.com/api/remote-jobs",
+            params={"category": "software-dev", "search": "AI", "limit": 25},
+            headers=HEADERS, timeout=20,
         )
         resp.raise_for_status()
-        raw = resp.json()
         jobs = []
-        for item in raw[1:21]:  # 첫 번째 원소는 메타
-            if not isinstance(item, dict):
-                continue
+        for item in resp.json().get("jobs", []):
+            tags = item.get("tags") or []
+            if isinstance(tags, str):
+                tags = [t.strip() for t in tags.split(",")]
             jobs.append({
-                "title":   item.get("position", ""),
-                "company": item.get("company", ""),
-                "location": "원격",
-                "url":     item.get("url", ""),
-                "tags":    (item.get("tags") or [])[:5],
-                "pubDate": (item.get("date") or "")[:10],
-                "source":  "RemoteOK",
+                "title":    item.get("title", ""),
+                "company":  item.get("company_name", ""),
+                "location": item.get("candidate_required_location") or "원격",
+                "url":      item.get("url", ""),
+                "tags":     [t for t in tags[:5] if t],
+                "pubDate":  (item.get("publication_date") or "")[:10],
+                "source":   "Remotive",
             })
         return jobs
     except Exception as e:
-        print(f"[WARN] RemoteOK 실패: {e}")
+        print(f"[WARN] Remotive 실패: {e}")
+        return []
+
+def _jobicy() -> list[dict]:
+    """Jobicy — 공식 공개 API (인증 불필요)"""
+    try:
+        resp = requests.get(
+            "https://jobicy.com/api/v2/remote-jobs",
+            params={"count": 20, "tag": "ai"},
+            headers=HEADERS, timeout=20,
+        )
+        resp.raise_for_status()
+        jobs = []
+        for item in resp.json().get("jobs", []):
+            jobs.append({
+                "title":    item.get("jobTitle", ""),
+                "company":  item.get("companyName", ""),
+                "location": item.get("jobGeo") or "원격",
+                "url":      item.get("url", ""),
+                "tags":     [item.get("jobCategory", ""), item.get("jobType", "")],
+                "pubDate":  (item.get("pubDate") or "")[:10],
+                "source":   "Jobicy",
+            })
+        return jobs
+    except Exception as e:
+        print(f"[WARN] Jobicy 실패: {e}")
         return []
 
 def collect():
     jobs: list[dict] = []
     seen: set[str] = set()
 
-    for item in _wanted() + _remoteok():
+    for item in _remotive() + _jobicy():
         url = item.get("url", "")
         if url and url not in seen:
             seen.add(url)

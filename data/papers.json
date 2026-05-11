@@ -1,1 +1,391 @@
-{"updatedAt": "2026-05-11T00:00:00Z", "items": []}
+{
+  "updatedAt": "2026-05-11T05:22:14Z",
+  "items": [
+    {
+      "title": "LLMs Improving LLMs: Agentic Discovery for Test-Time Scaling",
+      "authors": [
+        "Tong Zheng",
+        "Haolin Liu",
+        "Chengsong Huang"
+      ],
+      "arxivId": "2605.08083v1",
+      "url": "https://arxiv.org/abs/2605.08083v1",
+      "abstract": "Test-time scaling (TTS) has become an effective approach for improving large language model performance by allocating additional computation during inference. However, existing TTS strategies are largely hand-crafted: researchers manually design reasoning patterns and tune heuristics by intuition, l",
+      "categories": [
+        "cs.CL"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Privately Estimating Black-Box Statistics",
+      "authors": [
+        "Günter F. Steinke",
+        "Thomas Steinke"
+      ],
+      "arxivId": "2510.00322v3",
+      "url": "https://arxiv.org/abs/2510.00322v3",
+      "abstract": "Standard techniques for differentially private estimation, such as Laplace or Gaussian noise addition, require guaranteed bounds on the sensitivity of the estimator in question. But such sensitivity bounds are often large or simply unknown. Thus we seek differentially private methods that can be app",
+      "categories": [
+        "cs.CR",
+        "cs.CC",
+        "cs.DS"
+      ],
+      "pubDate": "2025-09-30"
+    },
+    {
+      "title": "Normalizing Trajectory Models",
+      "authors": [
+        "Jiatao Gu",
+        "Tianrong Chen",
+        "Ying Shen"
+      ],
+      "arxivId": "2605.08078v1",
+      "url": "https://arxiv.org/abs/2605.08078v1",
+      "abstract": "Diffusion-based models decompose sampling into many small Gaussian denoising steps -- an assumption that breaks down when generation is compressed to a few coarse transitions. Existing few-step methods address this through distillation, consistency training, or adversarial objectives, but sacrifice ",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Conformal Path Reasoning: Trustworthy Knowledge Graph Question Answering via Path-Level Calibration",
+      "authors": [
+        "Shuhang Lin",
+        "Chuhao Zhou",
+        "Xiao Lin"
+      ],
+      "arxivId": "2605.08077v1",
+      "url": "https://arxiv.org/abs/2605.08077v1",
+      "abstract": "Knowledge Graph Question Answering (KGQA) has shown promise for grounded and interpretable reasoning, yet existing approaches often fail to provide reliable coverage guarantees over retrieved answers. While Conformal Prediction (CP) offers a principled framework for producing prediction sets with st",
+      "categories": [
+        "cs.CL"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Zero-Shot Imagined Speech Decoding via Imagined-to-Listened MEG Mapping",
+      "authors": [
+        "Maryam Maghsoudi",
+        "Shihab Shamma"
+      ],
+      "arxivId": "2605.08075v1",
+      "url": "https://arxiv.org/abs/2605.08075v1",
+      "abstract": "Decoding imagined speech from non-invasive brain recordings is challenging because imagined datasets are scarce and difficult to align temporally across subjects and sessions In this work, we propose a new approach to the decoding of imagined speech that leverages the richer and more reliably labele",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "GRAPHLCP: Structure-Aware Localized Conformal Prediction on Graphs",
+      "authors": [
+        "Peyman Baghershahi",
+        "Fangxin Wang",
+        "Debmalya Mandal"
+      ],
+      "arxivId": "2605.08074v1",
+      "url": "https://arxiv.org/abs/2605.08074v1",
+      "abstract": "Conformal prediction (CP) provides a distribution-free approach to uncertainty quantification with finite-sample guarantees. However, applying CP to graph neural networks (GNNs) remains challenging as the combinatorial nature of graphs often leads to insufficiently certain predictions and indiscrimi",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "EmambaIR: Efficient Visual State Space Model for Event-guided Image Reconstruction",
+      "authors": [
+        "Wei Yu",
+        "Yunhang Qian"
+      ],
+      "arxivId": "2605.08073v1",
+      "url": "https://arxiv.org/abs/2605.08073v1",
+      "abstract": "Recent event-based image reconstruction methods predominantly rely on Convolutional Neural Networks (CNNs) and Vision Transformers (ViTs) to process complementary event information. However, these architectures face fundamental limitations: CNNs often fail to capture global feature correlations, whe",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "A Note on Non-Negative $L_1$-Approximating Polynomials",
+      "authors": [
+        "Jane H. Lee",
+        "Anay Mehrotra",
+        "Manolis Zampetakis"
+      ],
+      "arxivId": "2605.08072v1",
+      "url": "https://arxiv.org/abs/2605.08072v1",
+      "abstract": "$L_1$-Approximating polynomials, i.e., polynomials that approximate indicator functions in $L_1$-norm under certain distributions, are widely used in computational learning theory. We study the existence of \\textit{non-negative} $L_1$-approximating polynomials with respect to Gaussian distributions.",
+      "categories": [
+        "stat.ML",
+        "cs.DS",
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "VecCISC: Improving Confidence-Informed Self-Consistency with Reasoning Trace Clustering and Candidate Answer Selection",
+      "authors": [
+        "James Petullo",
+        "Sonny George",
+        "Dylan Cashman"
+      ],
+      "arxivId": "2605.08070v1",
+      "url": "https://arxiv.org/abs/2605.08070v1",
+      "abstract": "A standard technique for scaling inference-time reasoning is Self-Consistency, whereby multiple candidate answers are sampled from an LLM and the most common answer is selected. More recently, it has been shown that weighted majority voting (e.g. Confidence-Informed Self Consistency (CISC)), which a",
+      "categories": [
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "DReS: Dual Reconstruction Smoothing for Functional Regularization",
+      "authors": [
+        "Parsa Moradi",
+        "Tayyebeh Jahaninezhad",
+        "Hanzaleh Akbarinodehi"
+      ],
+      "arxivId": "2510.00253v2",
+      "url": "https://arxiv.org/abs/2510.00253v2",
+      "abstract": "Smoothness is a key inductive bias in machine learning and is closely related to generalization. Existing smoothness-inducing methods typically rely either on explicit gradient regularization, which often incurs substantial computational and memory overhead, or on data-mixing strategies, which are l",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2025-09-30"
+    },
+    {
+      "title": "UNCOM: Zero-shot Context-Aware Command Understanding for Tabletop Scenarios",
+      "authors": [
+        "Antonio Galiza Cerdeira Gonzalez",
+        "Paweł Gajewski",
+        "Bipin Indurkhya"
+      ],
+      "arxivId": "2410.06355v3",
+      "url": "https://arxiv.org/abs/2410.06355v3",
+      "abstract": "This paper presents UNCOM, a novel hybrid framework for interpreting natural human commands in tabletop scenarios. The system integrates multiple sources of information -- speech, gestures, and scene context -- to extract structured, actionable instructions for robots. Addressing the need for genera",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "pubDate": "2024-10-08"
+    },
+    {
+      "title": "Flow-OPD: On-Policy Distillation for Flow Matching Models",
+      "authors": [
+        "Zhen Fang",
+        "Wenxuan Huang",
+        "Yu Zeng"
+      ],
+      "arxivId": "2605.08063v1",
+      "url": "https://arxiv.org/abs/2605.08063v1",
+      "abstract": "Existing Flow Matching (FM) text-to-image models suffer from two critical bottlenecks under multi-task alignment: the reward sparsity induced by scalar-valued rewards, and the gradient interference arising from jointly optimizing heterogeneous objectives, which together give rise to a 'seesaw effect",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Rubric-Grounded RL: Structured Judge Rewards for Generalizable Reasoning",
+      "authors": [
+        "Manish Bhattarai",
+        "Ismael Boureima",
+        "Nishath Rajiv Ranasinghe"
+      ],
+      "arxivId": "2605.08061v1",
+      "url": "https://arxiv.org/abs/2605.08061v1",
+      "abstract": "We argue that decomposing reward into weighted, verifiable criteria and using an LLM judge to score them provides a partial-credit optimization signal: instead of a binary outcome or a single holistic score, each response is graded along multiple task-specific criteria. We formalize \\emph{rubric-gro",
+      "categories": [
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "The Memory Curse: How Expanded Recall Erodes Cooperative Intent in LLM Agents",
+      "authors": [
+        "Jiayuan Liu",
+        "Tianqin Li",
+        "Shiyi Du"
+      ],
+      "arxivId": "2605.08060v1",
+      "url": "https://arxiv.org/abs/2605.08060v1",
+      "abstract": "Context window expansion is often treated as a straightforward capability upgrade for LLMs, but we find it systematically fails in multi-agent social dilemmas. Across 7 LLMs and 4 games over 500 rounds, expanding accessible history degrades cooperation in 18 of 28 model--game settings, a pattern we ",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.GT"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Scaling Continual Learning to 300+ Tasks with Bi-Level Routing Mixture-of-Experts",
+      "authors": [
+        "Meng Lou",
+        "Yunxiang Fu",
+        "Yizhou Yu"
+      ],
+      "arxivId": "2602.03473v2",
+      "url": "https://arxiv.org/abs/2602.03473v2",
+      "abstract": "Continual learning, especially class-incremental learning (CIL), on the basis of a pre-trained model (PTM) has garnered substantial research interest in recent years. However, how to effectively learn both discriminative and comprehensive feature representations while maintaining stability and plast",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "pubDate": "2026-02-03"
+    },
+    {
+      "title": "CA-SQL: Complexity-Aware Inference Time Reasoning for Text-to-SQL via Exploration and Compute Budget Allocation",
+      "authors": [
+        "James Petullo",
+        "Nianwen Xue"
+      ],
+      "arxivId": "2605.08057v1",
+      "url": "https://arxiv.org/abs/2605.08057v1",
+      "abstract": "While recent advancements in inference-time learning have improved LLM reasoning on Text-to-SQL tasks, current solutions still struggle to perform well on the most challenging tasks in the Bird-Bench (BIRD) benchmark. This is due to inadequate solution space exploration, which is necessary to uncove",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Reinforcement Learning for Exponential Utility: Algorithms and Convergence in Discounted MDPs",
+      "authors": [
+        "Gugan Thoppe",
+        "L. A. Prashanth",
+        "Ankur Naskar"
+      ],
+      "arxivId": "2605.08053v1",
+      "url": "https://arxiv.org/abs/2605.08053v1",
+      "abstract": "Reinforcement learning (RL) for exponential-utility optimization in discounted Markov decision processes (MDPs) lacks principled value-based algorithms. We address this gap in the fixed risk-aversion setting. Building on the Bellman-type equation for exponential utility studied in \\cite{porteus1975o",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Goal-Conditioned Decision Transformer for Multi-Goal Offline Reinforcement Learning",
+      "authors": [
+        "Paweł Gajewski",
+        "Dominik Żurek",
+        "Marcin Pietroń"
+      ],
+      "arxivId": "2410.06347v2",
+      "url": "https://arxiv.org/abs/2410.06347v2",
+      "abstract": "Reinforcement learning (RL) in robotics faces significant hurdles regarding sample efficiency and generalization across varying goals. While Offline RL mitigates the need for costly online interactions, its integration with goal-conditioned policies and transformer-based architectures remains undere",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "pubDate": "2024-10-08"
+    },
+    {
+      "title": "Accurate and Efficient Statistical Testing for Word Semantic Breadth",
+      "authors": [
+        "Yo Ehara"
+      ],
+      "arxivId": "2605.08048v1",
+      "url": "https://arxiv.org/abs/2605.08048v1",
+      "abstract": "Measuring the breadth of a word's meaning, or its spread across contexts, has become feasible with contextualized token embeddings. A word type can be represented as a cloud of token vectors, with dispersion-based statistics serving as proxies for contextual diversity (Nagata and Tanaka-Ishii, ACL20",
+      "categories": [
+        "cs.CL"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Synergistic Benefits of Joint Molecule Generation and Property Prediction",
+      "authors": [
+        "Adam Izdebski",
+        "Jan Olszewski",
+        "Pankhil Gawade"
+      ],
+      "arxivId": "2504.16559v3",
+      "url": "https://arxiv.org/abs/2504.16559v3",
+      "abstract": "Modeling the joint distribution of data samples and their properties allows to construct a single model for both data generation and property prediction, with synergistic benefits reaching beyond purely generative or predictive models. However, training joint models presents daunting architectural a",
+      "categories": [
+        "cs.LG"
+      ],
+      "pubDate": "2025-04-23"
+    },
+    {
+      "title": "Uncertainty-Aware Structured Data Extraction from Full CMR Reports via Distilled LLMs",
+      "authors": [
+        "Yi Yu",
+        "Parker Martin",
+        "Zhenyu Bu"
+      ],
+      "arxivId": "2605.08045v1",
+      "url": "https://arxiv.org/abs/2605.08045v1",
+      "abstract": "Converting free-text cardiac magnetic resonance (CMR) reports into auditable structured data remains a bottleneck for cohort assembly, longitudinal curation, and clinical decision support. We present CMR-EXTR, a lightweight framework that converts free-text CMR reports into structured data and assig",
+      "categories": [
+        "cs.CL"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Fast Byte Latent Transformer",
+      "authors": [
+        "Julie Kallini",
+        "Artidoro Pagnoni",
+        "Tomasz Limisiewicz"
+      ],
+      "arxivId": "2605.08044v1",
+      "url": "https://arxiv.org/abs/2605.08044v1",
+      "abstract": "Recent byte-level language models (LMs) match the performance of token-level models without relying on subword vocabularies, yet their utility is limited by slow, byte-by-byte autoregressive generation. We address this bottleneck in the Byte Latent Transformer (BLT) through new training and generati",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "SCOPE: Structured Decomposition and Conditional Skill Orchestration for Complex Image Generation",
+      "authors": [
+        "Tianfei Ren",
+        "Zhipeng Yan",
+        "Yiming Zhao"
+      ],
+      "arxivId": "2605.08043v1",
+      "url": "https://arxiv.org/abs/2605.08043v1",
+      "abstract": "While text-to-image models have made strong progress in visual fidelity, faithfully realizing complex visual intents remains challenging because many requirements must be tracked across grounding, generation, and verification. We refer to these requirements as semantic commitments and formalize thei",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "Beyond Pairs: Your Language Model is Secretly Optimizing a Preference Graph",
+      "authors": [
+        "Ning Liu",
+        "Chuanneng Sun",
+        "Kristina Klinkner"
+      ],
+      "arxivId": "2605.08037v1",
+      "url": "https://arxiv.org/abs/2605.08037v1",
+      "abstract": "Direct Preference Optimization (DPO) aligns language models using pairwise preference comparisons, offering a simple and effective alternative to Reinforcement Learning (RL) from human feedback. However, in many practical settings, training data consists of multiple rollouts per prompt, inducing ric",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "pubDate": "2026-05-08"
+    },
+    {
+      "title": "THINKSAFE: Self-Generated Safety Alignment for Reasoning Models",
+      "authors": [
+        "Seanie Lee",
+        "Sangwoo Park",
+        "Yumin Choi"
+      ],
+      "arxivId": "2601.23143v2",
+      "url": "https://arxiv.org/abs/2601.23143v2",
+      "abstract": "Large reasoning models (LRMs) achieve remarkable performance by leveraging reinforcement learning (RL) on reasoning tasks to generate long chain-of-thought (CoT) reasoning. However, this over-optimization often prioritizes compliance, making models vulnerable to harmful prompts. To mitigate this saf",
+      "categories": [
+        "cs.AI"
+      ],
+      "pubDate": "2026-01-30"
+    }
+  ]
+}

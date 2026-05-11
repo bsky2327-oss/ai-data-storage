@@ -1,19 +1,26 @@
-"""AI 뉴스 수집 — RSS 기반 (무료, 무인증)"""
+"""AI 뉴스 수집 — RSS 기반 + 영문 기사 한국어 번역"""
 import re
 import json
 import feedparser
 from datetime import datetime, timezone
 from pathlib import Path
+from deep_translator import GoogleTranslator
 
 RSS_FEEDS = [
-    ("AI Times",      "https://www.aitimes.com/rss/allArticle.xml"),
-    ("블로터",         "https://www.bloter.net/feed"),
-    ("TechCrunch AI", "https://techcrunch.com/category/artificial-intelligence/feed/"),
-    ("VentureBeat AI","https://venturebeat.com/ai/feed/"),
+    ("AI Times",       "https://www.aitimes.com/rss/allArticle.xml"),
+    ("블로터",          "https://www.bloter.net/feed"),
+    ("TechCrunch AI",  "https://techcrunch.com/category/artificial-intelligence/feed/"),
+    ("VentureBeat AI", "https://venturebeat.com/ai/feed/"),
 ]
 
-AI_KEYWORDS = ["AI", "인공지능", "머신러닝", "딥러닝", "LLM", "GPT", "생성형",
-               "모델", "neural", "machine learning", "deep learning", "agent", "anthropic", "openai", "gemini"]
+# 이미 한국어인 소스 — 번역 생략
+KO_SOURCES = {"AI Times", "블로터"}
+
+AI_KEYWORDS = [
+    "AI", "인공지능", "머신러닝", "딥러닝", "LLM", "GPT", "생성형", "모델",
+    "neural", "machine learning", "deep learning", "agent", "anthropic",
+    "openai", "gemini", "claude", "chatgpt", "llama",
+]
 
 def _is_ai(text: str) -> bool:
     t = text.lower()
@@ -32,6 +39,15 @@ def _parse_date(entry) -> str:
 def _strip_html(text: str) -> str:
     return re.sub(r"<[^>]+>", "", text or "").strip()
 
+def _tr(text: str) -> str:
+    """영문 → 한국어 번역. 실패 시 원문 반환."""
+    if not text or not text.strip():
+        return text
+    try:
+        return GoogleTranslator(source="auto", target="ko").translate(text[:4999])
+    except Exception:
+        return text
+
 def collect():
     articles = []
     seen_urls: set[str] = set()
@@ -46,8 +62,16 @@ def collect():
                     continue
                 if not _is_ai(title) and not _is_ai(entry.get("summary") or ""):
                     continue
+
                 seen_urls.add(link)
-                summary = _strip_html(entry.get("summary") or "")[:200]
+                summary = _strip_html(entry.get("summary") or "")[:300]
+
+                # 영문 소스만 번역
+                if source not in KO_SOURCES:
+                    print(f"  번역 중: {title[:40]}...")
+                    title   = _tr(title)
+                    summary = _tr(summary)
+
                 articles.append({
                     "title":   title,
                     "source":  source,
